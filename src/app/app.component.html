@@ -1,0 +1,53 @@
+<mat-drawer-container class="main-container" autosize>
+  <mat-drawer #drawer class="main-sidenav" mode="side">
+    <!-- <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button> -->
+
+    <mat-selection-list #shoes [multiple]="false">
+      <!-- <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+        {{shoe}}
+      </mat-list-option> -->
+      <mat-list-option>ff
+        <!-- <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'" (click) = "toggleTag()">
+          <mat-icon>{{ menuitem.icon }}</mat-icon> 
+          <span>{{ menuitem.name }}</span> 
+          <span fxFlex></span> 
+          <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> 
+          <mat-icon *ngIf="showList">keyboard_arrow_up</mat-icon> 
+          <mat-icon *ngIf="!showList">keyboard_arrow_down</mat-icon> 
+        </a> -->
+      </mat-list-option>
+      <mat-list-option>ABC</mat-list-option>
+      <mat-list-option>ABC</mat-list-option>
+      <mat-list-option>ABC</mat-list-option>
+      <mat-list-option>ABC</mat-list-option>
+
+    </mat-selection-list>
+ 
+  </mat-drawer>
+
+  <div class="main-sidenav-content">
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="main-icon" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+      <span class="main-spacer"></span>
+      <button mat-icon-button>
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="main-icon">
+        <mat-icon>share</mat-icon>
+      </button> 
+    </mat-toolbar> 
+  </div>
+
+</mat-drawer-container>
+
+
+
+
+<router-outlet></router-outlet>
