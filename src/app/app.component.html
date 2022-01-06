@@ -12,24 +12,23 @@
   </mat-drawer>
 
   <div class="main-sidenav-content">
-    <mat-toolbar color="primary">
+    <mat-toolbar>
       <button mat-icon-button class="main-icon" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span>{{title}}</span>
-      <span class="main-spacer"></span>
-      <button mat-icon-button>
+      <!-- <span class="main-spacer"></span> -->
+      <!-- <button mat-icon-button>
         <mat-icon>favorite</mat-icon>
       </button>
       <button mat-icon-button class="main-icon">
         <mat-icon>share</mat-icon>
-      </button> 
+      </button>  -->
     </mat-toolbar> 
   </div>
 
-  <div class="container">
-    <router-outlet> </router-outlet>
-  </div>
+    <router-outlet>  
+    </router-outlet>
 </mat-drawer-container>
 
 

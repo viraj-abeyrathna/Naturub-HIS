@@ -1,23 +1,32 @@
 <mat-accordion>
     <div *ngFor="let menuitem of menuItems.getMenuitem()">
         <button mat-button class="menu-btn" *ngIf="menuitem.children.length == 0">
-            <mat-icon>{{ menuitem.icon }}</mat-icon>
-            <span class="menu-btn-text">{{ menuitem.name }}</span> 
-        </button> 
+            <a [routerLink]="['/', menuitem.state]" class="menu-link">
+                <span class="menu-btn-text">
+                    <mat-icon>{{ menuitem.icon }}</mat-icon>
+                    {{ menuitem.name }}
+                </span>
+            </a>
+        </button>
 
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="menuitem.children.length > 0">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+            *ngIf="menuitem.children.length > 0">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <mat-icon>{{ menuitem.icon }}</mat-icon>
-                    <span class="menu-name">{{ menuitem.name }}</span> 
-                </mat-panel-title> 
+                    <span class="menu-name">{{ menuitem.name }}</span>
+                </mat-panel-title>
             </mat-expansion-panel-header>
-            
-           <a href=""  *ngFor="let subitem of menuitem.children">
-            <button mat-button class="sub-menu-btn"> 
-                <span class="menu-btn-text">{{ subitem.name }}</span> 
-            </button> 
-           </a>
+
+            <button mat-button class="menu-btn sub" *ngFor="let subitem of menuitem.children">
+                <a [routerLink]="[subitem.state]" class="menu-link">
+                    <span class="menu-btn-text">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ subitem.name }}</span>
+                </a>
+            </button>
+
         </mat-expansion-panel>
     </div>
 

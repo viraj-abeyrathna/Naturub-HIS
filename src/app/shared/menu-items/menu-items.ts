@@ -23,7 +23,7 @@ export interface Menu {
         icon: 'crop_7_5',
         children:[
             {
-                state: 'master/dataset',
+                state: '/master/dataset',
                 name: 'Dataset',
                 type: 'link',
                 icon: 'av_timer',

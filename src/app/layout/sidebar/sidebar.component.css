@@ -1,68 +1,124 @@
-
-.sidebar a{
-/* background-color: aquamarine; */
-margin: 0;
-vertical-align: middle !important;
-text-decoration: none;
-position: relative;
-padding: 10px;
-
+.sidebar a {
+  /* background-color: aquamarine; */
+  margin: 0;
+  vertical-align: middle !important;
+  text-decoration: none;
+  position: relative;
+  padding: 10px;
 }
 
-.sidebar mat-icon{
-    vertical-align: middle;
+.sidebar mat-icon {
+  vertical-align: middle;
 }
 
 :host /deep/ .sidebar .mat-list-item-content {
-    padding: 0!important;
-  }
-
-  :host /deep/ .sidebar .mat-list-text  {
-    padding: 0!important;
-    width: 200px!important;
-  }
-
-.sub-menu-arrow{
-  float: right;
+  padding: 0 !important;
 }
 
-.mat-form-field + .mat-form-field {
+:host /deep/ .sidebar .mat-list-text {
+  padding: 0 !important;
+  width: 200px !important;
+}
+
+:host /deep/ .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+/* .sub-menu-arrow {
+  float: right;
+} */
+
+.mat-form-field+.mat-form-field {
   margin-left: 8px;
 }
 
-.mat-expansion-panel:not([class*=mat-elevation-z]){
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
   box-shadow: none;
 }
 
-.menu-btn{
+.menu-btn {
   width: 100%;
   padding: 6px;
+  /* color: crimson; */
 }
 
-.sub-menu-btn{
-  width: 100%;
-}
 
-.menu-btn mat-icon{
+.menu-btn mat-icon {
   float: left;
   padding-top: 6px;
   padding-left: 18px;
+  padding-right: 10px;
 }
 
- 
 
-.menu-btn-text{
-  float: left;
-  margin-left: 10px;
+
+.menu-btn-text {
+  text-align: left;
+  /* margin-left: 10px; */
   font-size: 15px !important;
   font-weight: 500;
-
+  color: #A8ABB1;
 }
 
-.menu-name{
+.menu-btn:hover {
+  background-color: #343A4A;
+}
+
+.menu-btn-text:hover {
+  color: #FFFFFF !important;
+}
+
+.menu-name {
   vertical-align: middle;
   margin-left: 10px;
   padding-top: 2px;
   font-size: 15px !important;
   font-weight: 500;
 }
+
+.menu-btn .menu-link span {
+  width: 100%;
+  float: left;
+  position: relative;
+}
+
+mat-expansion-panel {
+  background-color: transparent;
+}
+
+mat-panel-title {
+  color: #A8ABB1;
+}
+
+::ng-deep .mat-expansion-indicator:after {
+  color: #A8ABB1;
+}
+
+mat-expansion-panel-header:hover {
+  background-color: #343A4A !important;
+}
+
+mat-panel-title:hover {
+  color: #FFFFFF !important;
+}
+
+/* .sub-menu-btn {
+  width: 100%;
+}
+
+.sub-menu-btn a {
+  text-decoration: none;
+  text-align: left;
+  background-color: chartreuse;
+  width: 100% !important;
+}
+
+.sub-menu-btn .menu-btn-text {
+  background-color: chocolate;
+  width: 100%;
+}
+
+.sub-menu-btn .menu-link span {
+  width: 100%;
+  text-align: left;
+} */
