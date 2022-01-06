@@ -11,12 +11,11 @@
   }
   
   .main-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: top;
-    justify-content: top;
+    display: flex; 
   }
   
   .main-sidenav {
     padding: 20px;
   }
+
+ 

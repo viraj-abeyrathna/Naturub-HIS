@@ -1,31 +1,13 @@
 <mat-drawer-container class="main-container" autosize>
-  <mat-drawer #drawer class="main-sidenav" mode="side">
+  <mat-drawer #drawer class="main-sidenav" mode="side" opened="true">
     <!-- <p>Auto-resizing sidenav</p>
     <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
     <button (click)="showFiller = !showFiller" mat-raised-button>
       Toggle extra text
     </button> -->
 
-    <mat-selection-list #shoes [multiple]="false">
-      <!-- <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-        {{shoe}}
-      </mat-list-option> -->
-      <mat-list-option>ff
-        <!-- <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'" (click) = "toggleTag()">
-          <mat-icon>{{ menuitem.icon }}</mat-icon> 
-          <span>{{ menuitem.name }}</span> 
-          <span fxFlex></span> 
-          <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> 
-          <mat-icon *ngIf="showList">keyboard_arrow_up</mat-icon> 
-          <mat-icon *ngIf="!showList">keyboard_arrow_down</mat-icon> 
-        </a> -->
-      </mat-list-option>
-      <mat-list-option>ABC</mat-list-option>
-      <mat-list-option>ABC</mat-list-option>
-      <mat-list-option>ABC</mat-list-option>
-      <mat-list-option>ABC</mat-list-option>
+    <app-sidebar></app-sidebar>
 
-    </mat-selection-list>
  
   </mat-drawer>
 
@@ -45,9 +27,11 @@
     </mat-toolbar> 
   </div>
 
+  <div class="container">
+    <router-outlet> </router-outlet>
+  </div>
 </mat-drawer-container>
 
 
 
 
-<router-outlet></router-outlet>

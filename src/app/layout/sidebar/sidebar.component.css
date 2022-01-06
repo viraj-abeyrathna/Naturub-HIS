@@ -1,0 +1,68 @@
+
+.sidebar a{
+/* background-color: aquamarine; */
+margin: 0;
+vertical-align: middle !important;
+text-decoration: none;
+position: relative;
+padding: 10px;
+
+}
+
+.sidebar mat-icon{
+    vertical-align: middle;
+}
+
+:host /deep/ .sidebar .mat-list-item-content {
+    padding: 0!important;
+  }
+
+  :host /deep/ .sidebar .mat-list-text  {
+    padding: 0!important;
+    width: 200px!important;
+  }
+
+.sub-menu-arrow{
+  float: right;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]){
+  box-shadow: none;
+}
+
+.menu-btn{
+  width: 100%;
+  padding: 6px;
+}
+
+.sub-menu-btn{
+  width: 100%;
+}
+
+.menu-btn mat-icon{
+  float: left;
+  padding-top: 6px;
+  padding-left: 18px;
+}
+
+ 
+
+.menu-btn-text{
+  float: left;
+  margin-left: 10px;
+  font-size: 15px !important;
+  font-weight: 500;
+
+}
+
+.menu-name{
+  vertical-align: middle;
+  margin-left: 10px;
+  padding-top: 2px;
+  font-size: 15px !important;
+  font-weight: 500;
+}
