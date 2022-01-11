@@ -24,7 +24,7 @@ export interface Menu {
         children:[
             {
                 state: '/master/dataset',
-                name: 'Dataset',
+                name: 'Data Set',
                 type: 'link',
                 icon: 'av_timer',
                 children:[]
