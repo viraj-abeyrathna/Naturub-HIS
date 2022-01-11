@@ -1,1 +1,12 @@
-<p>dataset works!</p>
+<mat-card class="example-card">
+    <mat-card-title>Data Set</mat-card-title>
+    <mat-card-subtitle>MASTER</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let dataset of datasets" [value]="">
+            {{dataset.DataSetName}}
+            </mat-list-option>
+          </mat-selection-list>
+    </mat-card-content> 
+  </mat-card>

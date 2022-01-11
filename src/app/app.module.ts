@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { MasterModule } from "./pages/master/master.module";
+// import { CommonData } from "./shared/common/common";
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +17,13 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatRippleModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component'; 
@@ -39,7 +48,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatListModule,
     SharedModule,
     MatRippleModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatCardModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
