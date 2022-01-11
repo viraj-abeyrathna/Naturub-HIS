@@ -9,9 +9,7 @@ export class AppComponent {
 
   title = 'Naturub HIS';
 
-  showFiller = false;
-
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  // showFiller = false; 
 
   
 }
