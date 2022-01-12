@@ -17,6 +17,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { FormsComponent } from './forms/forms.component';
 
 
 
@@ -27,6 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
     MasterComponent,
     DatasetComponent,
     ComponentComponent,
+    FormsComponent,
   ],
   imports: [
     CommonModule,
