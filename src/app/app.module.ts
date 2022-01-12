@@ -24,11 +24,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component'; 
- 
+
 
 @NgModule({
   declarations: [
@@ -57,7 +57,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     HttpClientModule,
     MatSortModule,
     MatInputModule,
-    MatTooltipModule 
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
