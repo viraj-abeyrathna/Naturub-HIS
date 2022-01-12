@@ -1,12 +1,51 @@
 <mat-card class="example-card">
-    <mat-card-title>Data Set</mat-card-title>
-    <mat-card-subtitle>MASTER</mat-card-subtitle>
+    <mat-form-field style="position: absolute;">
+        <mat-label>Filter</mat-label>
+        <input matInput placeholder="Ex. Computer" (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+    <mat-card-title class="text-right-align">Data Sets</mat-card-title>
+    <mat-card-subtitle class="text-right-align">MASTER</mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-card-content>
-        <mat-selection-list #shoes [multiple]="false">
-            <mat-list-option *ngFor="let dataset of datasets" [value]="">
-                {{dataset.DataSetName}}
-            </mat-list-option>
-        </mat-selection-list>
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="DataSetID">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Set ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.DataSetID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="DataSetName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Set Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.DataSetName}}</td>
+            </ng-container> 
+
+            <ng-container matColumnDef="Actions" class="btnAction">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button matTooltip="View Items">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Delete">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button> 
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="3" style="text-align: center;">No data matching the filter
+                    "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [length]="datasets.length" [pageSizeOptions]="[5, 10, 25, 50, 100]" [pageSize]="25">
+        </mat-paginator>
+
     </mat-card-content>
 </mat-card>

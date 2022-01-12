@@ -7,6 +7,8 @@ import { CommonData } from "../../shared/common/common";
 import { MasterComponent } from './master.component';
 import { DatasetComponent } from './dataset/dataset.component';
 import { ComponentComponent } from './component/component.component';
+import { FormsComponent } from './forms/forms.component';
+
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort'; 
@@ -17,7 +19,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { FormsComponent } from './forms/forms.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -42,7 +44,8 @@ import { FormsComponent } from './forms/forms.component';
     MatSortModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule 
+    MatButtonModule,
+    MatTooltipModule 
   ]
 })
 export class MasterModule { }

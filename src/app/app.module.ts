@@ -23,6 +23,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card'; 
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
@@ -55,7 +56,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatCardModule,
     HttpClientModule,
     MatSortModule,
-    MatInputModule 
+    MatInputModule,
+    MatTooltipModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
