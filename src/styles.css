@@ -7,3 +7,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 100%; 
     padding: 10px 25px;
 } */
+
+.text-right-align{
+    text-align: right;
+}
+
+.mat-card-subtitle {
+    margin-bottom: 8px;
+}
+
+.mat-toolbar-row, 
+.mat-toolbar-single-row{
+    margin-bottom: 20px;
+}

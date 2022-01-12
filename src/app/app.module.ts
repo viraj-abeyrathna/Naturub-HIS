@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
 
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
+import {MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -20,9 +20,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import {MatCardModule} from '@angular/material/card'; 
+import {MatSortModule} from '@angular/material/sort';
+import {MatInputModule} from '@angular/material/input';
 
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
@@ -53,7 +53,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatFormFieldModule,
     MatPaginatorModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSortModule,
+    MatInputModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

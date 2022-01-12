@@ -24,6 +24,7 @@ export class DatasetComponent implements OnInit {
   }
 
   FillDataSets(){
+    debugger;
     this.service.getDataSetList(0).subscribe(data=>{this.datasets = data});
   }
 

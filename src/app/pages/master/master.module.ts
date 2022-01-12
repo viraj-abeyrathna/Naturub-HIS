@@ -9,10 +9,17 @@ import { DatasetComponent } from './dataset/dataset.component';
 import { ComponentComponent } from './component/component.component';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort'; 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
-import {MatListModule} from '@angular/material/list';
+import {MatListModule} from '@angular/material/list'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
+
+
 
 
 @NgModule({
@@ -29,7 +36,11 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     MatTableModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatSortModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule 
   ]
 })
 export class MasterModule { }
