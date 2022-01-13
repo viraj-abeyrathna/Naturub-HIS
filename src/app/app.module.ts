@@ -13,21 +13,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatRippleModule} from '@angular/material/core';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card'; 
-import {MatSortModule} from '@angular/material/sort';
-import {MatInputModule} from '@angular/material/input';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatDialogModule} from '@angular/material/dialog';
+import { CommonData } from "./shared/common/common"; 
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 // import { DashboardComponent } from './pages/dashboard/dashboard.component'; 
@@ -44,24 +30,10 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     AppRoutingModule,
     MasterModule, 
     InventoryModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    SharedModule,
-    MatRippleModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatCardModule,
+    BrowserAnimationsModule, 
+    SharedModule, 
     HttpClientModule,
-    MatSortModule,
-    MatInputModule,
-    MatTooltipModule,
-    MatDialogModule
+    CommonData 
   ],
   providers: [],
   bootstrap: [AppComponent]
