@@ -20,3 +20,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-toolbar-single-row{
     margin-bottom: 20px;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #0F182A; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #274279; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

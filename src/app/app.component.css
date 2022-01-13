@@ -17,10 +17,15 @@
 }
 
 .main-sidenav {
-  padding: 20px;
+  /* padding: 20px; */
   background-color: #0F182A;
 }
 
 :host /deep/ mat-drawer-content {
   padding: 20px;
+}
+
+.mat-drawer.mat-drawer-side{
+  width: 250px;
+  padding-bottom: 20px;
 }

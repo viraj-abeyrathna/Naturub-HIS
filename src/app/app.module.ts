@@ -3,7 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
-import { MasterModule } from "./pages/master/master.module";
+import { MasterModule } from "./pages/master/master.module"; 
+import { InventoryModule } from "./pages/inventory/inventory.module"; 
+
+
 // import { CommonData } from "./shared/common/common";
 
 import { AppComponent } from './app.component';
@@ -27,20 +30,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component'; 
+// import { DashboardComponent } from './pages/dashboard/dashboard.component'; 
 
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    SidebarComponent,
-    DashboardComponent 
+    SidebarComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MasterModule,
+    MasterModule, 
+    InventoryModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
