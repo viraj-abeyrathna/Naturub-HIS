@@ -1,4 +1,29 @@
-<mat-accordion>
+<div class="profile-card">
+    <div class="card-menubar">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="btn-profile">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+            </button>
+        </mat-menu>
+    </div>
+    <img src="../../../assets/images/avatar.jpg" alt="Profile Picture" class="profile-pic">
+    <p class="user-name">Sample User</p>
+    <p class="user-email">example@naturub.com</p>
+
+</div>
+<mat-accordion> 
     <div *ngFor="let menuitem of menuItems.getMenuitem()">
         <button mat-button class="menu-btn" *ngIf="menuitem.children.length == 0">
             <a [routerLink]="['/', menuitem.state]" class="menu-link">
@@ -26,7 +51,6 @@
                         {{ subitem.name }}</span>
                 </a>
             </button>
-
         </mat-expansion-panel>
     </div>
 

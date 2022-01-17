@@ -80,7 +80,7 @@
   width: 100%;
   float: left;
   position: relative;
-} 
+}
 
 mat-expansion-panel {
   background-color: transparent;
@@ -122,3 +122,48 @@ mat-panel-title:hover {
   width: 100%;
   text-align: left;
 } */
+
+.profile-card {
+  /* background-color: #FFFFFF; */
+  /* width: 100%; */
+}
+
+.profile-card .card-menubar {
+  /* background-color: aqua; */
+  height: 40px;
+}
+
+.btn-profile {
+  color: #A8ABB1;
+  float: right;
+}
+
+.profile-card .profile-pic {
+  height: 60px;
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid;
+  border-color: #2C9488;
+}
+
+.user-name {
+  color: #FFFFFF;
+
+  text-align: center;
+  /* background-color: aquamarine; */
+  padding-top: 10px;
+  font-weight: 400; 
+  margin-bottom: 0;
+}
+
+.user-email {
+  color: #A8ABB1;
+
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 100;
+  padding: 0;
+  margin-bottom: 50px;
+}
