@@ -82,7 +82,7 @@ export class ComputerComponent implements OnInit {
 
   openAddComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
-      width: '700px',
+      width: '500px',
       data: {title: 'Add Computer'}
       // data: { name: this.name, animal: this.animal }
     });
@@ -95,7 +95,7 @@ export class ComputerComponent implements OnInit {
 
   openEditComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
-      width: '700px',
+      width: '500px',
       data: {title: 'Edit Computer'}
       // data: { name: this.name, animal: this.animal }
     });

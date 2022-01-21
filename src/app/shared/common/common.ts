@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   exports: [
@@ -35,7 +36,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatTooltipModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule, 
+    MatAutocompleteModule
   ]
 })
 export class CommonData {

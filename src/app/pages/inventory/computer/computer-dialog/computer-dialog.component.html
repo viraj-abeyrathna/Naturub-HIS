@@ -12,6 +12,114 @@
   </mat-select>
 </mat-form-field>
 
+<mat-form-field appearance="fill">
+  <mat-label>Sub Category</mat-label>
+  <mat-select>
+    <mat-option value="one">First option</mat-option>
+    <mat-option value="two">Second option</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>FAR Code</mat-label>
+  <input matInput>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Computer Name</mat-label>
+  <input matInput>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>IP Address</mat-label>
+  <input matInput>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Department</mat-label>
+  <mat-select>
+    <mat-option value="one">First option</mat-option>
+    <mat-option value="two">Second option</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Section</mat-label>
+  <mat-select>
+    <mat-option value="one">First option</mat-option>
+    <mat-option value="two">Second option</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Log On User</mat-label>
+  <input matInput>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>User</mat-label>
+  <input matInput>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Operating System</mat-label>
+  <mat-select>
+    <mat-option value="one">First option</mat-option>
+    <mat-option value="two">Second option</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Virus Guard</mat-label>
+  <mat-select>
+    <mat-option value="Active">Active</mat-option>
+    <mat-option value="Deactive">Deactive</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Processor</mat-label>
+  <mat-select>
+    <mat-option value="Active">Active</mat-option>
+    <mat-option value="Deactive">Deactive</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>RAM</mat-label>
+  <mat-select>
+    <mat-option value="Active">Active</mat-option>
+    <mat-option value="Deactive">Deactive</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Model Name</mat-label>
+  <input type="text"
+         placeholder="Pick one"
+         aria-label="Number"
+         matInput
+         [formControl]="myControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Leave a comment</mat-label>
+  <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+
+<!-- <div>
+  <label>Virus Guard: </label>
+  <mat-radio-group>
+    <mat-radio-button value="Active">Active</mat-radio-button>
+    <mat-radio-button value="Deactive">Deactive</mat-radio-button>
+  </mat-radio-group>
+</div> -->
 
 </div>
 <div mat-dialog-actions align="end">

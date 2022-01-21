@@ -67,3 +67,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #5d6471;
   }
   
+/* Radio Button */
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:#2f4f8f !important; 
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#2f4f8f !important;
+    background-color:#2f4f8f !important;
+  } 
+
+  .mat-radio-button .mat-radio-ripple .mat-ripple-element{
+    background-color:rgba(100, 136, 255, 0.26) !important;
+  }
+
+ 

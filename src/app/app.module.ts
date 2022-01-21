@@ -15,12 +15,13 @@ import { SharedModule } from "./shared/shared.module";
 import { CommonData } from "./shared/common/common"; 
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-// import { DashboardComponent } from './pages/dashboard/dashboard.component'; 
+// import { DashboardComponent } from './pages/dashboard/dashboard.component';  
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     routingComponents,
     SidebarComponent 
   ],
