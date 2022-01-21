@@ -6,17 +6,17 @@
 
 <mat-form-field appearance="fill">
   <mat-label>Main Category</mat-label>
-  <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
+  <mat-select (selectionChange)="FillSubCategory($event.value)">
+    <mat-option *ngFor="let main of MainCategoryList" [value]="main.MainCategoryID">
+      {{main.MainCategory}}</mat-option>
   </mat-select>
 </mat-form-field>
 
 <mat-form-field appearance="fill">
   <mat-label>Sub Category</mat-label>
   <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
+    <mat-option *ngFor="let sub of SubCategoryList" [value]="sub.SubCategoryID">
+      {{sub.SubCategory}}</mat-option>
   </mat-select>
 </mat-form-field>
 

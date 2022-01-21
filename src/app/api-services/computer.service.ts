@@ -17,4 +17,13 @@ import { Computers } from '../pages/inventory/computer/computer.component';
       return this.http.get<Computers[]>(new CommonData().APIUrl+'/Inventory/GetComputer/'+val); 
     }
 
+    getMainCategory():Observable<any[]> {
+      return this.http.get<any>(new CommonData().APIUrl+'/Master/GetMainCategory');
+    }
+
+    getSubCategory(val:any)
+    {
+      return this.http.get<any>(new CommonData().APIUrl+'/Master/GetSubCategory/'+val);
+    }
+
   }
