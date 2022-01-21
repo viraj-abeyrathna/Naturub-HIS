@@ -5,12 +5,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCommonModule } from '@angular/material/core';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatSelectModule} from '@angular/material/select';
 
-import { EditDialogComponent } from './edit-dialog.component';
+
+import { ComputerDialogComponent } from './computer-dialog.component';
 
 @NgModule({
-  declarations: [EditDialogComponent],
-  entryComponents: [EditDialogComponent],
+  declarations: [ComputerDialogComponent],
+  entryComponents: [ComputerDialogComponent],
   imports: [
     FormsModule,
     MatButtonModule,
@@ -18,6 +21,8 @@ import { EditDialogComponent } from './edit-dialog.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-  ],
+    MatDividerModule,
+    MatSelectModule
+  ], 
 })
-export class ExampleDialogModule { }
+export class ComputerDialogModule { }

@@ -18,8 +18,7 @@ import { RouterDongleComponent } from './router-dongle/router-dongle.component';
 import { EthernetSwitchComponent } from './ethernet-switch/ethernet-switch.component';
 import { AccessPointComponent } from './access-point/access-point.component';
 import { MobilePhoneComponent } from './mobile-phone/mobile-phone.component';
-
-
+ 
 
 @NgModule({
   declarations: [
@@ -35,7 +34,7 @@ import { MobilePhoneComponent } from './mobile-phone/mobile-phone.component';
     RouterDongleComponent,
     EthernetSwitchComponent,
     AccessPointComponent,
-    MobilePhoneComponent
+    MobilePhoneComponent, 
   ],
   imports: [
     CommonModule,

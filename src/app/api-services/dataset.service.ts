@@ -16,7 +16,6 @@ export class DataSetService {
   getDataSetList(val:any)
   {
     return this.http.get<Dataset[]>(new CommonData().APIUrl+'/Master/GetDataSet/'+val); 
-
   }
 
 

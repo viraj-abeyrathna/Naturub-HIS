@@ -1,20 +1,16 @@
 <div class="profile-card">
     <div class="card-menubar">
         <button mat-icon-button [matMenuTriggerFor]="menu" class="btn-profile">
-            <mat-icon>account_circle</mat-icon>
+            <mat-icon>drag_indicator</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-            </button>
             <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voice mail</span>
-            </button>
+                <mat-icon>settings</mat-icon>
+                <span>Change Account Details</span>
+            </button> 
             <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Sign Out</span>
             </button>
         </mat-menu>
     </div>

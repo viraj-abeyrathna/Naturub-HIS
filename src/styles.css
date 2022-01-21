@@ -12,8 +12,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: right;
 }
 
+.mat-card-title{
+  margin-top: 8px !important;
+  font-size: 35px;
+  font-weight: 100;
+  color: #2088e7;
+}
+
 .mat-card-subtitle {
     margin-bottom: 8px;
+}
+
+.mat-sort-header-container{
+  justify-content: center;
 }
 
 .mat-toolbar-row, 
@@ -34,10 +45,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #274279; 
+    background: #2f4f8f; 
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+
+  .mat-cell, .mat-footer-cell{
+    font-size: 12px; 
+  }
+
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  .mat-sort-header-content{
+    font-weight: 600;
+    color: #5d6471;
+  }
+  

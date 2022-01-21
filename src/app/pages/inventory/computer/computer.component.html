@@ -1,1 +1,138 @@
-<p>computer works!</p>
+<mat-card class="example-card">
+    <button mat-fab color="primary" style="position: absolute;" matTooltip="Add Computer" (click)="openAddComputerDialog()">
+        <mat-icon>library_add</mat-icon>
+    </button>
+
+    <mat-form-field style="position: absolute; margin-left: 80px;">
+        <mat-label>Filter</mat-label>
+        <input matInput placeholder="Ex. Computer" (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+    <mat-card-title class="text-right-align">Computers</mat-card-title>
+    <mat-card-subtitle class="text-right-align">INVENTORY</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+
+        <div class="table-overflow">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="ItemID">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Item ID </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ItemID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ItemCode">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Code </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ItemCode}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="FARCode">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FAR Code </th>
+                    <td mat-cell *matCellDef="let row"> {{row.FARCode}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="SubCategory">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Category </th>
+                    <td mat-cell *matCellDef="let row"> {{row.SubCategory}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ComputerName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Computer Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ComputerName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="IPAddress">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> IP Address </th>
+                    <td mat-cell *matCellDef="let row"> {{row.IPAddress}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Section">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Section </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Section}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="LogOnUser">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Log On User</th>
+                    <td mat-cell *matCellDef="let row"> {{row.LogOnUser}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="User">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
+                    <td mat-cell *matCellDef="let row"> {{row.User}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="OperatingSystem">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Operating System </th>
+                    <td mat-cell *matCellDef="let row"> {{row.OperatingSystem}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="VirusGuard">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Virus Guard </th>
+                    <td mat-cell *matCellDef="let row"> {{row.VirusGuard}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Processor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Processor </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Processor}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="RAM">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> RAM </th>
+                    <td mat-cell *matCellDef="let row"> {{row.RAM}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ModelName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Model Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ModelName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Remark">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Remark </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Remark}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EnterdDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Enterd Date </th>
+                    <td mat-cell *matCellDef="let row" style="min-width: 135px; text-align: center;"> {{row.EnterdDate | date:'yyyy-MM-dd / hh:mm a'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EnterdUser">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Enterd User </th>
+                    <td mat-cell *matCellDef="let row"> {{row.EnterdUser}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="LastModifiedDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Modified Date </th>
+                    <td mat-cell *matCellDef="let row"> {{row.LastModifiedDate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="LastModifiedUser">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Modified User </th>
+                    <td mat-cell *matCellDef="let row"> {{row.LastModifiedUser}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions" class="btnAction" style="justify-content: center;">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                    <td mat-cell *matCellDef="let row" style="min-width: 80px;">
+                        <button mat-icon-button matTooltip="Edit" (click)="openEditComputerDialog()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Delete">
+                            <mat-icon>delete_forever</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="19" style="text-align: center;">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+        </div>
+
+        <mat-paginator [length]="computers.length" [pageSizeOptions]="[5, 10, 25, 50, 100]" [pageSize]="50">
+        </mat-paginator>
+
+    </mat-card-content>
+</mat-card>

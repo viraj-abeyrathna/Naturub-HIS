@@ -26,9 +26,7 @@ export interface Components {
   styleUrls: ['./component.component.css']
 })
 export class ComponentComponent implements OnInit {
-
-
-
+ 
   dataSource: MatTableDataSource<Components> = new MatTableDataSource();
   components: Components[] = [];
   columns: string[] = ['ComponentID', 'ComponentName', 'ComponentTypeName','Actions'];
