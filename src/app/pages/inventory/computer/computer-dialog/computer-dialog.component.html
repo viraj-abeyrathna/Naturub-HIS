@@ -1,10 +1,12 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
-<mat-divider></mat-divider>
+<!-- <mat-divider></mat-divider> -->
 <div mat-dialog-content>  
-  
+
+  <div class="example-full-width-test">
+ 
 <!-- Fields -->
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Main Category</mat-label>
   <mat-select (selectionChange)="FillSubCategory($event.value)">
     <mat-option *ngFor="let main of MainCategoryList" [value]="main.MainCategoryID">
@@ -12,7 +14,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Sub Category</mat-label>
   <mat-select>
     <mat-option *ngFor="let sub of SubCategoryList" [value]="sub.SubCategoryID">
@@ -20,22 +22,22 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>FAR Code</mat-label>
   <input matInput>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Computer Name</mat-label>
   <input matInput placeholder="Ex. NGHQ-IT-008">
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>IP Address</mat-label>
   <input matInput placeholder="Ex. 192.168.0.8">
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Department</mat-label>
   <mat-select>
     <mat-option value="one">First option</mat-option>
@@ -43,7 +45,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Section</mat-label>
   <mat-select>
     <mat-option value="one">First option</mat-option>
@@ -51,17 +53,17 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Log On User</mat-label>
   <input matInput placeholder="Ex. sample.user">
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>User</mat-label>
   <input matInput placeholder="Ex. SampleUser">
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Operating System</mat-label>
   <mat-select>
     <mat-option value="one">First option</mat-option>
@@ -69,7 +71,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Virus Guard</mat-label>
   <mat-select>
     <mat-option value="Active">Active</mat-option>
@@ -77,7 +79,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Processor</mat-label>
   <mat-select>
     <mat-option value="Active">Active</mat-option>
@@ -85,7 +87,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>RAM</mat-label>
   <mat-select>
     <mat-option value="Active">Active</mat-option>
@@ -93,7 +95,8 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Model Name</mat-label>
   <input type="text"
          placeholder="Ex. Lenovo L580"
@@ -102,24 +105,20 @@
          [formControl]="modelControl"
          [matAutocomplete]="auto">
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredModels | async" [value]="option">
-      {{option}}
+    <mat-option *ngFor="let computerModel of filteredModels | async" [value]="computerModel.ModelName">
+      {{computerModel.ModelName}}
     </mat-option>
   </mat-autocomplete>
-</mat-form-field>
+</mat-form-field> 
 
-<mat-form-field class="example-full-width" appearance="fill">
+<mat-form-field class="example-full-width" appearance="outline">
   <mat-label>Leave a comment</mat-label>
    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
 </mat-form-field>
 
-<!-- <div>
-  <label>Virus Guard: </label>
-  <mat-radio-group>
-    <mat-radio-button value="Active">Active</mat-radio-button>
-    <mat-radio-button value="Deactive">Deactive</mat-radio-button>
-  </mat-radio-group>
-</div> -->
+  </div>
+ 
+
 
 </div>
 <div mat-dialog-actions align="end">

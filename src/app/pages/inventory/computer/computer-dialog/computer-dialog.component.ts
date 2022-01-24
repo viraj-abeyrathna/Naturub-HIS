@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 
-export interface ComputerModel {
+export interface ComputerModel { 
   ModelName: string;
 }
 
@@ -18,46 +18,38 @@ export interface ComputerModel {
 })
 export class ComputerDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService, private inventoryService: InventoryService,public dialogRef: MatDialogRef<ComputerDialogComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   computerModels: ComputerModel[] = [];
+
   modelControl = new FormControl();
 
-  options: string[] = ['One', 'Two', 'Three'];
-  
+  filteredModels: Observable<ComputerModel[]> = new Observable<ComputerModel[]>();
+ 
+
   MainCategoryList: any = [];
   SubCategoryList: any = [];
-  MainCategoryID : string = "0";
+  MainCategoryID: string = "0";
 
-  filteredModels: Observable<string[]> = new Observable<string[]>();
 
-  ngOnInit() {
-    this.filteredModels = this.modelControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
-    this.FillMainCategory(); 
+  ngOnInit(): void {
+    this.FillComputerModels(); 
+    this.FillMainCategory();   
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  }
 
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  FillMainCategory(){
+  FillMainCategory() {
     this.masterService.getMainCategory().subscribe((data: any) => {
       this.MainCategoryList = data;
     });
   }
 
-  FillSubCategory(MainCategoryID: number){
-    debugger;
+  FillSubCategory(MainCategoryID: number) { 
     this.masterService.getSubCategory(MainCategoryID).subscribe((data: any) => {
       this.SubCategoryList = data;
     });
@@ -65,10 +57,27 @@ export class ComputerDialogComponent implements OnInit {
 
   FillComputerModels() {
     this.inventoryService.getComputerModels().subscribe((data: any) => {
-      this.computerModels = data;
-    }); 
+      this.computerModels = data; 
+    });
+
+    this.filteredModels = this.modelControl.valueChanges.pipe(
+      startWith<string | ComputerModel>(''),
+      map(value => typeof value === 'string' ? value : value.ModelName),
+      map(name => name ? this._filter(name) : this.computerModels.slice())
+    );
+
+  }
+
+  private _filter(value: string): ComputerModel[] {
+ 
+    const filterValue = value.toLowerCase();   
+    return this.computerModels.filter(option=> option.ModelName.toLowerCase().includes(filterValue));
+
+
+
   }
 
 
- 
+
+
 }
