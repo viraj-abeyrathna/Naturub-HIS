@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../matdialog';
-import { ComponentService } from "../../../api-services/component.service";
+import { MasterService } from "../../../api-services/master.service";
 
 
 
@@ -34,7 +34,7 @@ export class ComponentComponent implements OnInit {
   @ViewChild(MatSort, { static: false })sort: MatSort = new MatSort;
   @ViewChild(MatPaginator)paginator!: MatPaginator;
 
-  constructor(private service: ComponentService,public dialog: MatDialog) {
+  constructor(private service: MasterService,public dialog: MatDialog) {
 
     this.service.getGetComponentList(0).subscribe(
       (data: any) => {

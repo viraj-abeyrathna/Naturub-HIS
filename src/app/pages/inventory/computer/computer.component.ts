@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ComputerDialogComponent } from './computer-dialog';
-import { ComputerService } from 'src/app/api-services/computer.service';
+import { InventoryService } from 'src/app/api-services/inventory.service';
 
 export interface Computers {
   // ItemID: number;
@@ -68,7 +68,7 @@ export class ComputerComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort = new MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private service: ComputerService, public dialog: MatDialog) {
+  constructor(private service: InventoryService, public dialog: MatDialog) {
 
     this.service.getComputerList(0).subscribe(
       (data: any) => {

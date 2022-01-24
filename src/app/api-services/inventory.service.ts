@@ -9,21 +9,20 @@ import { Computers } from '../pages/inventory/computer/computer.component';
     providedIn: 'root'
   })
 
-  export class ComputerService { 
+  export class InventoryService { 
     constructor(private http:HttpClient) { }
 
+    // Computer
     getComputerList(val:any)
     {
       return this.http.get<Computers[]>(new CommonData().APIUrl+'/Inventory/GetComputer/'+val); 
     }
 
-    getMainCategory():Observable<any[]> {
-      return this.http.get<any>(new CommonData().APIUrl+'/Master/GetMainCategory');
+    getComputerModels(){
+      return this.http.get<Computers[]>(new CommonData().APIUrl+'/Inventory/GetComputerModels'); 
     }
 
-    getSubCategory(val:any)
-    {
-      return this.http.get<any>(new CommonData().APIUrl+'/Master/GetSubCategory/'+val);
-    }
+
+ 
 
   }
