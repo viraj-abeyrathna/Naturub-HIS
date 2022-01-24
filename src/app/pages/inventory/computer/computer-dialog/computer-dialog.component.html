@@ -102,8 +102,8 @@
          [formControl]="modelControl"
          [matAutocomplete]="auto">
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredModels | async" [value]="model">
-      {{model.name}}
+    <mat-option *ngFor="let option of filteredModels | async" [value]="option">
+      {{option}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

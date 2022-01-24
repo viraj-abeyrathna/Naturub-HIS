@@ -6,23 +6,22 @@ import { CommonData } from "../shared/common/common";
 import { Computers } from '../pages/inventory/computer/computer.component';
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 
-  export class InventoryService { 
-    constructor(private http:HttpClient) { }
+export class InventoryService {
+  constructor(private http: HttpClient) { }
 
-    // Computer
-    getComputerList(val:any)
-    {
-      return this.http.get<Computers[]>(new CommonData().APIUrl+'/Inventory/GetComputer/'+val); 
-    }
-
-    getComputerModels(){
-      return this.http.get<Computers[]>(new CommonData().APIUrl+'/Inventory/GetComputerModels'); 
-    }
-
-
- 
-
+  // Computer
+  getComputerList(val: any) {
+    return this.http.get<Computers[]>(new CommonData().APIUrl + '/Inventory/GetComputer/' + val);
   }
+
+  getComputerModels() {
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetComputerModels');
+  }
+
+
+
+
+}

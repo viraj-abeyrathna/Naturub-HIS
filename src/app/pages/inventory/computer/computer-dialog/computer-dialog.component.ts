@@ -5,6 +5,11 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 import { MasterService } from 'src/app/api-services/master.service';
+import { InventoryService } from 'src/app/api-services/inventory.service';
+
+export interface ComputerModel {
+  ModelName: string;
+}
 
 @Component({
   selector: 'app-computer-dialog',
@@ -13,17 +18,21 @@ import { MasterService } from 'src/app/api-services/master.service';
 })
 export class ComputerDialogComponent implements OnInit {
 
-  constructor(private service: MasterService,public dialogRef: MatDialogRef<ComputerDialogComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private inventoryService: InventoryService,public dialogRef: MatDialogRef<ComputerDialogComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  computerModels: ComputerModel[] = [];
   modelControl = new FormControl();
+
   options: string[] = ['One', 'Two', 'Three'];
+  
   MainCategoryList: any = [];
   SubCategoryList: any = [];
   MainCategoryID : string = "0";
-  filteredOptions: Observable<string[]> = new Observable<string[]>();
+
+  filteredModels: Observable<string[]> = new Observable<string[]>();
 
   ngOnInit() {
-    this.filteredOptions = this.modelControl.valueChanges.pipe(
+    this.filteredModels = this.modelControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
@@ -42,18 +51,23 @@ export class ComputerDialogComponent implements OnInit {
   }
 
   FillMainCategory(){
-    this.service.getMainCategory().subscribe((data: any) => {
+    this.masterService.getMainCategory().subscribe((data: any) => {
       this.MainCategoryList = data;
     });
   }
 
   FillSubCategory(MainCategoryID: number){
     debugger;
-    this.service.getSubCategory(MainCategoryID).subscribe((data: any) => {
+    this.masterService.getSubCategory(MainCategoryID).subscribe((data: any) => {
       this.SubCategoryList = data;
     });
   }
 
+  FillComputerModels() {
+    this.inventoryService.getComputerModels().subscribe((data: any) => {
+      this.computerModels = data;
+    }); 
+  }
 
 
  
