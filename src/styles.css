@@ -82,3 +82,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
  
+/* Common */
+
+.pt-10{
+  padding-top: 10px;
+}
+
+.mb-0{
+  margin-bottom: 0px !important;
+}
+
+/* Dialog Models */
+
+.sub-title{
+  color: rgba(0,0,0,.54) !important;
+}

@@ -21,7 +21,7 @@ export interface Computers {
   IPAddress: string;
   SectionID: number;
   Section: string;
-  LogOnUser: string;
+  LoginUser: string;
   User: string;
   OperatingSystem: string;
   VirusGuard: string;
@@ -50,7 +50,7 @@ export class ComputerComponent implements OnInit {
     'ComputerName',
     'IPAddress',
     'Section',
-    'LogOnUser',
+    'LoginUser',
     'User',
     'OperatingSystem',
     'VirusGuard',
@@ -83,7 +83,7 @@ export class ComputerComponent implements OnInit {
   openAddComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: {title: 'Add Computer'}
+      data: {title: 'ADD COMPUTER', subtitle:'Fill the computer details'}
       // data: { name: this.name, animal: this.animal }
     });
 
@@ -96,7 +96,7 @@ export class ComputerComponent implements OnInit {
   openEditComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: {title: 'Edit Computer'}
+      data: {title: 'Edit Computer', subtitle:'Change the computer details'}
       // data: { name: this.name, animal: this.animal }
     });
 

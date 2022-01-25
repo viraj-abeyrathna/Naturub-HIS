@@ -21,6 +21,21 @@ export class InventoryService {
     return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetComputerModels');
   }
 
+  getOperatingSystem(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetOperatingSystem');
+  }
+
+  getVirusGuard(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetVirusGuard');
+  }
+
+  getProcessor(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetProcessor');
+  }
+
+  getRAM(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetRAM');
+  }
 
 
 

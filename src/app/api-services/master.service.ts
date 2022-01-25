@@ -37,6 +37,16 @@ export class MasterService {
   {
     return this.http.get<any>(new CommonData().APIUrl+'/Master/GetSubCategory/'+val);
   }
+
+  // Department
+  getDepartment():Observable<any[]> {
+    return this.http.get<any>(new CommonData().APIUrl+'/Master/GetDepartment');
+  }
+
+   // Section
+   getSection(val:any):Observable<any[]> {
+    return this.http.get<any>(new CommonData().APIUrl+'/Master/GetSection/'+val);
+  }
  
 
 }

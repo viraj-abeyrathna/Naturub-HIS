@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [
@@ -37,7 +38,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatTooltipModule,
     MatDialogModule,
     MatMenuModule, 
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule
   ]
 })
 export class CommonData {

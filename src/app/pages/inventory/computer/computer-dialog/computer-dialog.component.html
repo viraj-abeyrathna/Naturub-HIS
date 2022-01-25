@@ -1,127 +1,157 @@
-<h1 mat-dialog-title>{{data.title}}</h1>
+<h1 mat-dialog-title class="mb-0">{{data.title}}</h1>
+<p class="sub-title">{{data.subtitle}}</p>
+<mat-error *ngIf="ModelControl.hasError('valid')">Model is <strong>required</strong></mat-error>
 <!-- <mat-divider></mat-divider> -->
-<div mat-dialog-content>  
+<div mat-dialog-content>
 
-  <div class="example-full-width-test">
- 
-<!-- Fields -->
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Main Category</mat-label>
-  <mat-select (selectionChange)="FillSubCategory($event.value)">
-    <mat-option *ngFor="let main of MainCategoryList" [value]="main.MainCategoryID">
-      {{main.MainCategory}}</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Sub Category</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let sub of SubCategoryList" [value]="sub.SubCategoryID">
-      {{sub.SubCategory}}</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>FAR Code</mat-label>
-  <input matInput>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Computer Name</mat-label>
-  <input matInput placeholder="Ex. NGHQ-IT-008">
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>IP Address</mat-label>
-  <input matInput placeholder="Ex. 192.168.0.8">
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Department</mat-label>
-  <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Section</mat-label>
-  <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Log On User</mat-label>
-  <input matInput placeholder="Ex. sample.user">
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>User</mat-label>
-  <input matInput placeholder="Ex. SampleUser">
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Operating System</mat-label>
-  <mat-select>
-    <mat-option value="one">First option</mat-option>
-    <mat-option value="two">Second option</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Virus Guard</mat-label>
-  <mat-select>
-    <mat-option value="Active">Active</mat-option>
-    <mat-option value="Deactive">Deactive</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Processor</mat-label>
-  <mat-select>
-    <mat-option value="Active">Active</mat-option>
-    <mat-option value="Deactive">Deactive</mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>RAM</mat-label>
-  <mat-select>
-    <mat-option value="Active">Active</mat-option>
-    <mat-option value="Deactive">Deactive</mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Model Name</mat-label>
-  <input type="text"
-         placeholder="Ex. Lenovo L580"
-         aria-label="Model"
-         matInput
-         [formControl]="modelControl"
-         [matAutocomplete]="auto">
-  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-    <mat-option *ngFor="let computerModel of filteredModels | async" [value]="computerModel.ModelName">
-      {{computerModel.ModelName}}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field> 
-
-<mat-form-field class="example-full-width" appearance="outline">
-  <mat-label>Leave a comment</mat-label>
-   <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-</mat-form-field>
-
+  <div class="pt-10">
+   
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Main Category</mat-label>
+        <mat-select (selectionChange)="FillSubCategories($event.value)" [formControl]="MainCategoryControl"
+          [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let main of MainCategoryList" [value]="main.MainCategoryID">
+            {{main.MainCategory}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="MainCategoryControl.hasError('required')">Main category is <strong>required</strong></mat-error>
+  
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Sub Category</mat-label>
+        <mat-select [formControl]="SubCategoryControl" [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let sub of SubCategoryList" [value]="sub.SubCategoryID">
+            {{sub.SubCategory}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="SubCategoryControl.hasError('required')">Sub category is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>FAR Code</mat-label>
+        <input matInput [formControl]="FARControl" [errorStateMatcher]="matcher" required>
+        <mat-error *ngIf="FARControl.hasError('required')">FAR code is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Computer Name</mat-label>
+        <input matInput placeholder="Ex. NGHQ-IT-008" [formControl]="ComputerNameControl" [errorStateMatcher]="matcher"
+          required>
+        <mat-error *ngIf="ComputerNameControl.hasError('required')">Computer name is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>IP Address</mat-label>
+        <input matInput placeholder="Ex. 192.168.0.8" [formControl]="IPAddressControl" [errorStateMatcher]="matcher"
+          type="text" required>
+        <mat-error *ngIf="IPAddressControl.hasError('required')">IP address is <strong>required</strong></mat-error>
+        <mat-error *ngIf="IPAddressControl.hasError('pattern')">IP address is <strong>invalid</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Department</mat-label>
+        <mat-select (selectionChange)="FillSections($event.value)" [formControl]="DepartmentControl"
+          [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let department of DepartmentList" [value]="department.DepartmentID">
+            {{department.Department}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="DepartmentControl.hasError('required')">Department is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Section</mat-label>
+        <mat-select [formControl]="SectionControl" [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let section of SectionList" [value]="section.SectionID">
+            {{section.Section}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="SectionControl.hasError('required')">Section is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Login User</mat-label>
+        <input matInput placeholder="Ex. sample.user" [formControl]="LoginUserControl" [errorStateMatcher]="matcher"
+          required>
+        <mat-error *ngIf="LoginUserControl.hasError('required')">Login user is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>User</mat-label>
+        <input matInput placeholder="Ex. authorized.user" [formControl]="UserControl" [errorStateMatcher]="matcher"
+          required>
+        <mat-error *ngIf="UserControl.hasError('required')">User is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Operating System</mat-label>
+        <mat-select [formControl]="OSControl" [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let operatingSystem of OperatingSystemList" [value]="operatingSystem.OperatingSystemID">
+            {{operatingSystem.OperatingSystem}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="OSControl.hasError('required')">Operating system is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Virus Guard</mat-label>
+        <mat-select [formControl]="VirusGuardControl" [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let virusGuard of VirusGuardList" [value]="virusGuard.VirusGuardID">
+            {{virusGuard.VirusGuard}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="VirusGuardControl.hasError('required')">Virus guard is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Processor</mat-label>
+        <mat-select [formControl]="ProcessorControl" [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let processor of ProcessorList" [value]="processor.ProcessorID">
+            {{processor.Processor}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="ProcessorControl.hasError('required')">Processor is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>RAM</mat-label>
+        <mat-select [formControl]="RAMControl" [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let rams of RAMList" [value]="rams.RAMID">
+            {{rams.RAM}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="RAMControl.hasError('required')">RAM is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Capacity</mat-label>
+        <input matInput placeholder="Ex. 500GB SATA / 256GB SSD / 125GB NVMe" [formControl]="CapacityControl"
+          [errorStateMatcher]="matcher" required>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Model Name</mat-label>
+        <input type="text" placeholder="Ex. Lenovo L580" aria-label="Model" matInput [formControl]="ModelControl"
+          [errorStateMatcher]="matcher" [matAutocomplete]="auto" required>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let computerModel of filteredModels | async" [value]="computerModel.ModelName">
+            {{computerModel.ModelName}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="ModelControl.hasError('required')">Model is <strong>required</strong></mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Remark</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field> 
   </div>
- 
-
 
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)="Save()">Ok</button> -->
+  <button mat-button cdkFocusInitial (click)="Save()">Ok</button>
+
 </div>
