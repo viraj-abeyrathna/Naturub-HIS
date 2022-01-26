@@ -1,13 +1,15 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
+// import { HttpParams } from '@angular/common/http';
+import { Computer } from "../../../../model/computer";
 
 export interface ComputerModel {
   ModelName: string;
@@ -32,10 +34,10 @@ let IP_PATTERN = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2
 })
 export class ComputerDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService,private _snackBar: MatSnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private _snackBar: MatSnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   computerModels: ComputerModel[] = [];
-  filteredModels: Observable<ComputerModel[]> = new Observable<ComputerModel[]>(); 
+  filteredModels: Observable<ComputerModel[]> = new Observable<ComputerModel[]>();
 
 
   MainCategoryList: any = [];
@@ -68,11 +70,13 @@ export class ComputerDialogComponent implements OnInit {
   RAMControl = new FormControl('', [Validators.required]);
   CapacityControl = new FormControl('', [Validators.required]);
   ModelControl = new FormControl();
+  RemarkControl = new FormControl();
+
 
   matcher = new MyErrorStateMatcher();
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
 
   ngOnInit(): void {
@@ -84,7 +88,7 @@ export class ComputerDialogComponent implements OnInit {
     this.FillProcessors();
     this.FillRAM();
   }
- 
+
   FillMainCategories() {
     this.masterService.getMainCategory().subscribe((data: any) => {
       this.MainCategoryList = data;
@@ -150,23 +154,80 @@ export class ComputerDialogComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.computerModels.filter(option => option.ModelName.toLowerCase().includes(filterValue));
   }
- 
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  openSnackBar() {
-    this._snackBar.open('Warning !', 'OK', {
+  openSnackBar(msg: string) {
+    this._snackBar.open(msg, 'OK', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
+      duration: 2000
     });
   }
 
   Save() {
-    if (this.FARControl.valid) {
-      alert("Valid");
+    if (this.MainCategoryControl.invalid) {
+      this.openSnackBar('Main category is required !');
+    } else if (this.SubCategoryControl.invalid) {
+      this.openSnackBar('Sub category is required !');
+    }
+    else if (this.FARControl.invalid) {
+      this.openSnackBar('FAR code is required !');
+    }
+    else if (this.ComputerNameControl.invalid) {
+      this.openSnackBar('Computer name is required !');
+    } else if (this.IPAddressControl.invalid) {
+      this.openSnackBar('IP address is required !');
+    } else if (this.DepartmentControl.invalid) {
+      this.openSnackBar('Department is required !');
+    } else if (this.SectionControl.invalid) {
+      this.openSnackBar('Section is required !');
+    } else if (this.LoginUserControl.invalid) {
+      this.openSnackBar('Login user is required !');
+    } else if (this.UserControl.invalid) {
+      this.openSnackBar('User is required !');
+    } else if (this.OSControl.invalid) {
+      this.openSnackBar('Operating system is required !');
+    } else if (this.VirusGuardControl.invalid) {
+      this.openSnackBar('Virus guard is required !');
+    } else if (this.ProcessorControl.invalid) {
+      this.openSnackBar('Processor is required !');
+    } else if (this.RAMControl.invalid) {
+      this.openSnackBar('RAM is required !');
+    } else if (this.CapacityControl.invalid) {
+      this.openSnackBar('Capacity is required !');
+    } else if (this.ModelControl.invalid) {
+      this.openSnackBar('Model is required !');
     } else {
-      this.openSnackBar();
+
+
+      const objComputer = new Computer(); 
+
+      objComputer.MainCategoryID = this.MainCategoryControl.value;
+      objComputer.SubCategoryID = this.SubCategoryControl.value;
+      objComputer.FARCode = this.FARControl.value;
+      objComputer.ComputerName = this.ComputerNameControl.value;
+      objComputer.IPAddress = this.IPAddressControl.value;
+      objComputer.DepartmentID = this.DepartmentControl.value;
+      objComputer.SectionID = this.SectionControl.value;
+      objComputer.LoginUser = this.LoginUserControl.value;
+      objComputer.User = this.UserControl.value;
+      objComputer.OperatingSystemID = this.OSControl.value;
+      objComputer.VirusGuardID = this.VirusGuardControl.value;
+      objComputer.ProcessorID = this.ProcessorControl.value; 
+      objComputer.RAMID = this.RAMControl.value;
+      objComputer.Capacity = this.CapacityControl.value;
+      objComputer.ModelName = this.ModelControl.value;
+      objComputer.Remark = this.RemarkControl.value;
+ 
+
+      this.inventoryService.saveComputer(objComputer).subscribe(data =>{
+        alert(data);
+      });
+
+
     }
   }
 

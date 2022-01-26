@@ -5,6 +5,8 @@
 <div mat-dialog-content>
 
   <div class="pt-10">
+ 
+    <form (ngSubmit)="Save()"></form>
    
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Main Category</mat-label>
@@ -144,7 +146,7 @@
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Remark</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput [formControl]="RemarkControl"></textarea>
       </mat-form-field> 
   </div>
 
