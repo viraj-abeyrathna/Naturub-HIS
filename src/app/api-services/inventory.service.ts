@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
-import { CommonData } from "../shared/common/common";
-import { Computers } from '../pages/inventory/computer/computer.component';
+import { CommonData } from "../shared/common/common"; 
 import { Computer } from "../model/computer";
 
 @Injectable({
@@ -15,7 +14,7 @@ export class InventoryService {
 
   // Computer
   getComputerList(val: any) {
-    return this.http.get<Computers[]>(new CommonData().APIUrl + '/Inventory/GetComputer/' + val);
+    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetComputer/' + val);
   }
 
   getComputerModels() {

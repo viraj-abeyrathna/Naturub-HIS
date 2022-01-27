@@ -55,7 +55,7 @@ export class ComputerDialogComponent implements OnInit {
 
 
   // formControl = new FormControl('', [Validators.required, Validators.email]); 
-  MainCategoryControl = new FormControl('', [Validators.required]);
+  // MainCategoryControl = new FormControl('', [Validators.required]);
   SubCategoryControl = new FormControl('', [Validators.required]);
   FARControl = new FormControl('', [Validators.required]);
   ComputerNameControl = new FormControl('', [Validators.required]);
@@ -81,19 +81,18 @@ export class ComputerDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.FillComputerModels();
-    this.FillMainCategories();
+    this.FillSubCategories(1); //Computer
     this.FillDepartments();
-    this.FillOperatingSystems();
-    this.FillVirusGuards();
+    this.FillOperatingSystems(); 
     this.FillProcessors();
     this.FillRAM();
   }
 
-  FillMainCategories() {
-    this.masterService.getMainCategory().subscribe((data: any) => {
-      this.MainCategoryList = data;
-    });
-  }
+  // FillMainCategories() {
+  //   this.masterService.getMainCategory().subscribe((data: any) => {
+  //     this.MainCategoryList = data;
+  //   });
+  // }
 
   FillSubCategories(MainCategoryID: number) {
     this.masterService.getSubCategory(MainCategoryID).subscribe((data: any) => {
@@ -129,13 +128,7 @@ export class ComputerDialogComponent implements OnInit {
     this.inventoryService.getOperatingSystem().subscribe((data: any) => {
       this.OperatingSystemList = data;
     });
-  }
-
-  FillVirusGuards() {
-    this.inventoryService.getVirusGuard().subscribe((data: any) => {
-      this.VirusGuardList = data;
-    });
-  }
+  } 
 
   FillProcessors() {
     this.inventoryService.getProcessor().subscribe((data: any) => {
@@ -168,9 +161,7 @@ export class ComputerDialogComponent implements OnInit {
   }
 
   Save() {
-    if (this.MainCategoryControl.invalid) {
-      this.openSnackBar('Main category is required !');
-    } else if (this.SubCategoryControl.invalid) {
+    if (this.SubCategoryControl.invalid) {
       this.openSnackBar('Sub category is required !');
     }
     else if (this.FARControl.invalid) {
@@ -204,18 +195,17 @@ export class ComputerDialogComponent implements OnInit {
 
 
       const objComputer = new Computer(); 
-
-      objComputer.MainCategoryID = this.MainCategoryControl.value;
+ 
       objComputer.SubCategoryID = this.SubCategoryControl.value;
-      objComputer.FARCode = this.FARControl.value;
+      objComputer.FARBarcodeNo = this.FARControl.value;
       objComputer.ComputerName = this.ComputerNameControl.value;
       objComputer.IPAddress = this.IPAddressControl.value;
       objComputer.DepartmentID = this.DepartmentControl.value;
       objComputer.SectionID = this.SectionControl.value;
       objComputer.LoginUser = this.LoginUserControl.value;
-      objComputer.User = this.UserControl.value;
+      objComputer.AuthorizedUser = this.UserControl.value;
       objComputer.OperatingSystemID = this.OSControl.value;
-      objComputer.VirusGuardID = this.VirusGuardControl.value;
+      objComputer.IsVirusGuardActive = this.VirusGuardControl.value;
       objComputer.ProcessorID = this.ProcessorControl.value; 
       objComputer.RAMID = this.RAMControl.value;
       objComputer.Capacity = this.CapacityControl.value;

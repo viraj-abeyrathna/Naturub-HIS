@@ -5,33 +5,35 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ComputerDialogComponent } from './computer-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
+import { Computer } from "../../../model/computer";
 
-export interface Computers {
-  // ItemID: number;
-  ItemCode: string;
-  MainCategoryID: number;
-  MainCategory: string;
-  SubCategoryID: number;
-  SubCategory: string;
-  EnterdDate: Date;
-  EnterdUser: string;
-  LastModifiedDate?: Date;
-  LastModifiedUser?: string;
-  ComputerName: string;
-  IPAddress: string;
-  SectionID: number;
-  Section: string;
-  LoginUser: string;
-  User: string;
-  OperatingSystem: string;
-  VirusGuard: string;
-  Processor: string;
-  RAM: string;
-  ModelName: string;
-  FARCode: string;
-  Remark?: string;
+// export interface Computers {
+//   ItemID: number;
+//   ItemCode: string;
+//   ComputerName: string;
+//   IPAddress: string;
+//   SubCategoryID: number;
 
-}
+//   MainCategoryID: number;
+//   MainCategory: string;
+//   SubCategory: string;
+//   EnterdDate: Date;
+//   EnterdUser: string;
+//   LastModifiedDate?: Date;
+//   LastModifiedUser?: string;
+//   SectionID: number;
+//   Section: string;
+//   LoginUser: string;
+//   User: string;
+//   OperatingSystem: string;
+//   VirusGuard: string;
+//   Processor: string;
+//   RAM: string;
+//   ModelName: string;
+//   FARCode: string;
+//   Remark?: string;
+
+// }
 
 @Component({
   selector: 'app-computer',
@@ -40,23 +42,25 @@ export interface Computers {
 })
 export class ComputerComponent implements OnInit {
 
-  dataSource: MatTableDataSource<Computers> = new MatTableDataSource();
-  computers: Computers[] = [];
+  dataSource: MatTableDataSource<Computer> = new MatTableDataSource();
+  computers: Computer[] = [];
   columns: string[] = [
     'ItemID', 
     'ItemCode',
-    'FARCode',
-    'SubCategory',
     'ComputerName',
     'IPAddress',
+    'SubCategory',
+    'Department',
     'Section',
+    'FARCode',
     'LoginUser',
-    'User',
+    'AuthorizedUser',
+    'ModelName',
     'OperatingSystem',
-    'VirusGuard',
+    'VirusGuard', 
     'Processor',
     'RAM',
-    'ModelName',
+    'Capacity',
     'Remark',
     'EnterdDate',
     'EnterdUser',
@@ -71,12 +75,12 @@ export class ComputerComponent implements OnInit {
   constructor(private service: InventoryService, public dialog: MatDialog) {
 
     this.service.getComputerList(0).subscribe(
-      (data: any) => {
-        this.dataSource = new MatTableDataSource<Computers>(data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        return data;
-      }
+        (data: any) => {
+          this.dataSource = new MatTableDataSource<Computer>(data);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          return data;
+        }
     );
   }
 

@@ -8,7 +8,7 @@
  
     <form (ngSubmit)="Save()"></form>
    
-      <mat-form-field class="full-width" appearance="outline">
+      <!-- <mat-form-field class="full-width" appearance="outline">
         <mat-label>Main Category</mat-label>
         <mat-select (selectionChange)="FillSubCategories($event.value)" [formControl]="MainCategoryControl"
           [errorStateMatcher]="matcher" required>
@@ -18,7 +18,7 @@
         </mat-select>
         <mat-error *ngIf="MainCategoryControl.hasError('required')">Main category is <strong>required</strong></mat-error>
   
-      </mat-form-field>
+      </mat-form-field> -->
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Sub Category</mat-label>
@@ -80,8 +80,8 @@
       </mat-form-field>
   
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>User</mat-label>
-        <input matInput placeholder="Ex. authorized.user" [formControl]="UserControl" [errorStateMatcher]="matcher"
+        <mat-label>Authorized User</mat-label>
+        <input matInput placeholder="Ex. sample.user" [formControl]="UserControl" [errorStateMatcher]="matcher"
           required>
         <mat-error *ngIf="UserControl.hasError('required')">User is <strong>required</strong></mat-error>
       </mat-form-field>
@@ -99,9 +99,8 @@
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Virus Guard</mat-label>
         <mat-select [formControl]="VirusGuardControl" [errorStateMatcher]="matcher" required>
-          <mat-option *ngFor="let virusGuard of VirusGuardList" [value]="virusGuard.VirusGuardID">
-            {{virusGuard.VirusGuard}}
-          </mat-option>
+          <mat-option value="1">Active</mat-option>
+          <mat-option value="0">Deactive</mat-option>
         </mat-select>
         <mat-error *ngIf="VirusGuardControl.hasError('required')">Virus guard is <strong>required</strong></mat-error>
       </mat-form-field>

@@ -25,16 +25,6 @@
                     <td mat-cell *matCellDef="let row"> {{row.ItemCode}}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="FARCode">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FAR Code </th>
-                    <td mat-cell *matCellDef="let row"> {{row.FARCode}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="SubCategory">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Category </th>
-                    <td mat-cell *matCellDef="let row"> {{row.SubCategory}} </td>
-                </ng-container>
-
                 <ng-container matColumnDef="ComputerName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Computer Name </th>
                     <td mat-cell *matCellDef="let row"> {{row.ComputerName}} </td>
@@ -45,9 +35,24 @@
                     <td mat-cell *matCellDef="let row"> {{row.IPAddress}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="SubCategory">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Category </th>
+                    <td mat-cell *matCellDef="let row"> {{row.SubCategory}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Department">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Department}} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="Section">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Section </th>
                     <td mat-cell *matCellDef="let row"> {{row.Section}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="FARCode">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FAR Code </th>
+                    <td mat-cell *matCellDef="let row"> {{row.FARBarcodeNo}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="LoginUser">
@@ -55,9 +60,14 @@
                     <td mat-cell *matCellDef="let row"> {{row.LoginUser}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="User">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
-                    <td mat-cell *matCellDef="let row"> {{row.User}} </td>
+                <ng-container matColumnDef="AuthorizedUser">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Authorized User </th>
+                    <td mat-cell *matCellDef="let row"> {{row.AuthorizedUser}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ModelName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Model Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ModelName}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="OperatingSystem">
@@ -80,9 +90,9 @@
                     <td mat-cell *matCellDef="let row"> {{row.RAM}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="ModelName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Model Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.ModelName}} </td>
+                <ng-container matColumnDef="Capacity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Capacity </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Capacity}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Remark">
@@ -120,7 +130,7 @@
                             <mat-icon>delete_forever</mat-icon>
                         </button>
                     </td>
-                </ng-container>
+                </ng-container> 
 
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>
                 <tr mat-row *matRowDef="let row; columns: columns;"></tr>
