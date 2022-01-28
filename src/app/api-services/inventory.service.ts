@@ -66,6 +66,20 @@ export class InventoryService {
     return this.http.post(new CommonData().APIUrl + '/Inventory/SaveComputer',obj);
   }
 
+  // Ups
+  getUpsList(val: any) {
+    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetUps/' + val);
+  }
+
+  //AccessPoint
+  getAccessPointList(val: any) {
+    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetAccessPoint/' + val);
+  }
+
+  //CCTV
+  getCCTVList(val: any) {
+    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetCCTV/' + val);
+  }
 
 
 }
