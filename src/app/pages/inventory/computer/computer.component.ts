@@ -3,9 +3,10 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ComputerDialogComponent } from './computer-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
-import { Computer } from "../../../model/computer";
+import { Computer } from "../../../model/computer"; 
 
 // export interface Computers {
 //   ItemID: number;
@@ -42,10 +43,12 @@ import { Computer } from "../../../model/computer";
 })
 export class ComputerComponent implements OnInit {
 
+  isLoading = true;
+
   dataSource: MatTableDataSource<Computer> = new MatTableDataSource();
   computers: Computer[] = [];
   columns: string[] = [
-    'ItemID', 
+    'ItemID',
     'ItemCode',
     'ComputerName',
     'IPAddress',
@@ -57,7 +60,7 @@ export class ComputerComponent implements OnInit {
     'AuthorizedUser',
     'ModelName',
     'OperatingSystem',
-    'VirusGuard', 
+    'VirusGuard',
     'Processor',
     'RAM',
     'Capacity',
@@ -72,51 +75,70 @@ export class ComputerComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort = new MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private service: InventoryService, public dialog: MatDialog) {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
+  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+
+    this.FillComputerList();
+  }
+
+  FillComputerList() {
     this.service.getComputerList(0).subscribe(
-        (data: any) => {
-          this.dataSource = new MatTableDataSource<Computer>(data);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          return data;
-        }
+      (data: any) => {
+        this.dataSource = new MatTableDataSource<Computer>(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.isLoading = false;
+        // return data;
+      } 
     );
+
+    // this.dataSource = new MatTableDataSource(this.computers);
+
+    // this.FillComputers();
   }
 
   openAddComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: {title: 'ADD COMPUTER', subtitle:'Fill the computer details'}
-      // data: { name: this.name, animal: this.animal }
+      data: { title: 'ADD COMPUTER', subtitle: 'Fill the computer details' } 
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+
+      if (result.SavedSuccess === true) {
+        this.successSnackBar(result.ItemCode + ' is successfully saved !')
+        this.FillComputerList();
+      } else if (result.SavedSuccess === false) {
+
+      }
+
     });
   }
 
   openEditComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: {title: 'Edit Computer', subtitle:'Change the computer details'}
-      // data: { name: this.name, animal: this.animal }
+      data: { title: 'Edit Computer', subtitle: 'Change the computer details' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      if (result.SavedSuccess === true) {
+        this.FillComputerList();
+      } else if (result.SavedSuccess === false) {
+
+      }
     });
   }
 
   ngOnInit(): void {
-    this.FillComputers();
+    // this.FillComputers(); 
   }
 
-  FillComputers() {
-    this.dataSource = new MatTableDataSource(this.computers);
-  }
+  // FillComputers() {
+  //   this.dataSource = new MatTableDataSource(this.computers);
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -125,6 +147,24 @@ export class ComputerComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  warningSnackBar(msg: string) {
+    this._snackBar.open(msg, 'Got it!', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 2000,
+      panelClass: ['blue-snackbar']
+    });
+  }
+
+  successSnackBar(msg: string) {
+    this._snackBar.open(msg, 'Got it!', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 4000,
+      panelClass: ['blue-snackbar']
+    });
   }
 
 }

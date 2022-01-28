@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { delay, map, startWith } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
@@ -83,7 +83,7 @@ export class ComputerDialogComponent implements OnInit {
     this.FillComputerModels();
     this.FillSubCategories(1); //Computer
     this.FillDepartments();
-    this.FillOperatingSystems(); 
+    this.FillOperatingSystems();
     this.FillProcessors();
     this.FillRAM();
   }
@@ -128,7 +128,7 @@ export class ComputerDialogComponent implements OnInit {
     this.inventoryService.getOperatingSystem().subscribe((data: any) => {
       this.OperatingSystemList = data;
     });
-  } 
+  }
 
   FillProcessors() {
     this.inventoryService.getProcessor().subscribe((data: any) => {
@@ -194,27 +194,32 @@ export class ComputerDialogComponent implements OnInit {
     } else {
 
 
-      const objComputer = new Computer(); 
- 
+      const objComputer = new Computer();
+      objComputer.MainCategoryID = 1 // Computer
       objComputer.SubCategoryID = this.SubCategoryControl.value;
       objComputer.FARBarcodeNo = this.FARControl.value;
       objComputer.ComputerName = this.ComputerNameControl.value;
       objComputer.IPAddress = this.IPAddressControl.value;
-      objComputer.DepartmentID = this.DepartmentControl.value;
       objComputer.SectionID = this.SectionControl.value;
       objComputer.LoginUser = this.LoginUserControl.value;
       objComputer.AuthorizedUser = this.UserControl.value;
       objComputer.OperatingSystemID = this.OSControl.value;
       objComputer.IsVirusGuardActive = this.VirusGuardControl.value;
-      objComputer.ProcessorID = this.ProcessorControl.value; 
+      objComputer.ProcessorID = this.ProcessorControl.value;
       objComputer.RAMID = this.RAMControl.value;
       objComputer.Capacity = this.CapacityControl.value;
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
- 
+      objComputer.EnterdUserID = 1; // Temporary !!!
 
-      this.inventoryService.saveComputer(objComputer).subscribe(data =>{
-        alert(data);
+
+
+      this.inventoryService.saveComputer(objComputer).subscribe(data => { 
+        if (data) {  
+          this.dialogRef.close({ SavedSuccess: true, ItemCode: data });
+        } else {
+          this.dialogRef.close({ SavedSuccess: false });
+        }
       });
 
 

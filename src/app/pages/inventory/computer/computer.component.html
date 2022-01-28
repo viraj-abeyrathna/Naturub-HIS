@@ -1,7 +1,8 @@
+<mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
 <mat-card class="example-card">
     <button mat-fab color="primary" style="position: absolute;" matTooltip="Add Computer" (click)="openAddComputerDialog()">
         <mat-icon>library_add</mat-icon>
-    </button>
+    </button> 
 
     <mat-form-field style="position: absolute; margin-left: 80px;">
         <mat-label>Filter</mat-label>

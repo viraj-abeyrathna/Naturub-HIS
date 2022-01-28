@@ -97,3 +97,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .sub-title{
   color: rgba(0,0,0,.54) !important;
 }
+
+/* mat-progress-bar */
+
+mat-progress-bar{
+  position: absolute !important;
+  z-index: 99999;
+  left: 0;
+  top: 0px;
+}

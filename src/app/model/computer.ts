@@ -3,6 +3,7 @@ export class Computer {
     ItemCode: string | undefined;
     ComputerName: string | undefined;
     IPAddress: string | undefined; 
+    MainCategoryID: number | undefined;
     SubCategoryID: number | undefined;
     SubCategory: string | undefined;
     DepartmentID:string|undefined;
@@ -15,7 +16,7 @@ export class Computer {
     ModelName: string | undefined;
     OperatingSystemID: number | undefined;
     OperatingSystem: string | undefined;
-    IsVirusGuardActive: number | undefined;
+    IsVirusGuardActive: boolean | undefined;
     VirusGuard: string | undefined;
     ProcessorID: number | undefined;
     Processor: string | undefined;
@@ -25,10 +26,10 @@ export class Computer {
     Remark?: string | undefined;  
     EnterdDate: Date | undefined;
     EnterdUser: string | undefined;
-    EnterdUserID: string | undefined;
+    EnterdUserID: number | undefined;
     LastModifiedDate?: Date;
     LastModifiedUser?: string; 
-    LastModifiedUserID?: string; 
+    LastModifiedUserID?: string;  
 }
 
 
