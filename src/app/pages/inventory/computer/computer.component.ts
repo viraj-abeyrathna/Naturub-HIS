@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ComputerDialogComponent } from './computer-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
+import { SnackBar } from "../../../shared/common/snackBar";
 import { Computer } from "../../../model/computer"; 
 
 // export interface Computers {
@@ -78,7 +79,7 @@ export class ComputerComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: SnackBar) {
 
     this.FillComputerList();
   }
@@ -108,22 +109,23 @@ export class ComputerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result.SavedSuccess === true) {
-        this.successSnackBar(result.ItemCode + ' is successfully saved !')
+        this._snackBar.successSnackBar('('+ result.ItemCode + ')  is successfully saved !',4000)
         this.FillComputerList();
       } else if (result.SavedSuccess === false) {
-
+        this._snackBar.errorSnackBar('Data saving error !',4000)
       }
 
     });
   }
 
-  openEditComputerDialog(): void {
+  openEditComputerDialog(_itemID:number): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: { title: 'Edit Computer', subtitle: 'Change the computer details' }
+      data: { title: 'Edit Computer', subtitle: 'Change the computer details', itemID:_itemID }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       if (result.SavedSuccess === true) {
         this.FillComputerList();
       } else if (result.SavedSuccess === false) {
@@ -149,22 +151,8 @@ export class ComputerComponent implements OnInit {
     }
   }
 
-  warningSnackBar(msg: string) {
-    this._snackBar.open(msg, 'Got it!', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 2000,
-      panelClass: ['blue-snackbar']
-    });
-  }
+ 
 
-  successSnackBar(msg: string) {
-    this._snackBar.open(msg, 'Got it!', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 4000,
-      panelClass: ['blue-snackbar']
-    });
-  }
+
 
 }

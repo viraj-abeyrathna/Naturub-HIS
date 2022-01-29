@@ -106,3 +106,35 @@ mat-progress-bar{
   left: 0;
   top: 0px;
 }
+
+
+/* Snackbar */
+
+.warning-snackbar {  
+  color: #FF9800;
+  font-weight: 400;
+}
+
+.success-snackbar {  
+  color: #5AEF1B;
+  font-weight: 400;
+}
+
+.error-snackbar {  
+  color: #f04040;
+  font-weight: 400;
+}
+
+
+
+.warning-snackbar .mat-simple-snackbar,
+.success-snackbar .mat-simple-snackbar,
+.error-snackbar .mat-simple-snackbar{
+  font-weight: 500;
+}
+
+.warning-snackbar .mat-button,
+.success-snackbar .mat-button,
+.error-snackbar .mat-button{
+  color: #FFFFFF;
+}

@@ -21,6 +21,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 @NgModule({
   exports: [
     MatToolbarModule,
@@ -44,6 +46,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatProgressBarModule
   ]
 })
-export class CommonData {
-  public readonly APIUrl = "http://localhost:5000/api";
+export class CommonData { 
+  public readonly APIUrl = "http://localhost:5000/api"; 
 }

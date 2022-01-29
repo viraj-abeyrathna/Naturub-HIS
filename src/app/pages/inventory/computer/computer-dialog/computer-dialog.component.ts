@@ -4,11 +4,12 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '
 import { Observable } from 'rxjs';
 import { delay, map, startWith } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+// import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar'; 
 
 import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
+import { SnackBar } from "../../../../shared/common/snackBar";
 import { Computer } from "../../../../model/computer";
 
 export interface ComputerModel {
@@ -34,7 +35,7 @@ let IP_PATTERN = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2
 })
 export class ComputerDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService, private _snackBar: MatSnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   computerModels: ComputerModel[] = [];
   filteredModels: Observable<ComputerModel[]> = new Observable<ComputerModel[]>();
@@ -52,10 +53,7 @@ export class ComputerDialogComponent implements OnInit {
   VirusGuardList: any = [];
   ProcessorList: any = [];
   RAMList: any = [];
-
-
-  // formControl = new FormControl('', [Validators.required, Validators.email]); 
-  // MainCategoryControl = new FormControl('', [Validators.required]);
+ 
   SubCategoryControl = new FormControl('', [Validators.required]);
   FARControl = new FormControl('', [Validators.required]);
   ComputerNameControl = new FormControl('', [Validators.required]);
@@ -73,13 +71,10 @@ export class ComputerDialogComponent implements OnInit {
   RemarkControl = new FormControl();
 
 
-  matcher = new MyErrorStateMatcher();
-
-  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-
+  matcher = new MyErrorStateMatcher(); 
 
   ngOnInit(): void {
+    console.log(this.dialogRef.componentInstance.data.itemID);
     this.FillComputerModels();
     this.FillSubCategories(1); //Computer
     this.FillDepartments();
@@ -88,12 +83,7 @@ export class ComputerDialogComponent implements OnInit {
     this.FillRAM();
   }
 
-  // FillMainCategories() {
-  //   this.masterService.getMainCategory().subscribe((data: any) => {
-  //     this.MainCategoryList = data;
-  //   });
-  // }
-
+ 
   FillSubCategories(MainCategoryID: number) {
     this.masterService.getSubCategory(MainCategoryID).subscribe((data: any) => {
       this.SubCategoryList = data;
@@ -151,48 +141,37 @@ export class ComputerDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  openSnackBar(msg: string) {
-    this._snackBar.open(msg, 'OK', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 2000
-    });
-  }
-
+ 
   Save() {
     if (this.SubCategoryControl.invalid) {
-      this.openSnackBar('Sub category is required !');
-    }
-    else if (this.FARControl.invalid) {
-      this.openSnackBar('FAR code is required !');
-    }
-    else if (this.ComputerNameControl.invalid) {
-      this.openSnackBar('Computer name is required !');
+      this._snackBar.warningSnackBar('Sub category is required !');
+    } else if (this.FARControl.invalid) {
+      this._snackBar.warningSnackBar('FAR code is required !');
+    } else if (this.ComputerNameControl.invalid) {
+      this._snackBar.warningSnackBar('Computer name is required !');
     } else if (this.IPAddressControl.invalid) {
-      this.openSnackBar('IP address is required !');
+      this._snackBar.warningSnackBar('IP address is required !');
     } else if (this.DepartmentControl.invalid) {
-      this.openSnackBar('Department is required !');
+      this._snackBar.warningSnackBar('Department is required !');
     } else if (this.SectionControl.invalid) {
-      this.openSnackBar('Section is required !');
+      this._snackBar.warningSnackBar('Section is required !');
     } else if (this.LoginUserControl.invalid) {
-      this.openSnackBar('Login user is required !');
+      this._snackBar.warningSnackBar('Login user is required !');
     } else if (this.UserControl.invalid) {
-      this.openSnackBar('User is required !');
+      this._snackBar.warningSnackBar('User is required !');
     } else if (this.OSControl.invalid) {
-      this.openSnackBar('Operating system is required !');
+      this._snackBar.warningSnackBar('Operating system is required !');
     } else if (this.VirusGuardControl.invalid) {
-      this.openSnackBar('Virus guard is required !');
+      this._snackBar.warningSnackBar('Virus guard is required !');
     } else if (this.ProcessorControl.invalid) {
-      this.openSnackBar('Processor is required !');
+      this._snackBar.warningSnackBar('Processor is required !');
     } else if (this.RAMControl.invalid) {
-      this.openSnackBar('RAM is required !');
+      this._snackBar.warningSnackBar('RAM is required !');
     } else if (this.CapacityControl.invalid) {
-      this.openSnackBar('Capacity is required !');
+      this._snackBar.warningSnackBar('Capacity is required !');
     } else if (this.ModelControl.invalid) {
-      this.openSnackBar('Model is required !');
+      this._snackBar.warningSnackBar('Model is required !');
     } else {
-
 
       const objComputer = new Computer();
       objComputer.MainCategoryID = 1 // Computer
@@ -210,18 +189,15 @@ export class ComputerDialogComponent implements OnInit {
       objComputer.Capacity = this.CapacityControl.value;
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
-      objComputer.EnterdUserID = 1; // Temporary !!!
+      objComputer.EnterdUserID = 1; // Temporary !!! 
 
-
-
-      this.inventoryService.saveComputer(objComputer).subscribe(data => { 
-        if (data) {  
+      this.inventoryService.saveComputer(objComputer).subscribe(data => {
+        if (data) {
           this.dialogRef.close({ SavedSuccess: true, ItemCode: data });
         } else {
           this.dialogRef.close({ SavedSuccess: false });
         }
-      });
-
+      }); 
 
     }
   }
