@@ -4,6 +4,9 @@ import { Observable, of } from 'rxjs';
 import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { CommonData } from "../shared/common/common"; 
 import { Computer } from "../model/computer";
+import { Ups } from '../model/ups';
+import { AccessPoint } from '../model/accesspoint';
+import { CCTV } from '../model/cctv';
 
 @Injectable({
   providedIn: 'root'
@@ -67,18 +70,37 @@ export class InventoryService {
   }
 
   // Ups
-  getUpsList(val: any) {
-    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetUps/' + val);
+  getUpsList(val: any):Observable<{}> {
+    return this.http.get<Ups[]>(new CommonData().APIUrl + '/Inventory/GetUps/' + val);
+  }
+
+  getCapacity(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetCapacity');
+  }
+
+  saveUps(obj:Ups):Observable<{}>{
+    console.log(obj);
+    return this.http.post(new CommonData().APIUrl + '/Inventory/SaveUps',obj);
+  }
+
+  updateUps(obj:Ups):Observable<{}>{
+    console.log(obj);
+    return this.http.post(new CommonData().APIUrl + '/Inventory/UpdateUps',obj);
   }
 
   //AccessPoint
   getAccessPointList(val: any) {
-    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetAccessPoint/' + val);
+    return this.http.get<AccessPoint[]>(new CommonData().APIUrl + '/Inventory/GetAccessPoint/' + val);
+  }
+
+  saveAccessPoint(obj:AccessPoint):Observable<{}>{
+    console.log(obj);
+    return this.http.post(new CommonData().APIUrl + '/Inventory/SaveAccessPoint',obj);
   }
 
   //CCTV
   getCCTVList(val: any) {
-    return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetCCTV/' + val);
+    return this.http.get<CCTV[]>(new CommonData().APIUrl + '/Inventory/GetCCTV/' + val);
   }
 
 

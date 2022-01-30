@@ -7,6 +7,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { InventoryService } from 'src/app/api-services/inventory.service';
+import { SnackBar } from "../../../shared/common/snackBar";
+import { AccessPointDialogComponent } from './access-point-dialog';
 
 export interface AccessPoint {
   ItemID: number;
@@ -35,10 +37,12 @@ export interface AccessPoint {
 })
 export class AccessPointComponent implements OnInit {
 
+  isLoading = true;
+
   dataSource: MatTableDataSource<AccessPoint> = new MatTableDataSource();
-  computers: AccessPoint[] = [];
+  accesspoint: AccessPoint[] = [];
   columns: string[] = [
-    'ItemID',
+    // 'ItemID',
     'ItemCode',
     'BrandName',
     'ModelName',
@@ -58,35 +62,64 @@ export class AccessPointComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort = new MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private service: InventoryService, public dialog: MatDialog) {
-    this.myControl = new FormControl();
+  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: SnackBar) {
 
+    this.FillAccessPointList();
+
+   }
+
+   FillAccessPointList()
+   {
     this.service.getAccessPointList(0).subscribe(
       (data: any) => {
         this.dataSource = new MatTableDataSource<AccessPoint>(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        return data;
+        this.isLoading = false;
       }
     );
-
    }
 
-   myControl = new FormControl();
-   options: string[] = ['One', 'Two', 'Three'];
-   filteredOptions!: Observable<string[]>;
+   openAccessPointDialogDialog(): void {
+    let dialogRef = this.dialog.open(AccessPointDialogComponent, {
+      width: '500px',
+      data: { title: 'ADD Access-Point', subtitle: 'Fill the Access-Point details' }
+    });
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.SavedSuccess === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillAccessPointList();
+        } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  editAccessPointDialog(ItemID: number): void {
+    let dialogRef = this.dialog.open(AccessPointDialogComponent, {
+      width: '500px',
+      data: { title: 'EDIT ACCESS-POINT', subtitle: 'Fill the Access-Point details', ItemID : ItemID }
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.SavedSuccess === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillAccessPointList();
+        } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  ngOnInit(): void {
+
   }
 
   applyFilter(event: Event) {

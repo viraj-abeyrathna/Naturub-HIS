@@ -3,31 +3,12 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { UpsDialogComponent } from './ups-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
+import { SnackBar } from "../../../shared/common/snackBar";
+import { Ups } from "../../../model/ups";
 
-export interface Ups {
-  ItemID: number;
-  ItemCode: string;
-  MainCategoryID: number;
-  MainCategory: string;
-  SubCategoryID: number;
-  SubCategory: string;
-  EnterdDate: Date;
-  EnterdUser: string;
-  LastModifiedDate?: Date;
-  LastModifiedUser?: string;
-  SectionID: number;
-  Section: string;
-  LoginUser: string;
-  User: string;
-  ModelName: string;
-  FARCode: string;
-  Remark?: string;
-
-}
 
 @Component({
   selector: 'app-ups',
@@ -36,10 +17,12 @@ export interface Ups {
 })
 export class UpsComponent implements OnInit {
 
+  isLoading = true;
+
   dataSource: MatTableDataSource<Ups> = new MatTableDataSource();
-  computers: Ups[] = [];
+  ups: Ups[] = [];
   columns: string[] = [
-    'ItemID',
+    // 'ItemID',
     'ItemCode',
     'BrandName',
     'SerialNo',
@@ -60,35 +43,64 @@ export class UpsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
-  constructor(private service: InventoryService, public dialog: MatDialog) {
-    this.myControl = new FormControl();
+  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: SnackBar) {
 
+    this.FillUpsList();
+
+  }
+
+  FillUpsList() {
     this.service.getUpsList(0).subscribe(
       (data: any) => {
         this.dataSource = new MatTableDataSource<Ups>(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        return data;
+        this.isLoading = false;
       }
     );
-
   }
 
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions!: Observable<string[]>;
-
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
+  openAddUpsDialog(): void {
+    let dialogRef = this.dialog.open(UpsDialogComponent, {
+      width: '500px',
+      data: { title: 'ADD UPS', subtitle: 'Fill the UPS details' }
+    }
     );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.SavedSuccess === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillUpsList();
+        } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  openEditComputerDialog(ItemID: number): void {
+    let dialogRef = this.dialog.open(UpsDialogComponent, {
+      width: '500px',
+      data: { title: 'EDIT UPS', subtitle: 'Fill the UPS details', ItemID : ItemID }
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.SavedSuccess === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillUpsList();
+        } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  ngOnInit(): void {
+
   }
 
   applyFilter(event: Event) {
@@ -100,5 +112,7 @@ export class UpsComponent implements OnInit {
     }
   }
 
-
 }
+
+
+

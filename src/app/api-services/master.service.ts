@@ -47,6 +47,12 @@ export class MasterService {
    getSection(val:any):Observable<any[]> {
     return this.http.get<any>(new CommonData().APIUrl+'/Master/GetSection/'+val);
   }
+
+  // Brand
+  getBrand(val:any)
+  {
+    return this.http.get<any>(new CommonData().APIUrl+'/Master/GetBrand/'+val);
+  }
  
 
 }

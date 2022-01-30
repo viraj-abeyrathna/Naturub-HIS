@@ -1,4 +1,5 @@
 export class Ups {
+    MainCategoryID : number | undefined;
     ItemID: number | undefined;
     ItemCode: string | undefined;
     SubCategoryID: number | undefined;
@@ -17,7 +18,7 @@ export class Ups {
     Remark?: string | undefined;  
     EnterdDate: Date | undefined;
     EnterdUser: string | undefined;
-    EnterdUserID: string | undefined;
+    EnterdUserID: number | undefined;
     LastModifiedDate?: Date;
     LastModifiedUser?: string; 
     LastModifiedUserID?: string; 
