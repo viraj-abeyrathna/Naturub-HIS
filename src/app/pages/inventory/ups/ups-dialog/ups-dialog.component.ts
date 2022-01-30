@@ -68,7 +68,7 @@ export class UpsDialogComponent implements OnInit {
     this.FillCapacity();
     this.FillDepartments();
 
-    if (this.data.title == "EDIT UPS") {
+    if (this.data.ItemID != 0) {
        this.isADD = false;
        this.inventoryService.getUpsList(this.data.ItemID).subscribe(
         (data: any) => {

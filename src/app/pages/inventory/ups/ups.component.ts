@@ -63,7 +63,7 @@ export class UpsComponent implements OnInit {
   openAddUpsDialog(): void {
     let dialogRef = this.dialog.open(UpsDialogComponent, {
       width: '500px',
-      data: { title: 'ADD UPS', subtitle: 'Fill the UPS details' }
+      data: { title: 'ADD UPS', subtitle: 'Fill the UPS details', ItemID : 0 }
     }
     );
 

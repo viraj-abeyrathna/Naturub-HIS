@@ -71,7 +71,7 @@ export class AccessPointDialogComponent implements OnInit {
     this.FillBrand(1005); //Access Point
     this.FillDepartments();
 
-    if (this.data.title == "EDIT ACCESS-POINT") {
+    if (this.data.ItemID != 0) {
       this.isADD = false;
       this.inventoryService.getAccessPointList(this.data.ItemID).subscribe(
        (data: any) => {

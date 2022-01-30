@@ -83,7 +83,7 @@ export class AccessPointComponent implements OnInit {
    openAccessPointDialogDialog(): void {
     let dialogRef = this.dialog.open(AccessPointDialogComponent, {
       width: '500px',
-      data: { title: 'ADD Access-Point', subtitle: 'Fill the Access-Point details' }
+      data: { title: 'ADD Access-Point', subtitle: 'Fill the Access-Point details', ItemID : 0 }
     });
 
     dialogRef.afterClosed().subscribe(result => {
