@@ -40,6 +40,10 @@ export class InventoryService {
     return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetRAM');
   }
 
+  getIPAddress(ipAddress: string) {
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetIPAddress/' + ipAddress); 
+  }
+
   saveComputer(obj:Computer):Observable<{}>{
     
     // let headers = new Headers();
