@@ -143,7 +143,7 @@ const MENUITEMS = [
 
   {
     state: '',
-    name: 'Repair & Replace',
+    name: 'Maintenance',
     type: 'link',
     icon: 'build',
     children: [
