@@ -1,7 +1,9 @@
-export class CCTV {
+export class DVR {
     ItemID: number | undefined;
     ItemCode: string | undefined;
     MainCategoryID: number | undefined;
+    TypeID: number | undefined;
+    Type: string | undefined;
     SubCategoryID: number | undefined;
     SubCategory: string | undefined;
     DepartmentID:string|undefined;
