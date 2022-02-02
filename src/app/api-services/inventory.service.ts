@@ -7,6 +7,10 @@ import { Computer } from "../model/computer";
 import { Ups } from '../model/ups';
 import { AccessPoint } from '../model/accesspoint';
 import { CCTV } from '../model/cctv';
+import { DVR } from '../model/dvr';
+import { EthernetSwitch } from '../model/ethernetswitch';
+import { MobilePhone } from '../model/mobilephone';
+
 
 @Injectable({
   providedIn: 'root'
@@ -105,6 +109,49 @@ export class InventoryService {
   //CCTV
   getCCTVList(val: any) {
     return this.http.get<CCTV[]>(new CommonData().APIUrl + '/Inventory/GetCCTV/' + val);
+  }
+
+  
+
+  getCctvModels(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetCctvModels');
+  }
+
+  saveCctv(obj:CCTV):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/SaveCctv',obj);
+  }
+
+
+  //DVR
+  getDVRList(val: any) {
+    return this.http.get<DVR[]>(new CommonData().APIUrl + '/Inventory/GetDVR/' + val);
+  }
+
+  getDvrType()
+  {
+    return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetDvrType');
+  }
+
+  saveDvr(obj:DVR):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/SaveDvr',obj);
+  }
+
+    //Ethernet-Switch
+  getEthernetSwitchList(val: any) {
+    return this.http.get<EthernetSwitch[]>(new CommonData().APIUrl + '/Inventory/GetEthernetSwitch/' + val);
+  }
+
+  saveEthernetSwitch(obj:EthernetSwitch):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/SaveEthernetSwitch',obj);
+  }
+
+   //Mobile-Phone
+   saveMobilePhone(obj:MobilePhone):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/SaveMobilePhone',obj);
+  }
+
+  getMobilePhoneList(val: any) {
+    return this.http.get<MobilePhone[]>(new CommonData().APIUrl + '/Inventory/GetMobilePhone/' + val);
   }
 
 
