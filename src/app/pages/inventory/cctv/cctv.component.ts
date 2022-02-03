@@ -3,30 +3,12 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { CctvDialogComponent } from './cctv-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
+import { SnackBar } from "../../../shared/common/snackBar";
+import { CCTV } from "../../../model/cctv";
 
-export interface CCTV {
-  ItemID: number;
-  ItemCode: string;
-  MainCategoryID: number;
-  MainCategory: string;
-  SubCategoryID: number;
-  SubCategory: string;
-  EnterdDate: Date;
-  EnterdUser: string;
-  LastModifiedDate?: Date;
-  LastModifiedUser?: string;
-  SectionID: number;
-  Section: string;
-  LoginUser: string;
-  User: string;
-  ModelName: string;
-  FARCode: string;
-  Remark?: string;
-}
 
 @Component({
   selector: 'app-cctv',
@@ -35,6 +17,8 @@ export interface CCTV {
 })
 export class CctvComponent implements OnInit {
   
+  isLoading = true;
+
   dataSource: MatTableDataSource<CCTV> = new MatTableDataSource();
   computers: CCTV[] = [];
   columns: string[] = [
@@ -58,35 +42,65 @@ export class CctvComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
-  constructor(private service: InventoryService, public dialog: MatDialog) {
-    this.myControl = new FormControl();
+  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: SnackBar) {
 
+    this.FillCCTVList();
+
+   }
+
+   openAddCCTVDialog(): void {
+    let dialogRef = this.dialog.open(CctvDialogComponent, {
+      width: '500px',
+      data: { title: 'ADD CCTV', subtitle: 'Fill the CCTV details', ItemID : 0 }
+    }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.SavedSuccess === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillCCTVList();
+        } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  openEditCCTVDialog(ItemID: number): void {
+    let dialogRef = this.dialog.open(CctvDialogComponent, {
+      width: '500px',
+      data: { title: 'EDIT CCTV', subtitle: 'Fill the CCTV details', ItemID : ItemID }
+
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.SavedSuccess === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillCCTVList();
+        } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  FillCCTVList()
+  {
     this.service.getCCTVList(0).subscribe(
       (data: any) => {
         this.dataSource = new MatTableDataSource<CCTV>(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        return data;
+        this.isLoading = false;
       }
-    );
-
-   }
-
-   myControl = new FormControl();
-   options: string[] = ['One', 'Two', 'Three'];
-   filteredOptions!: Observable<string[]>;
-
-   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
     );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  ngOnInit(): void {
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   applyFilter(event: Event) {

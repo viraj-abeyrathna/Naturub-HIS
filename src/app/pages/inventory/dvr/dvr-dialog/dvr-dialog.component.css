@@ -1,0 +1,42 @@
+/* width */
+
+::-webkit-scrollbar {
+    height: 8px;
+    cursor: pointer;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 8px;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #3f51b5;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1469b8;
+}
+
+
+/* 
+ .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  } */
+
+.full-width {
+    width: 100%;
+    position: relative;
+    float: left;
+}

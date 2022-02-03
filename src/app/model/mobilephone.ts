@@ -1,19 +1,23 @@
-export class CCTV {
+export class MobilePhone {
+    MainCategoryID : number | undefined;
     ItemID: number | undefined;
     ItemCode: string | undefined;
-    MainCategoryID: number | undefined;
     SubCategoryID: number | undefined;
     SubCategory: string | undefined;
     DepartmentID:string|undefined;
     Department:string|undefined;
     SectionID: number | undefined;
     Section: string | undefined;
+    IMEINumber1: string | undefined;
+    IMEINumber2: string | undefined;
+    AuthorizedUser: string | undefined;
     BrandID: number | undefined;
     BrandName: string | undefined;
-    ModelName: string | undefined;
     SerialNo : string | undefined;
     FARBarcodeNo: string | undefined; 
+    ModelName: string | undefined;
     Remark?: string | undefined;  
+    IssueDate: Date | undefined;
     EnterdDate: Date | undefined;
     EnterdUser: string | undefined;
     EnterdUserID: number | undefined;

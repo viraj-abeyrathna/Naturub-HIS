@@ -1,8 +1,8 @@
 <mat-card class="example-card">
-    <!-- <button mat-fab color="primary" style="position: absolute;" matTooltip="Add Ups"
-      (click)="openAddUpsDialog()">
+    <button mat-fab color="primary" style="position: absolute;" matTooltip="Add Ups"
+      (click)="openAddCCTVDialog()">
       <mat-icon>library_add</mat-icon>
-    </button> -->
+    </button>
   
     <mat-form-field style="position: absolute; margin-left: 80px;">
       <mat-label>Filter</mat-label>
@@ -89,9 +89,9 @@
           <ng-container matColumnDef="Actions" class="btnAction" style="justify-content: center;">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
             <td mat-cell *matCellDef="let row" style="min-width: 80px;">
-              <!-- <button mat-icon-button matTooltip="Edit" (click)="openEditComputerDialog()">
+              <button mat-icon-button matTooltip="Edit" (click)="openEditCCTVDialog(row.ItemID)">
                 <mat-icon>edit</mat-icon>
-              </button> -->
+              </button>
               <button mat-icon-button matTooltip="Delete">
                 <mat-icon>delete_forever</mat-icon>
               </button>
