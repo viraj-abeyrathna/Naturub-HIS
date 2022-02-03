@@ -36,7 +36,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     HttpClientModule,
     CommonData 
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  // providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
