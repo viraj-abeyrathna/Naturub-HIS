@@ -81,8 +81,8 @@
     <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)="Save()">Ok</button> -->
 
     <div *ngIf="isADD; then add else edit"></div>
-    <ng-template #add> <button mat-button cdkFocusInitial (click)="Save()">Ok</button></ng-template>
-    <ng-template #edit> <button mat-button cdkFocusInitial (click)="Edit(data.ItemID)">Edit</button></ng-template>
+    <ng-template #add> <button mat-button cdkFocusInitial (click)="Save()">OK</button></ng-template>
+    <ng-template #edit> <button mat-button cdkFocusInitial (click)="Edit(data.ItemID)">Update</button></ng-template>
 
 
 </div>
