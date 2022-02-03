@@ -48,33 +48,12 @@ export class InventoryService {
     return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetIPAddress/' + ipAddress); 
   }
 
-  saveComputer(obj:Computer):Observable<{}>{
-    
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // // const queryParams = [val._selection].map((row: { value: any; }) => `id=${row.value}`);
-    // const url = new CommonData().APIUrl + '/Inventory/SaveComputer';
-
-    // const options = {
-    //   obj:val2,
-    //     headers: new HttpHeaders({
-    //         'Content-Type': 'application/json'
-    //     }),
-    //     body: {
-    //       val2
-    //     }
-    // } 
-
-    //// return this.http.post<any>(url, options);
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({'Content-Type': 'application/json'})
-    // }
-
-    console.log(obj);
-
- 
+  saveComputer(obj:Computer):Observable<{}>{  
     return this.http.post(new CommonData().APIUrl + '/Inventory/SaveComputer',obj);
+  }
+
+  updateComputer(obj:Computer):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/UpdateComputer',obj);
   }
 
   // Ups
