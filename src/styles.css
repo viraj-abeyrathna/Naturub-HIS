@@ -92,6 +92,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-bottom: 0px !important;
 }
 
+.Uppercase{
+  text-transform: uppercase;
+}
+
 /* Dialog Models */
 
 .sub-title{
