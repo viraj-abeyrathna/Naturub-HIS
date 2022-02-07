@@ -7,7 +7,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { ComputerDialogComponent } from './computer-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
-import { Computer } from "../../../model/computer"; 
+import { Computer } from "../../../model/computer";
 
 // export interface Computers {
 //   ItemID: number;
@@ -48,8 +48,7 @@ export class ComputerComponent implements OnInit {
 
   dataSource: MatTableDataSource<Computer> = new MatTableDataSource();
   computers: Computer[] = [];
-  columns: string[] = [
-    'ItemID',
+  columns: string[] = [ 
     'ItemCode',
     'ComputerName',
     'IPAddress',
@@ -92,7 +91,7 @@ export class ComputerComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.isLoading = false;
         // return data;
-      } 
+      }
     );
 
     // this.dataSource = new MatTableDataSource(this.computers);
@@ -103,33 +102,42 @@ export class ComputerComponent implements OnInit {
   openAddComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: { title: 'ADD COMPUTER', subtitle: 'Fill the computer details' } 
+      data: { 
+        title: 'ADD COMPUTER', 
+        subtitle: 'Fill the computer details' 
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result.SavedSuccess === true) {
-        this._snackBar.successSnackBar('('+ result.ItemCode + ')  is successfully saved !',4000)
+      if (result.Success === true) {
+        this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
         this.FillComputerList();
-      } else if (result.SavedSuccess === false) {
-        this._snackBar.errorSnackBar('Data saving error !',4000)
+      } else if (result.Success === false) {
+        this._snackBar.errorSnackBar('Data saving error !', 4000)
       }
 
     });
   }
 
-  openEditComputerDialog(_itemID:number): void {
+  openEditComputerDialog(_itemID: number): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: { title: 'Edit Computer', subtitle: 'Change the computer details', itemID:_itemID }
+      data: {
+        title: 'Edit Computer',
+        subtitle: 'Change the computer details',
+        itemID: _itemID 
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result.SavedSuccess === true) {
-        this.FillComputerList();
-      } else if (result.SavedSuccess === false) {
-
+      if (result) {
+        if (result.Success === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully updated !', 4000)
+          this.FillComputerList();
+        } else if (result.Success === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
       }
     });
   }
@@ -151,7 +159,7 @@ export class ComputerComponent implements OnInit {
     }
   }
 
- 
+
 
 
 
