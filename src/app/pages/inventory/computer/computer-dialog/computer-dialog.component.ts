@@ -45,7 +45,7 @@ export class ComputerDialogComponent implements OnInit {
   SubCategoryList: any = [];
 
   MainCategoryID: string = "0";
-  allComplete: boolean = false;
+  IsValidForm: boolean = true;
 
   DepartmentList: any = [];
   SectionList: any = [];
@@ -53,9 +53,10 @@ export class ComputerDialogComponent implements OnInit {
   VirusGuardList: any = [];
   ProcessorList: any = [];
   RAMList: any = [];
- 
+
+  ItemCodeControl = new FormControl({ value: '', disabled: true }); // Only using for edit
   SubCategoryControl = new FormControl('', [Validators.required]);
-  FARControl = new FormControl('', [Validators.required]);
+  FARControl = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
   ComputerNameControl = new FormControl('', [Validators.required]);
   IPAddressControl = new FormControl('', [Validators.required, Validators.pattern(IP_PATTERN)]);
   DepartmentControl = new FormControl('', [Validators.required]);
@@ -71,19 +72,44 @@ export class ComputerDialogComponent implements OnInit {
   RemarkControl = new FormControl();
 
 
-  matcher = new MyErrorStateMatcher(); 
+  matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-    console.log(this.dialogRef.componentInstance.data.itemID);
     this.FillComputerModels();
     this.FillSubCategories(1); //Computer
     this.FillDepartments();
-    this.FillOperatingSystems();
+    this.FillOperatingSystems(); 
     this.FillProcessors();
     this.FillRAM();
+
+    this.FillDataByItemID(); // Edited Mode
+
   }
 
- 
+  FillDataByItemID() {
+    if (this.data.itemID) { 
+      this.inventoryService.getComputerList(this.data.itemID).subscribe((_data: any)=>{
+        this.ItemCodeControl.setValue(_data[0]['ItemCode']);
+        this.SubCategoryControl.setValue(_data[0]['SubCategoryID']);
+        this.FARControl.setValue(_data[0]['FARBarcodeNo']);
+        this.ComputerNameControl.setValue(_data[0]['ComputerName']);
+        this.IPAddressControl.setValue(_data[0]['IPAddress']);
+        this.DepartmentControl.setValue(_data[0]['DepartmentID']);
+        this.FillSections(_data[0]['DepartmentID']);
+        this.SectionControl.setValue(_data[0]['SectionID']);
+        this.LoginUserControl.setValue(_data[0]['LoginUser']);
+        this.UserControl.setValue(_data[0]['AuthorizedUser']);
+        this.OSControl.setValue(_data[0]['OperatingSystemID']);
+        this.VirusGuardControl.setValue(_data[0]['IsVirusGuardActive']);
+        this.RAMControl.setValue(_data[0]['RAMID']);
+        this.ProcessorControl.setValue(_data[0]['ProcessorID']);
+        this.CapacityControl.setValue(_data[0]['Capacity']);
+        this.ModelControl.setValue(_data[0]['ModelName']);
+        this.RemarkControl.setValue(_data[0]['Remark']); 
+      });
+    }
+  }
+
   FillSubCategories(MainCategoryID: number) {
     this.masterService.getSubCategory(MainCategoryID).subscribe((data: any) => {
       this.SubCategoryList = data;
@@ -108,7 +134,7 @@ export class ComputerDialogComponent implements OnInit {
     });
   }
 
-  FillSections(DepartmentID: number) {
+  FillSections(DepartmentID: number) { 
     this.masterService.getSection(DepartmentID).subscribe((data: any) => {
       this.SectionList = data;
     });
@@ -141,37 +167,103 @@ export class ComputerDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
  
-  Save() {
+  Validation(){
     if (this.SubCategoryControl.invalid) {
-      this._snackBar.warningSnackBar('Sub category is required !');
+      // this._snackBar.warningSnackBar('Sub category is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.FARControl.invalid) {
-      this._snackBar.warningSnackBar('FAR code is required !');
+      // this._snackBar.warningSnackBar('FAR code is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.ComputerNameControl.invalid) {
-      this._snackBar.warningSnackBar('Computer name is required !');
+      // this._snackBar.warningSnackBar('Computer name is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.IPAddressControl.invalid) {
-      this._snackBar.warningSnackBar('IP address is required !');
+      // this._snackBar.warningSnackBar('IP address is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.DepartmentControl.invalid) {
-      this._snackBar.warningSnackBar('Department is required !');
+      // this._snackBar.warningSnackBar('Department is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.SectionControl.invalid) {
-      this._snackBar.warningSnackBar('Section is required !');
+      // this._snackBar.warningSnackBar('Section is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.LoginUserControl.invalid) {
-      this._snackBar.warningSnackBar('Login user is required !');
+      // this._snackBar.warningSnackBar('Login user is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.UserControl.invalid) {
-      this._snackBar.warningSnackBar('User is required !');
+      // this._snackBar.warningSnackBar('User is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.OSControl.invalid) {
-      this._snackBar.warningSnackBar('Operating system is required !');
+      // this._snackBar.warningSnackBar('Operating system is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.VirusGuardControl.invalid) {
-      this._snackBar.warningSnackBar('Virus guard is required !');
+      // this._snackBar.warningSnackBar('Virus guard is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.ProcessorControl.invalid) {
-      this._snackBar.warningSnackBar('Processor is required !');
+      // this._snackBar.warningSnackBar('Processor is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.RAMControl.invalid) {
-      this._snackBar.warningSnackBar('RAM is required !');
+      // this._snackBar.warningSnackBar('RAM is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.CapacityControl.invalid) {
-      this._snackBar.warningSnackBar('Capacity is required !');
+      // this._snackBar.warningSnackBar('Capacity is required !');
+      this.IsValidForm = false;
+      return false;
     } else if (this.ModelControl.invalid) {
-      this._snackBar.warningSnackBar('Model is required !');
+      // this._snackBar.warningSnackBar('Model is required !');
+      this.IsValidForm = false;
+      return false;
     } else {
+      this.IsValidForm = true;
+      return true;
+    }
+  }
+
+  Save() {
+    // if (this.SubCategoryControl.invalid) {
+    //   this._snackBar.warningSnackBar('Sub category is required !');
+    // } else if (this.FARControl.invalid) {
+    //   this._snackBar.warningSnackBar('FAR code is required !');
+    // } else if (this.ComputerNameControl.invalid) {
+    //   this._snackBar.warningSnackBar('Computer name is required !');
+    // } else if (this.IPAddressControl.invalid) {
+    //   this._snackBar.warningSnackBar('IP address is required !');
+    // } else if (this.DepartmentControl.invalid) {
+    //   this._snackBar.warningSnackBar('Department is required !');
+    // } else if (this.SectionControl.invalid) {
+    //   this._snackBar.warningSnackBar('Section is required !');
+    // } else if (this.LoginUserControl.invalid) {
+    //   this._snackBar.warningSnackBar('Login user is required !');
+    // } else if (this.UserControl.invalid) {
+    //   this._snackBar.warningSnackBar('User is required !');
+    // } else if (this.OSControl.invalid) {
+    //   this._snackBar.warningSnackBar('Operating system is required !');
+    // } else if (this.VirusGuardControl.invalid) {
+    //   this._snackBar.warningSnackBar('Virus guard is required !');
+    // } else if (this.ProcessorControl.invalid) {
+    //   this._snackBar.warningSnackBar('Processor is required !');
+    // } else if (this.RAMControl.invalid) {
+    //   this._snackBar.warningSnackBar('RAM is required !');
+    // } else if (this.CapacityControl.invalid) {
+    //   this._snackBar.warningSnackBar('Capacity is required !');
+    // } else if (this.ModelControl.invalid) {
+    //   this._snackBar.warningSnackBar('Model is required !');
+    // } else {
+
+    if(this.Validation()){
 
       const objComputer = new Computer();
       objComputer.MainCategoryID = 1 // Computer
@@ -193,12 +285,42 @@ export class ComputerDialogComponent implements OnInit {
 
       this.inventoryService.saveComputer(objComputer).subscribe(data => {
         if (data) {
-          this.dialogRef.close({ SavedSuccess: true, ItemCode: data });
+          this.dialogRef.close({ Success: true, ItemCode: data });
         } else {
-          this.dialogRef.close({ SavedSuccess: false });
+          this.dialogRef.close({ Success: false });
         }
-      }); 
+      });
 
+    }
+  }
+
+  Update(itemID:number){
+    if(this.Validation()){
+      const objComputer = new Computer();
+      objComputer.ItemID = itemID; 
+      objComputer.SubCategoryID = this.SubCategoryControl.value;
+      objComputer.FARBarcodeNo = this.FARControl.value;
+      objComputer.ComputerName = this.ComputerNameControl.value;
+      objComputer.IPAddress = this.IPAddressControl.value;
+      objComputer.SectionID = this.SectionControl.value;
+      objComputer.LoginUser = this.LoginUserControl.value;
+      objComputer.AuthorizedUser = this.UserControl.value;
+      objComputer.OperatingSystemID = this.OSControl.value;
+      objComputer.IsVirusGuardActive = this.VirusGuardControl.value;
+      objComputer.ProcessorID = this.ProcessorControl.value;
+      objComputer.RAMID = this.RAMControl.value;
+      objComputer.Capacity = this.CapacityControl.value;
+      objComputer.ModelName = this.ModelControl.value;
+      objComputer.Remark = this.RemarkControl.value;
+      objComputer.LastModifiedUserID = 1; // Temporary !!! 
+
+      this.inventoryService.updateComputer(objComputer).subscribe(data => {
+        if (data) {
+          this.dialogRef.close({ Success: true, ItemCode: data });
+        } else {
+          this.dialogRef.close({ Success: false });
+        }
+      });
     }
   }
 
