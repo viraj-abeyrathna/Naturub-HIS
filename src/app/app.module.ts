@@ -16,6 +16,7 @@ import { SharedModule } from "./shared/shared.module";
 import { CommonData } from "./shared/common/common"; 
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { LoginComponent } from './pages/account/login/login.component';
 // import { DashboardComponent } from './pages/dashboard/dashboard.component';  
 
 
@@ -24,7 +25,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
   declarations: [
     AppComponent, 
     routingComponents,
-    SidebarComponent 
+    SidebarComponent,
+    LoginComponent 
   ],
   imports: [
     BrowserModule,
