@@ -1,13 +1,14 @@
 <h1 mat-dialog-title class="mb-0">{{data.title}}</h1>
-<p class="sub-title">{{data.subtitle}}</p>
-<mat-error *ngIf="ModelControl.hasError('valid')">Model is <strong>required</strong></mat-error>
+<p class="sub-title">{{data.subtitle}}</p> 
+<mat-error *ngIf="!IsValidForm">Please fill the <strong>required fields</strong></mat-error>
+
 <!-- <mat-divider></mat-divider> -->
 <div mat-dialog-content>
 
   <div class="pt-10">
  
-    <form (ngSubmit)="Save()"></form>
-   
+    <!-- <form (ngSubmit)="Save()"></form> -->
+    
       <!-- <mat-form-field class="full-width" appearance="outline">
         <mat-label>Main Category</mat-label>
         <mat-select (selectionChange)="FillSubCategories($event.value)" [formControl]="MainCategoryControl"
@@ -19,10 +20,15 @@
         <mat-error *ngIf="MainCategoryControl.hasError('required')">Main category is <strong>required</strong></mat-error>
   
       </mat-form-field> -->
+
+      <mat-form-field *ngIf="this.data.itemID" class="full-width" appearance="outline">
+        <mat-label>Item Code</mat-label>
+        <input matInput [formControl]="ItemCodeControl"> 
+      </mat-form-field>
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Sub Category</mat-label>
-        <mat-select [formControl]="SubCategoryControl" [errorStateMatcher]="matcher" required>
+        <mat-select [formControl]="SubCategoryControl" [errorStateMatcher]="matcher" [disabled]="this.data.itemID" required>
           <mat-option *ngFor="let sub of SubCategoryList" [value]="sub.SubCategoryID">
             {{sub.SubCategory}}
           </mat-option>
@@ -34,12 +40,14 @@
         <mat-label>FAR Code</mat-label>
         <input matInput [formControl]="FARControl" [errorStateMatcher]="matcher" required>
         <mat-error *ngIf="FARControl.hasError('required')">FAR code is <strong>required</strong></mat-error>
+        <mat-error *ngIf="FARControl.hasError('pattern')">Enter only <strong>number</strong></mat-error>
+
       </mat-form-field>
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Computer Name</mat-label>
-        <input matInput placeholder="Ex. NGHQ-IT-008" [formControl]="ComputerNameControl" [errorStateMatcher]="matcher"
-          required>
+        <input matInput class="Uppercase" placeholder="Ex. NGHQ-IT-008" [formControl]="ComputerNameControl" [errorStateMatcher]="matcher"
+        required>
         <mat-error *ngIf="ComputerNameControl.hasError('required')">Computer name is <strong>required</strong></mat-error>
       </mat-form-field>
   
@@ -74,14 +82,14 @@
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Login User</mat-label>
-        <input matInput placeholder="Ex. sample.user" [formControl]="LoginUserControl" [errorStateMatcher]="matcher"
+        <input matInput class="Uppercase" placeholder="Ex. sample.user" [formControl]="LoginUserControl" [errorStateMatcher]="matcher"
           required>
         <mat-error *ngIf="LoginUserControl.hasError('required')">Login user is <strong>required</strong></mat-error>
       </mat-form-field>
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Authorized User</mat-label>
-        <input matInput placeholder="Ex. sample.user" [formControl]="UserControl" [errorStateMatcher]="matcher"
+        <input matInput class="Uppercase" placeholder="Ex. sample.user" [formControl]="UserControl" [errorStateMatcher]="matcher"
           required>
         <mat-error *ngIf="UserControl.hasError('required')">User is <strong>required</strong></mat-error>
       </mat-form-field>
@@ -99,8 +107,8 @@
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Virus Guard</mat-label>
         <mat-select [formControl]="VirusGuardControl" [errorStateMatcher]="matcher" required>
-          <mat-option value="true">Active</mat-option>
-          <mat-option value="false">Deactive</mat-option>
+          <mat-option [value]="true">Active</mat-option>
+          <mat-option [value]="false">Deactive</mat-option>
         </mat-select>
         <mat-error *ngIf="VirusGuardControl.hasError('required')">Virus guard is <strong>required</strong></mat-error>
       </mat-form-field>
@@ -153,6 +161,8 @@
 <div mat-dialog-actions align="end">
   <button mat-button (click)="onNoClick()">Cancel</button>
   <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)="Save()">Ok</button> -->
-  <button mat-button cdkFocusInitial (click)="Save()">Ok</button>
+  <button *ngIf="!this.data.itemID" mat-button cdkFocusInitial (click)="Save()">OK</button>
+  <button *ngIf="this.data.itemID" mat-button cdkFocusInitial (click)="Update(this.data.itemID)">Update</button>
+
 
 </div>
