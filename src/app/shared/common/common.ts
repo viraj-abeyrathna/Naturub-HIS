@@ -48,4 +48,5 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 })
 export class CommonData { 
   public readonly APIUrl = "http://localhost:5000/api"; 
+  public readonly BaseUrl = "http://localhost:4200/NaturubHIS/assets/images/avatar.jpg";
 }
