@@ -29,7 +29,7 @@ export class Computer {
     EnterdUserID: number | undefined;
     LastModifiedDate?: Date;
     LastModifiedUser?: string; 
-    LastModifiedUserID?: string;  
+    LastModifiedUserID?: number;  
 }
 
 
