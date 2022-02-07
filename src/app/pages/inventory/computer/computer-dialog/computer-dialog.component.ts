@@ -56,9 +56,11 @@ export class ComputerDialogComponent implements OnInit {
 
   ItemCodeControl = new FormControl({ value: '', disabled: true }); // Only using for edit
   SubCategoryControl = new FormControl('', [Validators.required]);
-  FARControl = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  // FARControl = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+  FARControl = new FormControl('', [Validators.pattern("^[0-9]*$")]);
   ComputerNameControl = new FormControl('', [Validators.required]);
-  IPAddressControl = new FormControl('', [Validators.required, Validators.pattern(IP_PATTERN)]);
+  // IPAddressControl = new FormControl('', [Validators.required, Validators.pattern(IP_PATTERN)]);
+  IPAddressControl = new FormControl('', [Validators.pattern(IP_PATTERN)]);
   DepartmentControl = new FormControl('', [Validators.required]);
   SectionControl = new FormControl('', [Validators.required]);
   LoginUserControl = new FormControl('', [Validators.required]);
