@@ -20,6 +20,9 @@ import { EthernetSwitchComponent } from './ethernet-switch/ethernet-switch.compo
 import { AccessPointComponent } from './access-point/access-point.component';
 import { MobilePhoneComponent } from './mobile-phone/mobile-phone.component';
 
+import { ComputerDialogComponent } from "./computer/computer-dialog/computer-dialog.component"; 
+import { JobCardDialogComponent } from './common/job-card-dialog/job-card-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { MobilePhoneComponent } from './mobile-phone/mobile-phone.component';
     RouterDongleComponent,
     EthernetSwitchComponent,
     AccessPointComponent,
-    MobilePhoneComponent,
+    MobilePhoneComponent, 
+    ComputerDialogComponent,
+    JobCardDialogComponent
   ],
   imports: [
     CommonModule,

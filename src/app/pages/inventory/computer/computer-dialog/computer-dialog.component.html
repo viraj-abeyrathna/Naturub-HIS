@@ -26,7 +26,7 @@
         <input matInput [formControl]="ItemCodeControl"> 
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>Sub Category</mat-label>
         <mat-select [formControl]="SubCategoryControl" [errorStateMatcher]="matcher" [disabled]="this.data.itemID" required>
           <mat-option *ngFor="let sub of SubCategoryList" [value]="sub.SubCategoryID">
@@ -36,7 +36,7 @@
         <mat-error *ngIf="SubCategoryControl.hasError('required')">Sub category is <strong>required</strong></mat-error>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>FAR Code</mat-label>
         <input matInput [formControl]="FARControl" [errorStateMatcher]="matcher">
         <!-- <input matInput [formControl]="FARControl" [errorStateMatcher]="matcher" required> -->
@@ -47,25 +47,22 @@
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Computer Name</mat-label>
-        <input matInput class="Uppercase" placeholder="Ex. NGHQ-IT-008" [formControl]="ComputerNameControl" [errorStateMatcher]="matcher"
-        required>
+        <input matInput class="Uppercase" placeholder="Ex. NGHQ-IT-008" [formControl]="ComputerNameControl" [errorStateMatcher]="matcher" required>
         <mat-error *ngIf="ComputerNameControl.hasError('required')">Computer name is <strong>required</strong></mat-error>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>IP Address</mat-label>
-        <input matInput placeholder="Ex. 192.168.0.8" [formControl]="IPAddressControl" [errorStateMatcher]="matcher"
-        type="text">
+        <input matInput placeholder="Ex. 192.168.0.8" [formControl]="IPAddressControl" [errorStateMatcher]="matcher" type="text">
         <!-- <input matInput placeholder="Ex. 192.168.0.8" [formControl]="IPAddressControl" [errorStateMatcher]="matcher"
           type="text" required> -->
         <mat-error *ngIf="IPAddressControl.hasError('required')">IP address is <strong>required</strong></mat-error>
         <mat-error *ngIf="IPAddressControl.hasError('pattern')">IP address is <strong>invalid</strong></mat-error>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>Department</mat-label>
-        <mat-select (selectionChange)="FillSections($event.value)" [formControl]="DepartmentControl"
-          [errorStateMatcher]="matcher" required>
+        <mat-select (selectionChange)="FillSections($event.value)" [formControl]="DepartmentControl" [errorStateMatcher]="matcher" [disabled]="this.data.isUpgrade" required>
           <mat-option *ngFor="let department of DepartmentList" [value]="department.DepartmentID">
             {{department.Department}}
           </mat-option>
@@ -73,9 +70,9 @@
         <mat-error *ngIf="DepartmentControl.hasError('required')">Department is <strong>required</strong></mat-error>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>Section</mat-label>
-        <mat-select [formControl]="SectionControl" [errorStateMatcher]="matcher" required>
+        <mat-select [formControl]="SectionControl" [errorStateMatcher]="matcher"  [disabled]="this.data.isUpgrade" required>
           <mat-option *ngFor="let section of SectionList" [value]="section.SectionID">
             {{section.Section}}
           </mat-option>
@@ -83,17 +80,15 @@
         <mat-error *ngIf="SectionControl.hasError('required')">Section is <strong>required</strong></mat-error>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>Login User</mat-label>
-        <input matInput class="Uppercase" placeholder="Ex. sample.user" [formControl]="LoginUserControl" [errorStateMatcher]="matcher"
-          required>
+        <input matInput class="Uppercase" placeholder="Ex. sample.user" [formControl]="LoginUserControl" [errorStateMatcher]="matcher" required>
         <mat-error *ngIf="LoginUserControl.hasError('required')">Login user is <strong>required</strong></mat-error>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>Authorized User</mat-label>
-        <input matInput class="Uppercase" placeholder="Ex. sample.user" [formControl]="UserControl" [errorStateMatcher]="matcher"
-          required>
+        <input matInput class="Uppercase" placeholder="Ex. sample.user" [formControl]="UserControl" [errorStateMatcher]="matcher" required>
         <mat-error *ngIf="UserControl.hasError('required')">User is <strong>required</strong></mat-error>
       </mat-form-field>
   
@@ -142,7 +137,7 @@
           [errorStateMatcher]="matcher" required>
       </mat-form-field>
   
-      <mat-form-field class="full-width" appearance="outline">
+      <mat-form-field class="full-width" appearance="outline" *ngIf="!this.data.isUpgrade">
         <mat-label>Model Name</mat-label>
         <input type="text" placeholder="Ex. Lenovo L580" aria-label="Model" matInput [formControl]="ModelControl"
           [errorStateMatcher]="matcher" [matAutocomplete]="auto" required>
@@ -165,7 +160,9 @@
   <button mat-button (click)="onNoClick()">Cancel</button>
   <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)="Save()">Ok</button> -->
   <button *ngIf="!this.data.itemID" mat-button cdkFocusInitial (click)="Save()">OK</button>
-  <button *ngIf="this.data.itemID" mat-button cdkFocusInitial (click)="Update(this.data.itemID)">Update</button>
+  <button *ngIf="this.data.itemID && this.data.isUpgrade == false" mat-button cdkFocusInitial (click)="Update(this.data.itemID, this.data.isUpgrade)">Update</button>
+  <button *ngIf="this.data.itemID && this.data.isUpgrade" mat-button cdkFocusInitial (click)="Update(this.data.itemID, this.data.isUpgrade)">Upgrade</button>
+
 
 
 </div>

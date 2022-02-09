@@ -4,10 +4,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ComputerDialogComponent } from './computer-dialog';
+import { ComputerDialogComponent } from './computer-dialog/computer-dialog.component';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
 import { Computer } from "../../../model/computer";
+import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialog.component';
 
 // export interface Computers {
 //   ItemID: number;
@@ -48,7 +49,7 @@ export class ComputerComponent implements OnInit {
 
   dataSource: MatTableDataSource<Computer> = new MatTableDataSource();
   computers: Computer[] = [];
-  columns: string[] = [ 
+  columns: string[] = [
     'ItemCode',
     'ComputerName',
     'IPAddress',
@@ -83,6 +84,11 @@ export class ComputerComponent implements OnInit {
     this.FillComputerList();
   }
 
+
+  ngOnInit(): void {
+    // this.FillComputers(); 
+  }
+
   FillComputerList() {
     this.service.getComputerList(0).subscribe(
       (data: any) => {
@@ -102,21 +108,22 @@ export class ComputerComponent implements OnInit {
   openAddComputerDialog(): void {
     let dialogRef = this.dialog.open(ComputerDialogComponent, {
       width: '500px',
-      data: { 
-        title: 'ADD COMPUTER', 
-        subtitle: 'Fill the computer details' 
+      data: {
+        title: 'ADD COMPUTER',
+        subtitle: 'Fill the computer details',
+        isUpgrade:false
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
-      if (result.Success === true) {
-        this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
-        this.FillComputerList();
-      } else if (result.Success === false) {
-        this._snackBar.errorSnackBar('Data saving error !', 4000)
+      if (result) {
+        if (result.Success === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillComputerList();
+        } else if (result.Success === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
       }
-
     });
   }
 
@@ -126,7 +133,8 @@ export class ComputerComponent implements OnInit {
       data: {
         title: 'Edit Computer',
         subtitle: 'Change the computer details',
-        itemID: _itemID 
+        itemID: _itemID,
+        isUpgrade:false
       }
     });
 
@@ -142,8 +150,53 @@ export class ComputerComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // this.FillComputers(); 
+  openRepairComputerDialog(_itemCode:string, _itemID: number, _farCode:string,_subCategoryID: number): void {
+    let dialogRef = this.dialog.open(JobCardDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'JOB CARD',
+        subtitle: 'Fill the computer maintenance details',
+        itemID: _itemID,
+        itemCode:_itemCode,
+        farCode:_farCode,
+        subCategoryID: _subCategoryID
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        if (result.Success === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this.FillComputerList();
+        } else if (result.Success === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  openUpgradeComputerDialog(_itemID: number): void {
+    let dialogRef = this.dialog.open(ComputerDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'Upgrade Computer',
+        subtitle: 'Upgrade the computer performance',
+        itemID: _itemID,
+        isUpgrade:true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.Success === true) {
+          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully updated !', 4000)
+          this.FillComputerList();
+        } else if (result.Success === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
   }
 
   // FillComputers() {

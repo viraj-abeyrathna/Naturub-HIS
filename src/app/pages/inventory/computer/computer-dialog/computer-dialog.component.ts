@@ -85,7 +85,19 @@ export class ComputerDialogComponent implements OnInit {
     this.FillRAM();
 
     this.FillDataByItemID(); // Edited Mode
+    this.DisableControlsWhenPopupUpgradeDialog(); // Upgrade Mode
 
+  }
+
+  DisableControlsWhenPopupUpgradeDialog(){
+    if(this.data.isUpgrade){
+      this.FARControl.disable();
+      this.ComputerNameControl.disable();
+      this.IPAddressControl.disable();
+      this.LoginUserControl.disable();
+      this.UserControl.disable();
+      this.ModelControl.disable();
+    }
   }
 
   FillDataByItemID() {
@@ -296,7 +308,7 @@ export class ComputerDialogComponent implements OnInit {
     }
   }
 
-  Update(itemID:number){
+  Update(itemID:number, isUpgrade:boolean){
     if(this.Validation()){
       const objComputer = new Computer();
       objComputer.ItemID = itemID; 
@@ -315,6 +327,7 @@ export class ComputerDialogComponent implements OnInit {
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
       objComputer.LastModifiedUserID = 1; // Temporary !!! 
+      objComputer.IsUpgrade = isUpgrade;
 
       this.inventoryService.updateComputer(objComputer).subscribe(data => {
         if (data) {
@@ -325,6 +338,8 @@ export class ComputerDialogComponent implements OnInit {
       });
     }
   }
+
+ 
 
 
 }

@@ -30,6 +30,8 @@ export class Computer {
     LastModifiedDate?: Date;
     LastModifiedUser?: string; 
     LastModifiedUserID?: number;  
+
+    IsUpgrade:boolean | undefined; // Upgrade Mode
 }
 
 
