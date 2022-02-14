@@ -169,8 +169,7 @@ export class CctvDialogComponent implements OnInit {
     }
   }
 
-  Edit(ItemID: number) {
-    console.log(ItemID);
+  Edit(ItemID: number) { 
     if (this.SubCategoryControl.invalid) {
       this._snackBar.warningSnackBar('Sub category is required !');
     } else if (this.BrandControl.invalid) {

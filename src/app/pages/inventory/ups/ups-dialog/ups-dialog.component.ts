@@ -61,8 +61,7 @@ export class UpsDialogComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher(); 
 
-  ngOnInit(): void {
-    console.log(this.data.title);
+  ngOnInit(): void { 
     this.FillSubCategories(3); //Ups
     this.FillBrand(3); //Ups
     this.FillCapacity();
@@ -80,8 +79,7 @@ export class UpsDialogComponent implements OnInit {
           this.FillSections(data[0]['DepartmentID']);
           this.SectionControl.setValue(data[0]['SectionID']);
           this.SerialNoControl.setValue(data[0]['SerialNo']);
-          this.RemarkControl.setValue(data[0]['Remark']);
-          console.log(data[0]);
+          this.RemarkControl.setValue(data[0]['Remark']); 
         } 
       );
     }  
@@ -160,8 +158,7 @@ export class UpsDialogComponent implements OnInit {
     }
   }
 
-  Edit(ItemID: number) {
-    console.log(ItemID);
+  Edit(ItemID: number) { 
     if (this.SubCategoryControl.invalid) {
       this._snackBar.warningSnackBar('Sub category is required !');
     } else if (this.BrandControl.invalid) {

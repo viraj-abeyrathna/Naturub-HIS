@@ -65,8 +65,7 @@ export class AccessPointDialogComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher(); 
 
-  ngOnInit(): void {
-    console.log(this.dialogRef.componentInstance.data.itemID);
+  ngOnInit(): void { 
     this.FillSubCategories(1005); //Access Point
     this.FillBrand(1005); //Access Point
     this.FillDepartments();
@@ -84,8 +83,7 @@ export class AccessPointDialogComponent implements OnInit {
          this.FillSections(data[0]['DepartmentID']);
          this.SectionControl.setValue(data[0]['SectionID']);
          this.SerialNoControl.setValue(data[0]['SerialNo']);
-         this.RemarkControl.setValue(data[0]['Remark']);
-         console.log(data[0]);
+         this.RemarkControl.setValue(data[0]['Remark']); 
        } 
      );
    }  

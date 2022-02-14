@@ -65,8 +65,7 @@ export class EthernetSwitchDialogComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher(); 
 
-  ngOnInit(): void {
-    console.log(this.dialogRef.componentInstance.data.itemID);
+  ngOnInit(): void { 
     this.FillSubCategories(1006); //Ethernet-Switch
     this.FillBrand(1006); //Ethernet-Switch
     this.FillDepartments();
@@ -84,8 +83,7 @@ export class EthernetSwitchDialogComponent implements OnInit {
          this.FillSections(data[0]['DepartmentID']);
          this.SectionControl.setValue(data[0]['SectionID']);
          this.SerialNoControl.setValue(data[0]['SerialNo']);
-         this.RemarkControl.setValue(data[0]['Remark']);
-         console.log(data[0]);
+         this.RemarkControl.setValue(data[0]['Remark']); 
        } 
      );
    }  

@@ -52,19 +52,17 @@ export class JobCardDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  Save(): void {
-    console.log("ddd");
-    if (this.Validation()) {
-      console.log("ddffff");
-
+  Save(): void { 
+    if (this.Validation()) { 
       const objMaintenance = new Maintenance();
       objMaintenance.ItemID = this.data.itemID;
       objMaintenance.SubCategoryID = this.data.subCategoryID;
       objMaintenance.MaintenanceTypeID = this.MaintenanceTypeControl.value;
       objMaintenance.MaintenancePartID = this.MaintenancePartControl.value;
+      objMaintenance.Remark = this.RemarkControl.value;
 
       this.maintenanceService.saveJobCard(objMaintenance).subscribe((data: any) => {
-        if (data) {
+        if (data) { 
           this.dialogRef.close({ Success: true, JobCardNo: data });
         } else {
           this.dialogRef.close({ Success: false });
@@ -84,8 +82,7 @@ export class JobCardDialogComponent implements OnInit {
       this.IsValidForm = true;
       return true;
     }
-  }
-
+  } 
 }
 
 /** Error when invalid control is dirty, touched, or submitted. */

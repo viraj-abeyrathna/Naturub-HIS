@@ -11,8 +11,7 @@ export class MaintenanceService {
 
   constructor(private http: HttpClient) { }
 
-  saveJobCard(obj:Maintenance):Observable<{}>{
-    console.log(obj);
+  saveJobCard(obj:Maintenance):Observable<{}>{ 
     return this.http.post(new CommonData().APIUrl + '/Maintenance/SaveJobCard/',obj);
   }
 }
