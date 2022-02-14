@@ -50,5 +50,5 @@
 
 <div mat-dialog-actions align="end">
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button *ngIf="this.data.itemID" mat-button cdkFocusInitial (click)="Save(this.data.itemID)">Update</button> 
+    <button *ngIf="this.data.itemID" mat-button cdkFocusInitial (click)="Save()">Save</button> 
   </div>

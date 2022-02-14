@@ -15,7 +15,6 @@ import { MobilePhone } from '../model/mobilephone';
 @Injectable({
   providedIn: 'root'
 })
-
 export class InventoryService {
   constructor(private http: HttpClient) { }
 
@@ -65,13 +64,11 @@ export class InventoryService {
     return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetCapacity');
   }
 
-  saveUps(obj:Ups):Observable<{}>{
-    console.log(obj);
+  saveUps(obj:Ups):Observable<{}>{ 
     return this.http.post(new CommonData().APIUrl + '/Inventory/SaveUps',obj);
   }
 
-  updateUps(obj:Ups):Observable<{}>{
-    console.log(obj);
+  updateUps(obj:Ups):Observable<{}>{ 
     return this.http.post(new CommonData().APIUrl + '/Inventory/UpdateUps',obj);
   }
 
@@ -80,8 +77,7 @@ export class InventoryService {
     return this.http.get<AccessPoint[]>(new CommonData().APIUrl + '/Inventory/GetAccessPoint/' + val);
   }
 
-  saveAccessPoint(obj:AccessPoint):Observable<{}>{
-    console.log(obj);
+  saveAccessPoint(obj:AccessPoint):Observable<{}>{ 
     return this.http.post(new CommonData().APIUrl + '/Inventory/SaveAccessPoint',obj);
   }
 

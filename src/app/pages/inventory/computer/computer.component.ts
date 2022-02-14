@@ -167,7 +167,7 @@ export class ComputerComponent implements OnInit {
 
       if (result) {
         if (result.Success === true) {
-          this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
+          this._snackBar.successSnackBar('(' + result.JobCardNo + ')  is successfully saved !', 4000)
           this.FillComputerList();
         } else if (result.Success === false) {
           this._snackBar.errorSnackBar('Data saving error !', 4000)

@@ -2,8 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { InventoryService } from 'src/app/api-services/inventory.service';
+import { MaintenanceService } from 'src/app/api-services/maintenance.service';
 import { MasterService } from 'src/app/api-services/master.service';
+import { Maintenance } from 'src/app/model/maintenance';
 
 @Component({
   selector: 'app-job-card-dialog',
@@ -12,7 +13,7 @@ import { MasterService } from 'src/app/api-services/master.service';
 })
 export class JobCardDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService, private inventoryService: InventoryService, public dialogRef: MatDialogRef<JobCardDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private maintenanceService: MaintenanceService, public dialogRef: MatDialogRef<JobCardDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   IsValidForm: boolean = true;
 
@@ -22,10 +23,10 @@ export class JobCardDialogComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  ItemCodeControl = new FormControl({ value: '', disabled: true }); 
-  FARCodeControl = new FormControl({ value: '', disabled: true }); 
-  MaintenanceTypeControl= new FormControl('',[Validators.required]);
-  MaintenancePartControl= new FormControl('',[Validators.required]);
+  ItemCodeControl = new FormControl({ value: '', disabled: true });
+  FARCodeControl = new FormControl({ value: '', disabled: true });
+  MaintenanceTypeControl = new FormControl('', [Validators.required]);
+  MaintenancePartControl = new FormControl('', [Validators.required]);
   RemarkControl = new FormControl();
 
   ngOnInit(): void {
@@ -36,23 +37,53 @@ export class JobCardDialogComponent implements OnInit {
   }
 
   FillMaintenanceTypes() {
-    this.masterService.getMaintenanceType().subscribe((data: any) => {  
-        this.MaintenanceTypeList = data.filter((item: { MaintenanceType: string; }) => item.MaintenanceType !== "Upgrade");  // Exclude item
-    }); 
+    this.masterService.getMaintenanceType().subscribe((data: any) => {
+      this.MaintenanceTypeList = data.filter((item: { MaintenanceType: string; }) => item.MaintenanceType !== "Upgrade");  // Exclude item
+    });
   }
 
-  FillMaintenanceParts(){
-    this.masterService.getMaintenancePart(this.data.subCategoryID).subscribe((data: any) => {  
+  FillMaintenanceParts() {
+    this.masterService.getMaintenancePart(this.data.subCategoryID).subscribe((data: any) => {
       this.MaintenancePartList = data;
-  }); 
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  Save(itemID:number):void{
+  Save(): void {
+    console.log("ddd");
+    if (this.Validation()) {
+      console.log("ddffff");
 
+      const objMaintenance = new Maintenance();
+      objMaintenance.ItemID = this.data.itemID;
+      objMaintenance.SubCategoryID = this.data.subCategoryID;
+      objMaintenance.MaintenanceTypeID = this.MaintenanceTypeControl.value;
+      objMaintenance.MaintenancePartID = this.MaintenancePartControl.value;
+
+      this.maintenanceService.saveJobCard(objMaintenance).subscribe((data: any) => {
+        if (data) {
+          this.dialogRef.close({ Success: true, JobCardNo: data });
+        } else {
+          this.dialogRef.close({ Success: false });
+        }
+      });
+    }
+  }
+
+  Validation() {
+    if (this.MaintenanceTypeControl.invalid) {
+      this.IsValidForm = false;
+      return false;
+    } else if (this.MaintenancePartControl.invalid) {
+      this.IsValidForm = false;
+      return false;
+    } else {
+      this.IsValidForm = true;
+      return true;
+    }
   }
 
 }
