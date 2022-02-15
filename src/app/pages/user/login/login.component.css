@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@200;300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;400;600;700;900&display=swap');
+
+
+::ng-deep body{
+    /* background:url("https://thefintechtimes.com/wp-content/uploads/2021/02/iStock-1170073827.jpg"); */
+    background: url('https://www.ebuyer.com/blog/wp-content/uploads/2021/05/shutterstock_693701887.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.system-name{
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2.5em;
+    font-family: 'KoHo', sans-serif;
+    letter-spacing: 0.2em;
+}
+
+.his{
+    color: #FFFFFF;
+    text-align: center; 
+    padding-bottom: 4em;
+    font-family: 'KoHo', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1em;
+    font-size: 0.8em;
+}
+
+.welcome{
+    color: #FFFFFF;
+    text-align: center; 
+    font-size: 2em;
+    padding-bottom: 1em;
+    font-weight: 100;
+    /* font-family: 'Jost', sans-serif; */
+    font-family: 'KoHo', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+.copyright{
+    color: #888888;
+    font-size: 0.8em;
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    font-family: 'KoHo', sans-serif;
+}
+
+
+.ftco-section {
+    padding: 15vh 0;
+}
+
+.layer {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+div {
+    display: block;
+}
+
+ 
+mat-form-field{
+    width: 100%; 
+    color: #FFFFFF;
+    font-family: 'KoHo', sans-serif;
+    /* font-family: 'Jost', sans-serif;
+    font-weight: 400; */
+    /* text-align: center; */
+}
+
+.btn-signIn{
+    width: 100% !important;
+    padding: 0.5em 0 0.5em 0;
+    border-radius: 28px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+}
+
+a{  
+    text-decoration: none; 
+    margin: 12px 10px;
+    font-size: 0.9em;
+    color: #888888;
+    font-weight: 500;
+    position: absolute;
+    right: 30px;
+}
+ 
+
+/* .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+    opacity: 0;
+    transition: opacity .6s cubic-bezier(.25,.8,.25,1);
+} */
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start { background-color: rgba(255,255,255,.08)!important; }
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-gap { background-color:rgba(255,255,255,.08)!important; }
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end { background-color: rgba(255,255,255,.08)!important; }
+::ng-deep .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+    opacity: 1!important;
+}
+
+::ng-deep input:-webkit-autofill,
+::ng-deep input:-webkit-autofill:hover, 
+::ng-deep input:-webkit-autofill:focus, 
+::ng-deep input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+ 
+::ng-deep .mat-form-field-outline-start {
+    border-radius: 28px 0 0 28px !important;
+    min-width: 28px !important; 
+  }
+  
+  ::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 28px 28px 0 !important;
+  } 
+
+  ::ng-deep .mat-form-field-label{
+      color: #FFFFFF;
+  }
+
+ 
+
+  /* default and hover color */
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(255, 255, 255); 
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #FFFFFF;
+}
+
+/* floating label color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label { 
+    color: #FFFFFF; 
+}
+  
+
+  /* ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex{
+    padding: 0 1em 0 2.5em;
+    margin-top: -0.25em;
+    position: relative;
+  }
+
+  ::ng-deep  .mat-form-field-label{
+    padding-left: 2.3em !important;
+  } */
+
+  /* ::ng-deep .mat-form-field-label{
+    left: -5px !important;
+  } */
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex{
+    padding: 0 1.5em 0 2.5em !important;
+  }
+ 
+.example-right-align {
+    text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.example-right-align {
+    -moz-appearance: textfield;
+}
+
+.remember-me{
+    margin: 10px 40px;
+    font-size: 0.9em;
+    color: #888888;
+    font-weight: 500;
+}
+ 
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: #888888; 
+} 
+
+
+
+/* Bootstrap  */
+
+.container {
+    /* background-color: beige; */
+
+
+    max-width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.col-lg-4{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.justify-content-center {
+    -webkit-box-pack: center!important;
+    -ms-flex-pack: center!important;
+    justify-content: center!important;
+}
+
+/* Media */
+
+@media (min-width: 576px){
+    .container {
+        max-width: 540px; 
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .col-md-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+
+    .col-lg-4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.33333%;
+        flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+    }
+}
+
+
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 1140px;
+    }
+}
+
+
+
+

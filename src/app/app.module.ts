@@ -16,7 +16,7 @@ import { SharedModule } from "./shared/shared.module";
 import { CommonData } from "./shared/common/common"; 
 
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { LoginComponent } from './pages/account/login/login.component';
+import { LoginComponent } from './pages/user/login/login.component';
 // import { DashboardComponent } from './pages/dashboard/dashboard.component';  
 
 
