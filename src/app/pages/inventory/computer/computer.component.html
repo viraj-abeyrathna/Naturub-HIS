@@ -23,7 +23,7 @@
 
                 <ng-container matColumnDef="ComputerName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Computer Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.ComputerName}} </td>
+                    <td mat-cell *matCellDef="let row" style="min-width: 135px; text-align: center;"> {{row.ComputerName}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="IPAddress">
@@ -68,22 +68,22 @@
 
                 <ng-container matColumnDef="OperatingSystem">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Operating System </th>
-                    <td mat-cell *matCellDef="let row"> {{row.OperatingSystem}} </td>
+                    <td mat-cell *matCellDef="let row" [ngClass]="{'red-color' : row.OperatingSystem == 'Unspecified'}"> {{row.OperatingSystem}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="VirusGuard">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Virus Guard </th>
-                    <td mat-cell *matCellDef="let row"> {{row.VirusGuard}} </td>
+                    <td mat-cell *matCellDef="let row" [ngClass]="{'red-color' : !row.IsVirusGuardActive}"> {{row.VirusGuard}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Processor">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Processor </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Processor}} </td>
+                    <td mat-cell *matCellDef="let row" [ngClass]="{'red-color' : row.Processor == 'Unspecified'}"> {{row.Processor}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="RAM">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> RAM </th>
-                    <td mat-cell *matCellDef="let row"> {{row.RAM}} </td>
+                    <td mat-cell *matCellDef="let row" [ngClass]="{'red-color' : row.RAM == 'Unspecified'}"> {{row.RAM}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="Capacity">

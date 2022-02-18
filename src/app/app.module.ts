@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'; 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -29,6 +30,8 @@ import { LoginComponent } from './pages/user/login/login.component';
     LoginComponent 
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     MasterModule, 
