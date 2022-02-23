@@ -9,7 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { DvrDialogComponent } from './dvr-dialog';
 import { SnackBar } from "../../../shared/common/snackBar";
-import { DVR } from "../../../model/dvr";
+import { DVR } from "../../../core/model/dvr";
 
 @Component({
   selector: 'app-dvr',

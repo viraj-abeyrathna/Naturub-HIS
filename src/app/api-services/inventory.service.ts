@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 import { CommonData } from "../shared/common/common"; 
-import { Computer } from "../model/computer";
-import { Ups } from '../model/ups';
-import { AccessPoint } from '../model/accesspoint';
-import { CCTV } from '../model/cctv';
-import { DVR } from '../model/dvr';
-import { EthernetSwitch } from '../model/ethernetswitch';
-import { MobilePhone } from '../model/mobilephone';
+import { Computer } from "../core/model/computer";
+import { Ups } from '../core/model/ups';
+import { AccessPoint } from '../core/model/accesspoint';
+import { CCTV } from '../core/model/cctv';
+import { DVR } from '../core/model/dvr';
+import { EthernetSwitch } from '../core/model/ethernetswitch';
+import { MobilePhone } from '../core/model/mobilephone'; 
 
 
 @Injectable({
@@ -22,6 +22,16 @@ export class InventoryService {
   getComputerList(val: any) {
     return this.http.get<Computer[]>(new CommonData().APIUrl + '/Inventory/GetComputer/' + val);
   }
+
+  // getHomeDetails(): Observable<{}> {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
+  //   let authToken = localStorage.getItem('auth_token');
+  //   headers.append('Authorization', `Bearer ${authToken}`);
+  
+  //   return this.http.get<Computer[]>(new CommonData().APIUrl+ "/dashboard/home",{headers})
+  //   .map((response: { json: () => any; }) => response.json()); 
+  // }
 
   getComputerModels() {
     return this.http.get<string[]>(new CommonData().APIUrl + '/Inventory/GetComputerModels');
@@ -127,6 +137,10 @@ export class InventoryService {
 
   getMobilePhoneList(val: any) {
     return this.http.get<MobilePhone[]>(new CommonData().APIUrl + '/Inventory/GetMobilePhone/' + val);
+  }
+
+  Test(){
+    return this.http.get<string[]>(new CommonData().APIUrl + '/values');
   }
 
 

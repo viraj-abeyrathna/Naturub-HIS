@@ -1,9 +1,15 @@
-import { AuthService } from 'src/app/api-services/auth.service';
+import { AuthService } from './auth.service';
 
 export function appInitializer(authService: AuthService) {
   return () =>
-    new Promise((resolve) => {
+    // new Promise((resolve) => {
+    //   console.log('refresh token on app start up')
+    //   authService.refreshToken().subscribe().add(resolve);
+    // });
+
+    new Promise((resolve:any) => {
       console.log('refresh token on app start up')
       authService.refreshToken().subscribe().add(resolve);
     });
 }
+

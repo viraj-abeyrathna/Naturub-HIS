@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { ComputerComponent } from './pages/inventory/computer/computer.component';
@@ -33,4 +33,4 @@ const routes: Routes=[
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [DashboardComponent] 
+// export const routingComponents = [DashboardComponent] 

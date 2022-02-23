@@ -10,7 +10,7 @@ import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
 import { SnackBar } from "../../../../shared/common/snackBar";
-import { EthernetSwitch } from "../../../../model/ethernetswitch";
+import { EthernetSwitch } from "../../../../core/model/ethernetswitch";
 
 export interface ComputerModel {
   ModelName: string;

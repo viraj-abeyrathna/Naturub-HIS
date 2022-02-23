@@ -1,10 +1,11 @@
 import { NgModule, APP_INITIALIZER, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../api-services/auth.service';
+import { AuthService } from './service/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { UnauthorizedInterceptor } from './interceptors/unauthorized.interceptor';
 import { appInitializer } from './service/app-initializer';
+import { Observable, of } from 'rxjs';
 
 
 @NgModule({

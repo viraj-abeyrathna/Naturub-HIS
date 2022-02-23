@@ -10,7 +10,7 @@ import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
 import { SnackBar } from "../../../../shared/common/snackBar";
-import { Ups } from "../../../../model/ups";
+import { Ups } from "../../../../core/model/ups";
 
 export interface ComputerModel {
   ModelName: string;

@@ -10,7 +10,7 @@ import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
 import { SnackBar } from "../../../../shared/common/snackBar";
-import { MobilePhone } from "../../../../model/mobilephone";
+import { MobilePhone } from "../../../../core/model/mobilephone";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export interface ComputerModel {

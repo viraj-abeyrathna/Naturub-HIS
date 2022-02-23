@@ -9,7 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
 import { EthernetSwitchDialogComponent } from './ethernet-switch-dialog';
-import { EthernetSwitch } from "../../../model/ethernetswitch";
+import { EthernetSwitch } from "../../../core/model/ethernetswitch";
 
 @Component({
   selector: 'app-ethernet-switch',

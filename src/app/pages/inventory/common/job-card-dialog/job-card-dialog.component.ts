@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaintenanceService } from 'src/app/api-services/maintenance.service';
 import { MasterService } from 'src/app/api-services/master.service';
-import { Maintenance } from 'src/app/model/maintenance';
+import { Maintenance } from 'src/app/core/model/maintenance';
 
 @Component({
   selector: 'app-job-card-dialog',

@@ -7,7 +7,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { UpsDialogComponent } from './ups-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
-import { Ups } from "../../../model/ups";
+import { Ups } from "../../../core/model/ups";
 
 
 @Component({

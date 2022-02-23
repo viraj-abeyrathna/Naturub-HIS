@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, Subscription } from 'rxjs';
-import { AuthService } from 'src/app/api-services/auth.service';
+import { AuthService } from '../../../core';
+import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -59,13 +60,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     if (this.validation()) {
       this.busy = true;
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+      // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+      // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/inventory/computer';
+
       this.authService
         .login(this.UserNameControl.value, this.PasswordControl.value)
         .pipe(finalize(() => (this.busy = false)))
         .subscribe(
           () => { 
-            this.router.navigate(['/inventory/computer']);
+            this.router.navigate(["/inventory/computer"]);
           },
           () => {
             this.loginError = true;

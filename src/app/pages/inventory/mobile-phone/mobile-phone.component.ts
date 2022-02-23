@@ -9,7 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
 import { MobilePhoneDialogComponent } from './mobile-phone-dialog';
-import { MobilePhone } from "../../../model/mobilephone";
+import { MobilePhone } from "../../../core/model/mobilephone";
 
 @Component({
   selector: 'app-mobile-phone',

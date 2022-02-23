@@ -1,16 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, delay, finalize, map, Observable, of, Subscription, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { map, tap, delay, finalize } from 'rxjs/operators';
 import { ApplicationUser } from '../model/application-user';
-import { CommonData } from "../shared/common/common";
+import { CommonData } from "../../shared/common/common";
 
 interface LoginResult {
-  username: string;
+  userName: string;
   role: string;
   originalUserName: string;
-  AccessToken: string;
-  RefreshToken: string;
+  accessToken: string;
+  refreshToken: string;
+  isAdmin: boolean;
 }
 
 @Injectable({
@@ -20,7 +22,7 @@ export class AuthService implements OnDestroy {
 
   empty: any = null;
 
- 
+
   private timer: Subscription | undefined;
   private _user = new BehaviorSubject<ApplicationUser>(this.empty);
   user$: Observable<ApplicationUser> = this._user.asObservable();
@@ -30,36 +32,38 @@ export class AuthService implements OnDestroy {
       if (event.key === 'logout-event') {
         this.stopTokenTimer();
         this._user.next(this.empty);
-      } 
+      }
       if (event.key === 'login-event') {
         this.stopTokenTimer();
-        this.http.get<LoginResult>(new CommonData().APIUrl+'/User').subscribe((x) => {
+        this.http.get<LoginResult>(new CommonData().APIUrl + '/Account/User').subscribe((x) => {
           this._user.next({
-            username: x.username,
+            username: x.userName,
             role: x.role,
             originalUserName: x.originalUserName,
+            isAdmin: x.isAdmin
           });
         });
       }
     }
   }
-  
-  constructor(private router: Router, private http: HttpClient) { 
+
+  constructor(private router: Router, private http: HttpClient) {
     window.addEventListener('storage', this.storageEventListener.bind(this));
   }
   ngOnDestroy(): void {
     window.removeEventListener('storage', this.storageEventListener.bind(this));
-  } 
-  
+  }
+
   login(username: string, password: string) {
     return this.http
-      .post<LoginResult>(new CommonData().APIUrl+'/Account/Login', { username, password })
+      .post<LoginResult>(new CommonData().APIUrl + '/Account/Login', { username, password })
       .pipe(
         map((x) => {
           this._user.next({
-            username: x.username,
+            username: x.userName,
             role: x.role,
             originalUserName: x.originalUserName,
+            isAdmin: x.isAdmin
           });
           this.setLocalStorage(x);
           this.startTokenTimer();
@@ -71,7 +75,7 @@ export class AuthService implements OnDestroy {
 
   logout() {
     this.http
-      .post<unknown>(new CommonData().APIUrl+'/Logout', {})
+      .post<unknown>(new CommonData().APIUrl + '/Account/logout', {})
       .pipe(
         finalize(() => {
           this.clearLocalStorage();
@@ -83,21 +87,27 @@ export class AuthService implements OnDestroy {
       .subscribe();
   }
 
-  refreshToken() {
+  // refreshToken(){
+    refreshToken(): Observable<any> {
     const refreshToken = localStorage.getItem('refresh_token');
     if (!refreshToken) {
       this.clearLocalStorage();
       return of(null);
     }
 
-    return this.http
-      .post<LoginResult>(new CommonData().APIUrl+'/RefreshToken', { refreshToken })
+      // .post<LoginResult>(new CommonData().APIUrl + '/RefreshToken', { refreshToken })
+
+    return this.http.post<LoginResult>(`${new CommonData().APIUrl}/Account/refresh-token`, { refreshToken })
+
+
+      
       .pipe(
         map((x) => {
           this._user.next({
-            username: x.username,
+            username: x.userName,
             role: x.role,
             originalUserName: x.originalUserName,
+            isAdmin: x.isAdmin
           });
           this.setLocalStorage(x);
           this.startTokenTimer();
@@ -107,15 +117,19 @@ export class AuthService implements OnDestroy {
   }
 
   setLocalStorage(x: LoginResult) {
-    localStorage.setItem('access_token', x.AccessToken);
-    localStorage.setItem('refresh_token', x.RefreshToken);
+    localStorage.setItem('access_token', x.accessToken);
+    localStorage.setItem('refresh_token', x.refreshToken);
     localStorage.setItem('login-event', 'login' + Math.random());
+    localStorage.setItem('isAdmin', x.isAdmin == true ? 'Y' : 'N');
+
   }
 
   clearLocalStorage() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.setItem('logout-event', 'logout' + Math.random());
+    localStorage.removeItem('isAdmin');
+
   }
 
   private getTokenRemainingTime() {
@@ -137,11 +151,11 @@ export class AuthService implements OnDestroy {
     //   )
     //   .subscribe();
     this.timer = of(true)
-    .pipe(
-      delay(timeout),
-      tap(() => this.refreshToken())
-    )
-    .subscribe();
+      .pipe(
+        delay(timeout),
+        tap(() => this.refreshToken())
+      )
+      .subscribe();
 
   }
 

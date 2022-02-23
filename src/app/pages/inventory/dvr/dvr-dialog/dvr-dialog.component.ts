@@ -10,7 +10,7 @@ import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
 import { SnackBar } from "../../../../shared/common/snackBar";
-import { DVR } from "../../../../model/dvr";
+import { DVR } from "../../../../core/model/dvr";
 
 export interface DvrModel {
   ModelName: string;

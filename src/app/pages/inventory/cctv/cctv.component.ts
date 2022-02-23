@@ -7,7 +7,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { CctvDialogComponent } from './cctv-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
-import { CCTV } from "../../../model/cctv";
+import { CCTV } from "../../../core/model/cctv";
 
 
 @Component({

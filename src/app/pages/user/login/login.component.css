@@ -9,10 +9,10 @@
     background-size: cover; 
 } */
 
-.background {
+/* .background { */
     /* background: url('https://www.ebuyer.com/blog/wp-content/uploads/2021/05/shutterstock_693701887.jpg'); */
     /* position: relative; */
-}
+/* } */
 
 .layer {
 
@@ -127,12 +127,12 @@ a{
     opacity: 1!important;
 }
 
-::ng-deep input:-webkit-autofill,
+/* ::ng-deep input:-webkit-autofill,
 ::ng-deep input:-webkit-autofill:hover, 
 ::ng-deep input:-webkit-autofill:focus, 
 ::ng-deep input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
-}
+} */
  
 ::ng-deep .mat-form-field-outline-start {
     border-radius: 28px 0 0 28px !important;

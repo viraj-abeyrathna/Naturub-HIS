@@ -4,7 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+
+// import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+
 import { MasterModule } from "./pages/master/master.module"; 
 import { InventoryModule } from "./pages/inventory/inventory.module"; 
  
@@ -25,7 +29,7 @@ import { LoginComponent } from './pages/user/login/login.component';
 @NgModule({
   declarations: [
     AppComponent, 
-    routingComponents,
+    // routingComponents,
     SidebarComponent,
     LoginComponent 
   ],
@@ -39,6 +43,7 @@ import { LoginComponent } from './pages/user/login/login.component';
     BrowserAnimationsModule, 
     SharedModule, 
     HttpClientModule,
+    CoreModule,
     CommonData 
   ],
   // providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

@@ -7,8 +7,9 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { ComputerDialogComponent } from './computer-dialog/computer-dialog.component';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
-import { Computer } from "../../../model/computer";
+import { Computer } from "../../../core/model/computer";
 import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialog.component';
+import { finalize } from 'rxjs/operators';
 
 // export interface Computers {
 //   ItemID: number;
@@ -46,6 +47,14 @@ import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialo
 export class ComputerComponent implements OnInit {
 
   isLoading = true;
+
+  accessToken:any = '';
+  refreshToken:any = '';
+
+  // test
+  busy = false;
+  values: string[] = [];
+  // Test end
 
   dataSource: MatTableDataSource<Computer> = new MatTableDataSource();
   computers: Computer[] = [];
@@ -87,7 +96,26 @@ export class ComputerComponent implements OnInit {
 
   ngOnInit(): void {
     // this.FillComputers(); 
+    this.accessToken = localStorage.getItem('access_token');
+    this.refreshToken = localStorage.getItem('refresh_token');
   }
+
+  // Test 
+  getValues() {
+    this.busy = true;
+    this.service.Test().pipe(finalize(() => (this.busy = false)))
+      .subscribe((x: string[]) => {
+        this.values = x;
+      });
+
+    // this.http
+    //   .get<string[]>(this.apiUrl)
+    //   .pipe(finalize(() => (this.busy = false)))
+    //   .subscribe((x) => {
+    //     this.values = x;
+    //   });
+  }
+  //Test - End
 
   FillComputerList() {
     this.service.getComputerList(0).subscribe(
@@ -111,7 +139,7 @@ export class ComputerComponent implements OnInit {
       data: {
         title: 'ADD COMPUTER',
         subtitle: 'Fill the computer details',
-        isUpgrade:false
+        isUpgrade: false
       }
     });
 
@@ -134,7 +162,7 @@ export class ComputerComponent implements OnInit {
         title: 'Edit Computer',
         subtitle: 'Change the computer details',
         itemID: _itemID,
-        isUpgrade:false
+        isUpgrade: false
       }
     });
 
@@ -150,15 +178,15 @@ export class ComputerComponent implements OnInit {
     });
   }
 
-  openRepairComputerDialog(_itemCode:string, _itemID: number, _farCode:string,_subCategoryID: number): void {
+  openRepairComputerDialog(_itemCode: string, _itemID: number, _farCode: string, _subCategoryID: number): void {
     let dialogRef = this.dialog.open(JobCardDialogComponent, {
       width: '500px',
       data: {
         title: 'JOB CARD',
         subtitle: 'Fill the computer maintenance details',
         itemID: _itemID,
-        itemCode:_itemCode,
-        farCode:_farCode,
+        itemCode: _itemCode,
+        farCode: _farCode,
         subCategoryID: _subCategoryID
       }
     });
@@ -183,7 +211,7 @@ export class ComputerComponent implements OnInit {
         title: 'Upgrade Computer',
         subtitle: 'Upgrade the computer performance',
         itemID: _itemID,
-        isUpgrade:true
+        isUpgrade: true
       }
     });
 

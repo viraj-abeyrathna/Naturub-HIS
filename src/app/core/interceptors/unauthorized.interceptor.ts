@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AuthService } from 'src/app/api-services/auth.service';
+import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 

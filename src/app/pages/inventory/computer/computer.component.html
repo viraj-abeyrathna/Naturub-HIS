@@ -1,4 +1,39 @@
 <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+
+<!-- test -->
+
+<!-- <div class="container p-3">
+    <section id="values-apis">
+      <div>
+        <p class="h2">Get Values</p>
+        <button type="button" class="btn btn-primary" (click)="getValues()">
+          Call <span class="text-monospace">api/values</span>
+        </button>
+        <section class="my-2">
+          <div *ngIf="values && values.length">
+            <ul>
+              <li *ngFor="let item of values">{{ item }}</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="card-body">
+        <div class="m-2">
+          <h6>Your access token is</h6>
+          {{ accessToken }}
+        </div>
+        <div class="m-2">
+          <h6>Your refresh token is</h6>
+          {{ refreshToken }}
+        </div>
+      </div>
+
+    </section>
+  </div> -->
+
+<!-- test end -->
+
 <mat-card class="example-card">
     <button mat-fab color="primary" style="position: absolute;" matTooltip="Add Computer" (click)="openAddComputerDialog()">
         <mat-icon>library_add</mat-icon>

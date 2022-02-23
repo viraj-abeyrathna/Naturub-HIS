@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Maintenance } from '../model/maintenance';
+import { Maintenance } from '../core/model/maintenance';
 import { CommonData } from '../shared/common/common';
 
 @Injectable({
