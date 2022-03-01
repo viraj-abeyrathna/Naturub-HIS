@@ -7,12 +7,15 @@ import { ApplicationUser } from '../model/application-user';
 import { CommonData } from "../../shared/common/common";
 
 interface LoginResult {
+  userID: number;
+  firstName: string;
+  lastName: string;
+  email: string;
   userName: string;
-  role: string;
-  originalUserName: string;
-  accessToken: string;
-  refreshToken: string;
   isAdmin: boolean;
+  userGroupID: number;
+  accessToken: string;
+  refreshToken: string;   
 }
 
 @Injectable({
@@ -21,6 +24,8 @@ interface LoginResult {
 export class AuthService implements OnDestroy {
 
   empty: any = null;
+
+  isAuthenticated = false;
 
 
   private timer: Subscription | undefined;
@@ -37,10 +42,16 @@ export class AuthService implements OnDestroy {
         this.stopTokenTimer();
         this.http.get<LoginResult>(new CommonData().APIUrl + '/Account/User').subscribe((x) => {
           this._user.next({
-            username: x.userName,
-            role: x.role,
-            originalUserName: x.originalUserName,
-            isAdmin: x.isAdmin
+            // username: x.userName,
+            // role: x.role,
+            // originalUserName: x.originalUserName 
+            userID:x.userID,
+            firstName:x.firstName,
+            lastName:x.lastName,
+            email:x.email,
+            userName: x.userName,
+            isAdmin:x.isAdmin,
+            userGroupID:x.userGroupID
           });
         });
       }
@@ -60,11 +71,18 @@ export class AuthService implements OnDestroy {
       .pipe(
         map((x) => {
           this._user.next({
-            username: x.userName,
-            role: x.role,
-            originalUserName: x.originalUserName,
-            isAdmin: x.isAdmin
+            // username: x.userName,
+            // role: x.role,
+            // originalUserName: x.originalUserName 
+            userID:x.userID,
+            firstName:x.firstName,
+            lastName:x.lastName,
+            email:x.email,
+            userName: x.userName,
+            isAdmin:x.isAdmin,
+            userGroupID:x.userGroupID
           });
+          this.isAuthenticated = true;
           this.setLocalStorage(x);
           this.startTokenTimer();
           return x;
@@ -93,21 +111,19 @@ export class AuthService implements OnDestroy {
     if (!refreshToken) {
       this.clearLocalStorage();
       return of(null);
-    }
-
-      // .post<LoginResult>(new CommonData().APIUrl + '/RefreshToken', { refreshToken })
+    } 
 
     return this.http.post<LoginResult>(`${new CommonData().APIUrl}/Account/refresh-token`, { refreshToken })
-
-
-      
       .pipe(
         map((x) => {
           this._user.next({
-            username: x.userName,
-            role: x.role,
-            originalUserName: x.originalUserName,
-            isAdmin: x.isAdmin
+            userID:x.userID,
+            firstName:x.firstName,
+            lastName:x.lastName,
+            email:x.email,
+            userName: x.userName,
+            isAdmin:x.isAdmin,
+            userGroupID:x.userGroupID
           });
           this.setLocalStorage(x);
           this.startTokenTimer();
@@ -119,17 +135,15 @@ export class AuthService implements OnDestroy {
   setLocalStorage(x: LoginResult) {
     localStorage.setItem('access_token', x.accessToken);
     localStorage.setItem('refresh_token', x.refreshToken);
-    localStorage.setItem('login-event', 'login' + Math.random());
-    localStorage.setItem('isAdmin', x.isAdmin == true ? 'Y' : 'N');
-
+    localStorage.setItem('login-event', 'login' + Math.random()); 
   }
 
   clearLocalStorage() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    localStorage.setItem('logout-event', 'logout' + Math.random());
-    localStorage.removeItem('isAdmin');
+    localStorage.setItem('logout-event', 'logout' + Math.random()); 
 
+    this.isAuthenticated = false;
   }
 
   private getTokenRemainingTime() {

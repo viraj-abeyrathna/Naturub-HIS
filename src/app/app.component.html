@@ -1,8 +1,11 @@
-<!-- <mat-drawer-container class="main-container" autosize>
-  <mat-drawer #drawer class="main-sidenav" mode="side" opened="true"> 
-
-    <app-sidebar></app-sidebar> 
- 
+<mat-drawer-container class="main-container" autosize *ngIf="authService.user$ | async as user">
+<!-- <mat-drawer-container class="main-container" autosize> --> 
+  <mat-drawer #drawer class="main-sidenav" mode="side" opened="true">
+    <!-- <p style="color: #FFFFFF;">
+      {{authService.isAuthenticated}}
+      {{accessToken}}
+    </p> -->
+    <app-sidebar></app-sidebar>
   </mat-drawer>
 
   <div class="main-sidenav-content">
@@ -10,14 +13,15 @@
       <button mat-icon-button class="main-icon" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>{{title}}</span> 
-    </mat-toolbar> 
-  </div> -->
+      <span>{{title}}</span>
+    </mat-toolbar>
+  </div>
 
-    <router-outlet>  
-    </router-outlet>
-<!-- </mat-drawer-container> -->
-
-
-
-
+  <router-outlet *ngIf="authService.user$ | async as user">
+  </router-outlet>
+</mat-drawer-container>
+ 
+<div *ngIf="(authService.user$ | async ) == null">
+  <router-outlet *ngIf="(authService.user$ | async ) == null">
+  </router-outlet>
+</div>

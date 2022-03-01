@@ -33,11 +33,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.authService.user$.subscribe((x) => {
-      if (this.route.snapshot.url[0].path === 'login') {
+     if (this.route.snapshot.url[0].path === 'login') {
+      // if (this.route.snapshot.url[0].path === '') {
+
         const accessToken = localStorage.getItem('access_token');
         const refreshToken = localStorage.getItem('refresh_token');
         if (x && accessToken && refreshToken) {
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
           this.router.navigate([returnUrl]);
         }
       } // optional touch-up: if a tab shows login page, then refresh the page to reduce duplicate login
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     if (this.validation()) {
       this.busy = true;
-      // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
       // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/inventory/computer';
 
       this.authService
@@ -68,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .pipe(finalize(() => (this.busy = false)))
         .subscribe(
           () => { 
-            this.router.navigate(["/inventory/computer"]);
+            this.router.navigate([returnUrl]);
           },
           () => {
             this.loginError = true;

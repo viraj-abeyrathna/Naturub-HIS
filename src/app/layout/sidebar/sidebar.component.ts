@@ -1,6 +1,7 @@
 import { ChangeDetectorRef,Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from "../../shared/menu-items/menu-items";
+import { AuthService } from '../../core';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,11 +22,13 @@ export class SidebarComponent implements OnDestroy {
   // radius: number;
   // color: string;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,media: MediaMatcher,public menuItems: MenuItems) 
+  constructor(changeDetectorRef: ChangeDetectorRef,media: MediaMatcher,public menuItems: MenuItems,public authService: AuthService) 
   {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    console.log(authService.user$);
    }
 
    ngOnDestroy(): void {
@@ -34,6 +37,10 @@ export class SidebarComponent implements OnDestroy {
 
   toggleTag(){
     this.showList = !this.showList
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

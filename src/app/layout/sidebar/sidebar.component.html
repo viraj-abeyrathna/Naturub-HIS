@@ -8,7 +8,7 @@
                 <mat-icon>settings</mat-icon>
                 <span>Change Account Details</span>
             </button> 
-            <button mat-menu-item>
+            <button mat-menu-item *ngIf="authService.user$ | async as user" (click)="logout()">
                 <mat-icon>power_settings_new</mat-icon>
                 <span>Sign Out</span>
             </button>

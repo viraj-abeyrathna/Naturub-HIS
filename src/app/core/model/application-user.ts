@@ -1,7 +1,9 @@
 export interface ApplicationUser {
-    username: string;
-    role: string;
-    originalUserName: string;
-    isAdmin:boolean;
-  }
-  
+  userID: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+  isAdmin: boolean;
+  userGroupID: number;
+}
