@@ -11,6 +11,7 @@ import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
 import { SnackBar } from "../../../../shared/common/snackBar";
 import { Computer } from "../../../../core/model/computer";
+import { AuthService } from 'src/app/core';
 
 export interface ComputerModel {
   ModelName: string;
@@ -35,7 +36,7 @@ let IP_PATTERN = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2
 })
 export class ComputerDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<ComputerDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,public authService:AuthService) { }
 
   computerModels: ComputerModel[] = [];
   filteredModels: Observable<ComputerModel[]> = new Observable<ComputerModel[]>();
@@ -298,7 +299,7 @@ export class ComputerDialogComponent implements OnInit {
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
       objComputer.SerialNo = this.SerialNoControl.value;
-      objComputer.EnterdUserID = 1; // Temporary !!! 
+      objComputer.EnterdUserID = this.authService.userData.userID;  
 
       this.inventoryService.saveComputer(objComputer).subscribe(data => {
         if (data) {
@@ -330,7 +331,7 @@ export class ComputerDialogComponent implements OnInit {
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
       objComputer.SerialNo = this.SerialNoControl.value;
-      objComputer.LastModifiedUserID = 1; // Temporary !!! 
+      objComputer.LastModifiedUserID = this.authService.userData.userID;  
       objComputer.IsUpgrade = isUpgrade;
 
       this.inventoryService.updateComputer(objComputer).subscribe(data => {

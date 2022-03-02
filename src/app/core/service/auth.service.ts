@@ -31,6 +31,7 @@ export class AuthService implements OnDestroy {
   private timer: Subscription | undefined;
   private _user = new BehaviorSubject<ApplicationUser>(this.empty);
   user$: Observable<ApplicationUser> = this._user.asObservable();
+  userData!: ApplicationUser; // Store User Account Details
 
   private storageEventListener(event: StorageEvent) {
     if (event.storageArea === localStorage) {
@@ -54,6 +55,7 @@ export class AuthService implements OnDestroy {
             userGroupID:x.userGroupID
           });
         });
+        this. setLoginUserData();
       }
     }
   }
@@ -85,6 +87,7 @@ export class AuthService implements OnDestroy {
           this.isAuthenticated = true;
           this.setLocalStorage(x);
           this.startTokenTimer();
+          this.setLoginUserData();
           return x;
         })
       );
@@ -127,6 +130,7 @@ export class AuthService implements OnDestroy {
           });
           this.setLocalStorage(x);
           this.startTokenTimer();
+          this. setLoginUserData();
           return x;
         })
       );
@@ -144,6 +148,14 @@ export class AuthService implements OnDestroy {
     localStorage.setItem('logout-event', 'logout' + Math.random()); 
 
     this.isAuthenticated = false;
+  }
+
+  setLoginUserData(){
+    this.user$.subscribe({
+      next: a => {
+        this.userData = a
+      }
+    })
   }
 
   private getTokenRemainingTime() {

@@ -7,22 +7,22 @@
             <button mat-menu-item disabled>
                 <mat-icon>settings</mat-icon>
                 <span>Change Account Details</span>
-            </button> 
+            </button>
             <button mat-menu-item *ngIf="authService.user$ | async as user" (click)="logout()">
                 <mat-icon>power_settings_new</mat-icon>
                 <span>Sign Out</span>
             </button>
         </mat-menu>
     </div>
-    
+
     <img src="../../HIS/assets/images/avatar.jpg" alt="Profile Picture" class="profile-pic">
 
     <!-- <img src="../../../assets/images/avatar.jpg" alt="Profile Picture" class="profile-pic"> -->
-    <p class="user-name">Sample User</p>
-    <p class="user-email">example@naturub.com</p>
+    <p class="user-name">{{userData.firstName}} {{userData.lastName}}</p>
+    <p class="user-email">{{userData.email}}</p>
 
 </div>
-<mat-accordion> 
+<mat-accordion>
     <div *ngFor="let menuitem of menuItems.getMenuitem()">
         <button mat-button class="menu-btn" *ngIf="menuitem.children.length == 0">
             <a [routerLink]="['/', menuitem.state]" class="menu-link">

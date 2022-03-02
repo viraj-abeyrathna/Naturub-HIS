@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'; 
 import { async } from 'rxjs';
-import { AuthService } from './core';
+import { ApplicationUser, AuthService } from './core';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,18 @@ export class AppComponent {
 
   accessToken = localStorage.getItem('access_token');
   title = 'Naturub HIS';
+  public userData!: ApplicationUser;
 
   // showFiller = false; 
 
   constructor(public authService:AuthService){
-    console.log(authService.user$); 
+
+    // authService.user$.subscribe({
+    //   next: a => {
+    //     this.userData = a
+    //   }
+    // })
+
   }
   
 }

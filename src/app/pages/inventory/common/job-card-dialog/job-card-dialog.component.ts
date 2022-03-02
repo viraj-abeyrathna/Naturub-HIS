@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaintenanceService } from 'src/app/api-services/maintenance.service';
 import { MasterService } from 'src/app/api-services/master.service';
+import { AuthService } from 'src/app/core';
 import { Maintenance } from 'src/app/core/model/maintenance';
 
 @Component({
@@ -13,7 +14,7 @@ import { Maintenance } from 'src/app/core/model/maintenance';
 })
 export class JobCardDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService, private maintenanceService: MaintenanceService, public dialogRef: MatDialogRef<JobCardDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private maintenanceService: MaintenanceService, public dialogRef: MatDialogRef<JobCardDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public authService:AuthService) { }
 
   IsValidForm: boolean = true;
 
@@ -60,6 +61,8 @@ export class JobCardDialogComponent implements OnInit {
       objMaintenance.MaintenanceTypeID = this.MaintenanceTypeControl.value;
       objMaintenance.MaintenancePartID = this.MaintenancePartControl.value;
       objMaintenance.Remark = this.RemarkControl.value;
+      objMaintenance.EnterdUser = this.authService.userData.userID;
+
 
       this.maintenanceService.saveJobCard(objMaintenance).subscribe((data: any) => {
         if (data) { 
