@@ -18,6 +18,8 @@ import { UpsComponent } from './pages/inventory/ups/ups.component';
 
 import { LoginComponent } from "./pages/user/login/login.component";
 
+import { JobCardComponent } from "./pages/maintenance/job-card/job-card.component";
+
 // const routes: Routes = [
 //   // {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
 //   // {path: 'dashboard', component: DashboardComponent}
@@ -50,7 +52,7 @@ const routes: Routes=[
   { path: 'inventory/scanner', component: ScannerComponent, canActivate: [AuthGuard] },
  
 
-
+  { path: 'maintenance/jobcard', component: JobCardComponent, canActivate: [AuthGuard] },
 
 
 
