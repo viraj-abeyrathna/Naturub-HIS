@@ -74,6 +74,7 @@ export class ComputerComponent implements OnInit {
     'Processor',
     'RAM',
     'Capacity',
+    'SerialNo',
     'Remark',
     'EnterdDate',
     'EnterdUser',
