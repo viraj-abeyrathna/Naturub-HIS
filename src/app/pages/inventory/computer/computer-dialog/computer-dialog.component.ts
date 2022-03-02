@@ -72,6 +72,7 @@ export class ComputerDialogComponent implements OnInit {
   CapacityControl = new FormControl('', [Validators.required]);
   ModelControl = new FormControl();
   RemarkControl = new FormControl();
+  SerialNoControl = new FormControl();
 
 
   matcher = new MyErrorStateMatcher();
@@ -119,6 +120,7 @@ export class ComputerDialogComponent implements OnInit {
         this.ProcessorControl.setValue(_data[0]['ProcessorID']);
         this.CapacityControl.setValue(_data[0]['Capacity']);
         this.ModelControl.setValue(_data[0]['ModelName']);
+        this.SerialNoControl.setValue(_data[0]['SerialNo']);
         this.RemarkControl.setValue(_data[0]['Remark']); 
       });
     }
@@ -295,6 +297,7 @@ export class ComputerDialogComponent implements OnInit {
       objComputer.Capacity = this.CapacityControl.value;
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
+      objComputer.SerialNo = this.SerialNoControl.value;
       objComputer.EnterdUserID = 1; // Temporary !!! 
 
       this.inventoryService.saveComputer(objComputer).subscribe(data => {
@@ -326,6 +329,7 @@ export class ComputerDialogComponent implements OnInit {
       objComputer.Capacity = this.CapacityControl.value;
       objComputer.ModelName = this.ModelControl.value;
       objComputer.Remark = this.RemarkControl.value;
+      objComputer.SerialNo = this.SerialNoControl.value;
       objComputer.LastModifiedUserID = 1; // Temporary !!! 
       objComputer.IsUpgrade = isUpgrade;
 
