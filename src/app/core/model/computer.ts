@@ -29,6 +29,7 @@ export class Computer {
     EnterdUserID: number | undefined;
     LastModifiedDate?: Date;
     LastModifiedUser?: string; 
+    SerialNo?: string; 
     LastModifiedUserID?: number;  
 
     IsUpgrade:boolean | undefined; // Upgrade Mode
