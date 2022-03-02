@@ -148,26 +148,27 @@ const MENUITEMS = [
     icon: 'build',
     children: [
       {
-        state: 'master/dataset',
-        name: 'Data Sets',
-        type: 'link',
-        icon: 'av_timer',
-        children: []
-      },
-      {
-        state: 'master/component',
-        name: 'Components',
-        type: 'link',
-        icon: 'av_timer',
-        children: []
-      },
-      {
-        state: 'master/forms',
-        name: 'Forms',
+        state: 'maintenance/jobcard',
+        name: 'Job Card',
         type: 'link',
         icon: 'av_timer',
         children: []
       }
+      // ,
+      // {
+      //   state: 'master/component',
+      //   name: 'Components',
+      //   type: 'link',
+      //   icon: 'av_timer',
+      //   children: []
+      // },
+      // {
+      //   state: 'master/forms',
+      //   name: 'Forms',
+      //   type: 'link',
+      //   icon: 'av_timer',
+      //   children: []
+      // }
 
     ]
   },
