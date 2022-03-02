@@ -148,6 +148,12 @@
         </mat-autocomplete>
         <mat-error *ngIf="ModelControl.hasError('required')">Model is <strong>required</strong></mat-error>
       </mat-form-field>
+
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Serial No</mat-label>
+        <input matInput class="Uppercase" placeholder="Ex. 1112223333" [formControl]="SerialNoControl">
+      </mat-form-field>
   
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Remark</mat-label>
