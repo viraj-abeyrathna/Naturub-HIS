@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MasterModule } from "./pages/master/master.module"; 
 import { InventoryModule } from "./pages/inventory/inventory.module"; 
- 
+import { MaintenanceModule } from "./pages/maintenance/maintenance.module"; 
 // import { CommonData } from "./shared/common/common";
 
 import { AppComponent } from './app.component';
@@ -40,14 +40,15 @@ import { LoginComponent } from './pages/user/login/login.component';
     AppRoutingModule,
     MasterModule, 
     InventoryModule, 
+    MaintenanceModule,
     BrowserAnimationsModule, 
     SharedModule, 
     HttpClientModule,
     CoreModule,
     CommonData 
   ],
-  // providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  // providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

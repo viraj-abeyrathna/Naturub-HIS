@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Maintenance } from '../core/model/maintenance';
+import { JobCard } from '../core/model/jobcard';
 import { CommonData } from '../shared/common/common';
 
 @Injectable({
@@ -13,5 +14,9 @@ export class MaintenanceService {
 
   saveJobCard(obj:Maintenance):Observable<{}>{ 
     return this.http.post(new CommonData().APIUrl + '/Maintenance/SaveJobCard/',obj);
+  }
+
+  getJobCardList(val: any) {
+    return this.http.get<JobCard[]>(new CommonData().APIUrl + '/Maintenance/GetJobCard/' + val);
   }
 }

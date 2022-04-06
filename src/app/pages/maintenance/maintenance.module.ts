@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InventoryRoutingModule } from "./maintenance-routing.module";
+import { MaintenanceRoutingModule } from "./maintenance-routing.module";
 import { CommonData } from "../../shared/common/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Components
-import { MaintenanceComponent } from './maintenance.component';
- 
-
+import { MaintenanceComponent } from './maintenance.component'; 
+import { JobCardComponent } from './job-card/job-card.component'; 
 
 @NgModule({
   declarations: [
-    MaintenanceComponent,
-
+    MaintenanceComponent, 
+    JobCardComponent,
   ],
   imports: [
     CommonModule,
-    InventoryRoutingModule,
+    MaintenanceRoutingModule,
     CommonData,
     FormsModule,
     ReactiveFormsModule
   ]
 })
-export class InventoryModule { }
+export class MaintenanceModule { }
