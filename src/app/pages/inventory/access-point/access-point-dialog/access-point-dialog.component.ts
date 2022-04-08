@@ -9,6 +9,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
+import { AuthService } from 'src/app/core';
 import { SnackBar } from "../../../../shared/common/snackBar";
 import { AccessPoint } from "../../../../core/model/accesspoint";
 
@@ -34,7 +35,7 @@ let IP_PATTERN = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2
 })
 export class AccessPointDialogComponent implements OnInit {
 
-  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<AccessPointDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<AccessPointDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public authService:AuthService) { }
 
   isADD = true;
   computerModels: ComputerModel[] = [];
@@ -148,7 +149,7 @@ export class AccessPointDialogComponent implements OnInit {
       objAccessPoint.SectionID = this.SectionControl.value;
       objAccessPoint.SerialNo = this.SerialNoControl.value;
       objAccessPoint.Remark = this.RemarkControl.value;
-      objAccessPoint.EnterdUserID = 1; // Temporary !!! 
+      objAccessPoint.EnterdUserID = this.authService.userData.userID; 
 
       this.inventoryService.saveAccessPoint(objAccessPoint).subscribe(data => {
         if (data) {
@@ -162,7 +163,47 @@ export class AccessPointDialogComponent implements OnInit {
   }
 
   Edit(ItemID: number) {
-    
+    if (this.SubCategoryControl.invalid) {
+      this._snackBar.warningSnackBar('Sub category is required !');
+    } else if (this.BrandControl.invalid) {
+      this._snackBar.warningSnackBar('Brand is required !');
+    }else if (this.IPAddressControl.invalid) {
+      this._snackBar.warningSnackBar('IP address is required !');
+    }else if (this.ModelControl.invalid) {
+      this._snackBar.warningSnackBar('Model is required !');
+    } else if (this.SerialNoControl.invalid) {
+      this._snackBar.warningSnackBar('Serial No is required !');
+    } else if (this.FARControl.invalid) {
+      this._snackBar.warningSnackBar('FARCode is required !');
+    } else if (this.DepartmentControl.invalid) {
+      this._snackBar.warningSnackBar('Department is required !');
+    } else if (this.SectionControl.invalid) {
+      this._snackBar.warningSnackBar('Section is required !');
+    } else {
+
+      const objAccessPoint = new AccessPoint();
+      objAccessPoint.ItemID = ItemID;
+      objAccessPoint.MainCategoryID = 1005; //Access Point
+      objAccessPoint.SubCategoryID = this.SubCategoryControl.value;
+      objAccessPoint.BrandID = this.BrandControl.value;
+      objAccessPoint.ModelName = this.ModelControl.value;
+      objAccessPoint.IPAddress = this.IPAddressControl.value;
+      objAccessPoint.SerialNo = this.SerialNoControl.value;
+      objAccessPoint.FARBarcodeNo = this.FARControl.value;
+      objAccessPoint.SectionID = this.SectionControl.value;
+      objAccessPoint.SerialNo = this.SerialNoControl.value;
+      objAccessPoint.Remark = this.RemarkControl.value;
+      objAccessPoint.EnterdUserID = this.authService.userData.userID; 
+
+      this.inventoryService.updateAccessPoint(objAccessPoint).subscribe(data => {
+        if (data) {
+          this.dialogRef.close({ SavedSuccess: true, ItemCode: data });
+        } else {
+          this.dialogRef.close({ SavedSuccess: false });
+        }
+      }); 
+
+    }
   }
 
 

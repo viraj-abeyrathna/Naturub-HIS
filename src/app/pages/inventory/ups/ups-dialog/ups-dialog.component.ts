@@ -9,6 +9,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MasterService } from 'src/app/api-services/master.service';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
+import { AuthService } from 'src/app/core';
 import { SnackBar } from "../../../../shared/common/snackBar";
 import { Ups } from "../../../../core/model/ups";
 
@@ -33,7 +34,7 @@ export class UpsDialogComponent implements OnInit {
 
   isADD = true;
 
-  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<UpsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<UpsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public authService:AuthService) { }
 
   computerModels: ComputerModel[] = [];
   filteredModels: Observable<ComputerModel[]> = new Observable<ComputerModel[]>();
@@ -145,7 +146,7 @@ export class UpsDialogComponent implements OnInit {
       objUps.CapacityID = this.CapacityControl.value;
       objUps.SerialNo = this.SerialNoControl.value;
       objUps.Remark = this.RemarkControl.value;
-      objUps.EnterdUserID = 1; // Temporary !!! 
+      objUps.EnterdUserID =  this.authService.userData.userID; 
 
       this.inventoryService.saveUps(objUps).subscribe(data => {
         if (data) {
@@ -185,7 +186,7 @@ export class UpsDialogComponent implements OnInit {
       objUps.CapacityID = this.CapacityControl.value;
       objUps.SerialNo = this.SerialNoControl.value;
       objUps.Remark = this.RemarkControl.value;
-      objUps.EnterdUserID = 1; // Temporary !!! 
+      objUps.EnterdUserID =this.authService.userData.userID; 
 
       this.inventoryService.updateUps(objUps).subscribe(data => {
         if (data) {

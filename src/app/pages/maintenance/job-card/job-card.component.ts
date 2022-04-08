@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { JobCard } from "../../../core/model/jobcard";
 import { SnackBar } from "../../../shared/common/snackBar";
 import { MaintenanceService } from 'src/app/api-services/maintenance.service';
-
+import { AuthService } from 'src/app/core'; 
 
 @Component({
   selector: 'app-job-card',
@@ -37,7 +37,7 @@ export class JobCardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
-  constructor(private service: MaintenanceService, public dialog: MatDialog, private _snackBar: SnackBar) {
+  constructor(private service: MaintenanceService, public dialog: MatDialog, private _snackBar: SnackBar, public authService:AuthService) {
 
     this.FillJobCardList();
 
@@ -56,6 +56,20 @@ export class JobCardComponent implements OnInit {
         // return data;
       }
     );
+  }
+
+  JobCardDelete(ID: number) {
+    if(confirm("Are you sure to delete? ")) {
+      const objJobCard = new JobCard();
+      objJobCard.JobCardID = ID;
+      objJobCard.EnterdUserID = this.authService.userData.userID;
+      // console.log(this.authService.userData.userID);
+      this.service.deleteJobCard(objJobCard).subscribe(data => {
+        if (data) {
+          this.FillJobCardList();
+        }
+      });
+    }
   }
 
   applyFilter(event: Event) {

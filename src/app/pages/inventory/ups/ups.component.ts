@@ -8,7 +8,7 @@ import { UpsDialogComponent } from './ups-dialog';
 import { InventoryService } from 'src/app/api-services/inventory.service';
 import { SnackBar } from "../../../shared/common/snackBar";
 import { Ups } from "../../../core/model/ups";
-
+import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialog.component';
 
 @Component({
   selector: 'app-ups',
@@ -73,6 +73,32 @@ export class UpsComponent implements OnInit {
           this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
           this.FillUpsList();
         } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  openRepairUpsDialog(_itemCode: string, _itemID: number, _farCode: string, _subCategoryID: number): void {
+    let dialogRef = this.dialog.open(JobCardDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'JOB CARD',
+        subtitle: 'Fill the ups maintenance details',
+        itemID: _itemID,
+        itemCode: _itemCode,
+        farCode: _farCode,
+        subCategoryID: _subCategoryID
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        if (result.Success === true) {
+          this._snackBar.successSnackBar('(' + result.JobCardNo + ')  is successfully saved !', 4000)
+          this.FillUpsList();
+        } else if (result.Success === false) {
           this._snackBar.errorSnackBar('Data saving error !', 4000)
         }
       }

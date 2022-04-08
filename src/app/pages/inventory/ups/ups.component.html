@@ -84,6 +84,9 @@
                 <ng-container matColumnDef="Actions" class="btnAction" style="justify-content: center;">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                     <td mat-cell *matCellDef="let row" style="min-width: 80px;">
+                        <button mat-icon-button matTooltip="Job Card" (click)="openRepairUpsDialog(row.ItemCode,row.ItemID, row.FARBarcodeNo,row.SubCategoryID)">
+                            <mat-icon>build</mat-icon>
+                        </button>
                         <button mat-icon-button matTooltip="Edit" (click)="openEditComputerDialog(row.ItemID)">
                         <mat-icon>edit</mat-icon>
                         </button>

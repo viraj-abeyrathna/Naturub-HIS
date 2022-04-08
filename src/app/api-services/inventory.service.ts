@@ -91,6 +91,10 @@ export class InventoryService {
     return this.http.post(new CommonData().APIUrl + '/Inventory/SaveAccessPoint',obj);
   }
 
+  updateAccessPoint(obj:AccessPoint):Observable<{}>{ 
+    return this.http.post(new CommonData().APIUrl + '/Inventory/UpdateAccessPoint',obj);
+  }
+
   //CCTV
   getCCTVList(val: any) {
     return this.http.get<CCTV[]>(new CommonData().APIUrl + '/Inventory/GetCCTV/' + val);
@@ -104,6 +108,10 @@ export class InventoryService {
 
   saveCctv(obj:CCTV):Observable<{}>{
     return this.http.post(new CommonData().APIUrl + '/Inventory/SaveCctv',obj);
+  }
+
+  updateCctv(obj:CCTV):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/UpdateCctv',obj);
   }
 
 

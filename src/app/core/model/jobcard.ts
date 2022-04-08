@@ -10,4 +10,5 @@ export class JobCard {
     Remark?: string | undefined;   
     EnterdUser:string | undefined;
     EnterdDate:Date | undefined;
+    EnterdUserID:number | undefined;
 }

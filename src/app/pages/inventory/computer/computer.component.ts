@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ComputerDialogComponent } from './computer-dialog/computer-dialog.component';
 import { InventoryService } from 'src/app/api-services/inventory.service';
@@ -10,6 +10,7 @@ import { SnackBar } from "../../../shared/common/snackBar";
 import { Computer } from "../../../core/model/computer";
 import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialog.component';
 import { finalize } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // export interface Computers {
 //   ItemID: number;
@@ -89,9 +90,13 @@ export class ComputerComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private service: InventoryService, public dialog: MatDialog, private _snackBar: SnackBar) {
+  constructor(private router: Router, private service: InventoryService,public dialog: MatDialog, private _snackBar: SnackBar) {
 
+ 
     this.FillComputerList();
+
+    
+  
   }
 
 
@@ -99,6 +104,8 @@ export class ComputerComponent implements OnInit {
     // this.FillComputers(); 
     this.accessToken = localStorage.getItem('access_token');
     this.refreshToken = localStorage.getItem('refresh_token');
+
+ 
   }
 
   // Test 

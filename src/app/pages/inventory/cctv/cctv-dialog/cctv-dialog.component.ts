@@ -11,6 +11,7 @@ import { InventoryService } from 'src/app/api-services/inventory.service';
 // import { HttpParams } from '@angular/common/http';
 import { SnackBar } from "../../../../shared/common/snackBar";
 import { CCTV } from "../../../../core/model/cctv";
+import { AuthService } from 'src/app/core';
 
 export interface CctvModel {
   ModelName: string;
@@ -33,7 +34,7 @@ export class CctvDialogComponent implements OnInit {
 
   isADD = true;
 
-  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<CctvDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private masterService: MasterService, private _snackBar: SnackBar, private inventoryService: InventoryService, public dialogRef: MatDialogRef<CctvDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public authService:AuthService) { }
 
   cctvModels: CctvModel[] = [];
   filteredModels: Observable<CctvModel[]> = new Observable<CctvModel[]>();
@@ -156,7 +157,7 @@ export class CctvDialogComponent implements OnInit {
       objCCTV.BrandID = this.BrandControl.value;
       objCCTV.SerialNo = this.SerialNoControl.value;
       objCCTV.Remark = this.RemarkControl.value;
-      objCCTV.EnterdUserID = 1; // Temporary !!! 
+      objCCTV.EnterdUserID = this.authService.userData.userID; 
 
       this.inventoryService.saveCctv(objCCTV).subscribe(data => {
         if (data) {
@@ -185,7 +186,7 @@ export class CctvDialogComponent implements OnInit {
     } else {
 
       const objCCTV = new CCTV();
-      objCCTV.MainCategoryID = 1003 // Ups
+      objCCTV.ItemID = ItemID;
       objCCTV.SubCategoryID = this.SubCategoryControl.value;
       objCCTV.FARBarcodeNo = this.FARControl.value;
       objCCTV.ModelName = this.ModelControl.value;
@@ -193,9 +194,9 @@ export class CctvDialogComponent implements OnInit {
       objCCTV.BrandID = this.BrandControl.value;
       objCCTV.SerialNo = this.SerialNoControl.value;
       objCCTV.Remark = this.RemarkControl.value;
-      objCCTV.EnterdUserID = 1; // Temporary !!!
+      objCCTV.EnterdUserID = this.authService.userData.userID; 
 
-      this.inventoryService.saveCctv(objCCTV).subscribe(data => {
+      this.inventoryService.updateCctv(objCCTV).subscribe(data => {
         if (data) {
           this.dialogRef.close({ SavedSuccess: true, ItemCode: data });
         } else {

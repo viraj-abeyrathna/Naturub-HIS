@@ -23,15 +23,15 @@ import { CommonData } from "./shared/common/common";
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { LoginComponent } from './pages/user/login/login.component';
 // import { DashboardComponent } from './pages/dashboard/dashboard.component';  
-
-
+import { ComputerDialogComponent } from './pages/inventory/computer/computer-dialog/computer-dialog.component';
+import { JobCardDialogComponent } from './pages/inventory/common/job-card-dialog/job-card-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     // routingComponents,
     SidebarComponent,
-    LoginComponent 
+    LoginComponent
   ],
   imports: [
     FormsModule,
@@ -49,6 +49,10 @@ import { LoginComponent } from './pages/user/login/login.component';
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   // providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ComputerDialogComponent,
+    JobCardDialogComponent
+  ]
 })
 export class AppModule { }

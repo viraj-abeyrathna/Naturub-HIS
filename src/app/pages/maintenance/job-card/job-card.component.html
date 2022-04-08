@@ -1,7 +1,7 @@
 <mat-card class="example-card">
     <button mat-fab color="primary" style="position: absolute;" disabled>
-    <mat-icon>library_add</mat-icon>
-  </button>
+        <mat-icon>library_add</mat-icon>
+    </button>
 
     <mat-form-field style="position: absolute; margin-left: 80px;">
         <mat-label>Filter</mat-label>
@@ -58,7 +58,8 @@
 
                 <ng-container matColumnDef="EnterdDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Enterd Date </th>
-                    <td mat-cell *matCellDef="let row" style="min-width: 135px; text-align: center;"> {{row.EnterdDate | date:'yyyy-MM-dd / hh:mm a'}} </td>
+                    <td mat-cell *matCellDef="let row" style="min-width: 135px; text-align: center;"> {{row.EnterdDate |
+                        date:'yyyy-MM-dd / hh:mm a'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="EnterdUser">
@@ -66,7 +67,7 @@
                     <td mat-cell *matCellDef="let row"> {{row.EnterdUser}} </td>
                 </ng-container>
 
-      
+
 
                 <ng-container matColumnDef="Actions" class="btnAction" style="justify-content: center;">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
@@ -74,9 +75,9 @@
                         <!-- <button mat-icon-button matTooltip="Edit" (click)="openEditComputerDialog(row.ItemID)">
                         <mat-icon>edit</mat-icon>
                         </button> -->
-                        <button mat-icon-button matTooltip="Delete">
-              <mat-icon>delete_forever</mat-icon>
-            </button>
+                        <button mat-icon-button matTooltip="Delete" (click)="JobCardDelete(row.JobCardID)">
+                            <mat-icon>delete_forever</mat-icon>
+                        </button>
                     </td>
                 </ng-container>
 

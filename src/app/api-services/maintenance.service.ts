@@ -19,4 +19,9 @@ export class MaintenanceService {
   getJobCardList(val: any) {
     return this.http.get<JobCard[]>(new CommonData().APIUrl + '/Maintenance/GetJobCard/' + val);
   }
+
+  deleteJobCard(obj:JobCard):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Maintenance/DeleteJobCard/',obj);
+  }
+
 }

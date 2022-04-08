@@ -40,7 +40,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         const refreshToken = localStorage.getItem('refresh_token');
         if (x && accessToken && refreshToken) {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
-          this.router.navigate([returnUrl]);
+          this.router.navigate([returnUrl]).then(() => {
+            window.location.reload();
+          });
         }
       } // optional touch-up: if a tab shows login page, then refresh the page to reduce duplicate login
     });
@@ -70,7 +72,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         .pipe(finalize(() => (this.busy = false)))
         .subscribe(
           () => { 
-            this.router.navigate([returnUrl]);
+            this.router.navigate([returnUrl]).then(() => {
+              window.location.reload();
+            });
           },
           () => {
             this.loginError = true;

@@ -10,6 +10,7 @@ import { InventoryService } from 'src/app/api-services/inventory.service';
 import { DvrDialogComponent } from './dvr-dialog';
 import { SnackBar } from "../../../shared/common/snackBar";
 import { DVR } from "../../../core/model/dvr";
+import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialog.component';
 
 @Component({
   selector: 'app-dvr',
@@ -93,6 +94,32 @@ export class DvrComponent implements OnInit {
           this._snackBar.successSnackBar('(' + result.ItemCode + ')  is successfully saved !', 4000)
           this.FillDVRList();
         } else if (result.SavedSuccess === false) {
+          this._snackBar.errorSnackBar('Data saving error !', 4000)
+        }
+      }
+    });
+  }
+
+  openRepairUpsDialog(_itemCode: string, _itemID: number, _farCode: string, _subCategoryID: number): void {
+    let dialogRef = this.dialog.open(JobCardDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'JOB CARD',
+        subtitle: 'Fill the dvr maintenance details',
+        itemID: _itemID,
+        itemCode: _itemCode,
+        farCode: _farCode,
+        subCategoryID: _subCategoryID
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        if (result.Success === true) {
+          this._snackBar.successSnackBar('(' + result.JobCardNo + ')  is successfully saved !', 4000)
+          this.FillDVRList();
+        } else if (result.Success === false) {
           this._snackBar.errorSnackBar('Data saving error !', 4000)
         }
       }
