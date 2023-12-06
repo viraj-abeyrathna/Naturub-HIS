@@ -344,7 +344,4 @@ export class ComputerDialogComponent implements OnInit {
     }
   }
 
- 
-
-
 }

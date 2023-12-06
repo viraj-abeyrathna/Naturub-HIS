@@ -11,6 +11,7 @@ import { Computer } from "../../../core/model/computer";
 import { JobCardDialogComponent } from '../common/job-card-dialog/job-card-dialog.component';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/core'; 
 
 // export interface Computers {
 //   ItemID: number;
@@ -90,7 +91,7 @@ export class ComputerComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private router: Router, private service: InventoryService,public dialog: MatDialog, private _snackBar: SnackBar) {
+  constructor(private router: Router, private service: InventoryService,public dialog: MatDialog, private _snackBar: SnackBar,public authService:AuthService) {
 
  
     this.FillComputerList();
@@ -245,6 +246,20 @@ export class ComputerComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  JobCardDelete(ID: number) {
+    if(confirm("Are you sure to delete? ")) {
+      const objComputer = new Computer();
+      objComputer.ItemID = ID;
+      objComputer.LastModifiedUserID = this.authService.userData.userID;
+      // console.log(this.authService.userData.userID);
+      this.service.deleteComputer(objComputer).subscribe(data => {
+        if (data) {
+          this.FillComputerList();
+        }
+      });
     }
   }
 

@@ -65,6 +65,10 @@ export class InventoryService {
     return this.http.post(new CommonData().APIUrl + '/Inventory/UpdateComputer',obj);
   }
 
+  deleteComputer(obj:Computer):Observable<{}>{
+    return this.http.post(new CommonData().APIUrl + '/Inventory/DeleteComputer',obj);
+  }
+
   // Ups
   getUpsList(val: any):Observable<{}> {
     return this.http.get<Ups[]>(new CommonData().APIUrl + '/Inventory/GetUps/' + val);
